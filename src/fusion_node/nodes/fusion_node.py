@@ -30,6 +30,7 @@ class FusionNode(Node):
         self.declare_parameter("rf_topic", "/sensor/rf/detections")
         self.declare_parameter("lidar_topic", "/sensor/lidar/points")
         self.declare_parameter("sigint_topic", "/sensor/sigint/elint")
+        self.declare_parameter("video_analytics_topic", "/sensor/visual/analytics")
         self.declare_parameter("fused_topic", "/fused_tracks")
         self.declare_parameter("publish_hz", 20.0)
         self.declare_parameter("min_confidence", 0.5)
@@ -53,6 +54,7 @@ class FusionNode(Node):
         self.rf_obs = deque(maxlen=20)
         self.lidar_obs = deque(maxlen=20)
         self.sigint_obs = deque(maxlen=20)
+        self.video_analytics_obs = deque(maxlen=20)
         self.state = {"x": 0.0, "y": 0.0, "vx": 0.0, "vy": 0.0}
         self.track_idx = 0
         self.onnx_backend = self._load_tensorrt_onnx_backend_stub()
@@ -62,6 +64,9 @@ class FusionNode(Node):
         self.create_subscription(String, self.get_parameter("rf_topic").value, self._on_rf, sensor_qos)
         self.create_subscription(String, self.get_parameter("lidar_topic").value, self._on_lidar, sensor_qos)
         self.create_subscription(String, self.get_parameter("sigint_topic").value, self._on_sigint, sensor_qos)
+        self.create_subscription(
+            String, self.get_parameter("video_analytics_topic").value, self._on_video_analytics, sensor_qos
+        )
 
         self.fused_pub = self.create_publisher(String, self.get_parameter("fused_topic").value, c2_qos)
         publish_hz = self.get_parameter("publish_hz").get_parameter_value().double_value
@@ -120,6 +125,13 @@ class FusionNode(Node):
         except json.JSONDecodeError:
             self.get_logger().warning("invalid sigint payload")
 
+    def _on_video_analytics(self, msg: String) -> None:
+        try:
+            payload = json.loads(msg.data)
+            self.video_analytics_obs.append(payload)
+        except json.JSONDecodeError:
+            self.get_logger().warning("invalid video analytics payload")
+
     def _confidence_vote(self) -> float:
         visual_conf = 0.0
         if self.visual_obs and self.visual_obs[-1].get("tracks"):
@@ -140,13 +152,17 @@ class FusionNode(Node):
         sigint_conf = 0.0
         if self.sigint_obs:
             sigint_conf = float(self.sigint_obs[-1].get("confidence", 0.0))
+        video_conf = 0.0
+        if self.video_analytics_obs and self.video_analytics_obs[-1].get("video_analytics"):
+            video_conf = float(self.video_analytics_obs[-1]["video_analytics"][0].get("confidence", 0.0))
 
         return (
-            0.35 * visual_conf
-            + 0.2 * acoustic_conf
-            + 0.2 * rf_conf
-            + 0.15 * lidar_conf
-            + 0.1 * sigint_conf
+            0.30 * visual_conf
+            + 0.18 * acoustic_conf
+            + 0.18 * rf_conf
+            + 0.12 * lidar_conf
+            + 0.08 * sigint_conf
+            + 0.14 * video_conf
         )
 
     def _modalities_present(self) -> list[str]:
@@ -161,6 +177,8 @@ class FusionNode(Node):
             present.append("lidar")
         if self.sigint_obs:
             present.append("sigint")
+        if self.video_analytics_obs and self.video_analytics_obs[-1].get("video_analytics"):
+            present.append("video_analytics")
         return present
 
     def _ekf_predict_update(self) -> None:
@@ -178,6 +196,18 @@ class FusionNode(Node):
             self.state["y"] = (1.0 - alpha) * self.state["y"] + alpha * my
             self.state["vx"] = (self.state["x"] - prev_x) / 0.05
             self.state["vy"] = (self.state["y"] - prev_y) / 0.05
+
+    def _uncertainty(self, conf: float, modalities: list[str]) -> dict:
+        modality_score = min(1.0, len(set(modalities)) / 6.0)
+        epistemic = round(max(0.0, 1.0 - modality_score), 4)
+        aleatoric = round(max(0.0, 1.0 - conf), 4)
+        total = round(min(1.0, 0.55 * epistemic + 0.45 * aleatoric), 4)
+        return {
+            "epistemic": epistemic,
+            "aleatoric": aleatoric,
+            "total": total,
+            "confidence_interval": [round(max(0.0, conf - total), 4), round(min(1.0, conf + total), 4)],
+        }
 
     def _tick(self) -> None:
         self._ekf_predict_update()
@@ -209,7 +239,7 @@ class FusionNode(Node):
                 "method": "multimodal_cross_attention_transformer_stub",
                 "model": str(self.get_parameter("fusion_model").value),
                 "onnx_backend": self.onnx_backend,
-                "sources": ["visual", "acoustic", "rf", "lidar", "sigint"],
+                "sources": ["visual", "acoustic", "rf", "lidar", "sigint", "video_analytics"],
             },
             "pid": {
                 "gate": pid_gate,
@@ -218,6 +248,7 @@ class FusionNode(Node):
                 "present_modalities": modalities,
                 "passed": pid_passed,
             },
+            "uncertainty": self._uncertainty(conf, modalities),
         }
         msg = String()
         msg.data = json.dumps(payload)

@@ -2,6 +2,14 @@ def threat_score(confidence: float, speed_norm: float, predicted_risk: float) ->
     return 0.6 * confidence + 0.25 * speed_norm + 0.15 * predicted_risk
 
 
+def nl_summary(track_id: str, score: float, action: str, uncertainty_total: float) -> str:
+    certainty = max(0.0, 1.0 - uncertainty_total)
+    return (
+        f"Threat score {score:.2f} for {track_id}. Recommended action: {action}. "
+        f"Estimated certainty {certainty:.2f} from multimodal agreement and trajectory context."
+    )
+
+
 def safety_gate_reason(
     *,
     pid_passed: bool,
@@ -91,3 +99,10 @@ def test_operator_ack_required() -> None:
         operator_ack=False,
     )
     assert reason == "blocked_no_operator_authorization"
+
+
+def test_nl_summary_contains_action_and_certainty() -> None:
+    text = nl_summary("trk-1", 0.87, "monitor", 0.22)
+    assert "trk-1" in text
+    assert "monitor" in text
+    assert "0.78" in text

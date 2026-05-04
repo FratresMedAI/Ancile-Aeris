@@ -1,0 +1,24 @@
+{
+  "scenario": "borap04_urban_mass_gathering",
+  "timestamp_utc": "2026-05-04T23:08:23.298841+00:00",
+  "environment_tags": [
+    "dense_urban",
+    "mass_gathering",
+    "critical_infrastructure"
+  ],
+  "next_gen_capabilities": {
+    "video_analytics_overlay": true,
+    "uncertainty_aware_fusion": true,
+    "swarm_intent_assessment": true,
+    "operator_copilot_queryable": true,
+    "sensor_resilience_alerting": true
+  },
+  "summary": {
+    "detected_tracks": 18,
+    "high_risk_tracks": 4,
+    "swarm_intent": "probe_cluster",
+    "false_positive_reduction_claim_mode": "simulation_only",
+    "human_authorization_required_for_non_monitor": true
+  },
+  "status": "pass"
+}

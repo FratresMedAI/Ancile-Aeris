@@ -39,6 +39,7 @@ class C2DecisionNode(Node):
         self.declare_parameter("rl_recommendation_topic", "/sim/rl_recommendations")
         self.declare_parameter("cyber_topic", "/cyber/identity_assessments")
         self.declare_parameter("digital_twin_topic", "/digital_twin_state")
+        self.declare_parameter("swarm_intent_topic", "/swarm/intent_assessment")
         self.declare_parameter("score_threshold", 0.65)
         self.declare_parameter("pid_gate", 0.999)
         self.declare_parameter("hostile_identity_confidence", 0.7)
@@ -59,6 +60,7 @@ class C2DecisionNode(Node):
         self.create_subscription(String, self.get_parameter("rl_recommendation_topic").value, self._on_rl_recommendations, qos)
         self.create_subscription(String, self.get_parameter("cyber_topic").value, self._on_cyber, qos)
         self.create_subscription(String, self.get_parameter("digital_twin_topic").value, self._on_digital_twin, qos)
+        self.create_subscription(String, self.get_parameter("swarm_intent_topic").value, self._on_swarm_intent, qos)
         self.create_subscription(String, self.get_parameter("operator_auth_topic").value, self._on_operator_auth, qos)
 
         self.threat_pub = self.create_publisher(String, self.get_parameter("threats_topic").value, qos)
@@ -71,6 +73,7 @@ class C2DecisionNode(Node):
         self.latest_cyber: dict[str, dict] = {}
         self.latest_operator_auth: dict[str, dict] = {}
         self.latest_digital_twin: dict = {}
+        self.latest_swarm_intent: dict = {}
         self.command_seq = 0
         self.get_logger().info("c2_decision_node initialized")
 
@@ -123,6 +126,12 @@ class C2DecisionNode(Node):
         except json.JSONDecodeError:
             self.get_logger().warning("invalid digital twin payload")
 
+    def _on_swarm_intent(self, msg: String) -> None:
+        try:
+            self.latest_swarm_intent = json.loads(msg.data)
+        except json.JSONDecodeError:
+            self.get_logger().warning("invalid swarm intent payload")
+
     def _select_effector(self, score: float) -> str:
         allow_jam = bool(self.get_parameter("allow_jamming").value)
         allow_spoof = bool(self.get_parameter("allow_spoofing").value)
@@ -172,14 +181,24 @@ class C2DecisionNode(Node):
         })
         self.audit_pub.publish(audit_msg)
 
-    def _publish_xai(self, track_id: str, score: float, action: str) -> None:
+    def _publish_xai(self, track_id: str, score: float, action: str, uncertainty: dict | None = None) -> None:
         twin = self.latest_digital_twin.get("digital_twin_state", {}) if self.latest_digital_twin else {}
+        uncertainty = uncertainty or {}
+        uncertainty_total = float(uncertainty.get("total", 1.0))
+        certainty = max(0.0, 1.0 - uncertainty_total)
+        nl_summary = (
+            f"Threat score {score:.2f} for {track_id}. Recommended action: {action}. "
+            f"Estimated certainty {certainty:.2f} from multimodal agreement and trajectory context."
+        )
         rationale = {
             "track_id": track_id,
             "score": score,
             "action": action,
             "top_features": ["confidence", "speed", "predicted_risk", "twin_collision_risk"],
             "digital_twin_context": twin,
+            "swarm_intent": self.latest_swarm_intent,
+            "uncertainty": uncertainty,
+            "nl_summary": nl_summary,
             "explanation": "Action selected by ROE-constrained score with policy assist and twin context.",
         }
         msg = String()
@@ -254,6 +273,8 @@ class C2DecisionNode(Node):
         pid_conf = float(pid.get("confidence", 0.0))
         pid_gate = float(self.get_parameter("pid_gate").value)
 
+        uncertainty = payload.get("uncertainty", {})
+
         # BORAP 04 safety posture across dense urban, mass gatherings,
         # critical infrastructure, mobile platforms, and remote terrain:
         # if any gate fails, commands are forced to monitor-only.
@@ -302,7 +323,7 @@ class C2DecisionNode(Node):
         cmd_msg.data = json.dumps({"commands": [asdict(cmd)]})
         self.cmd_pub.publish(cmd_msg)
         self._publish_audit(track_id, score, action, authorized, reason)
-        self._publish_xai(track_id, score, action)
+        self._publish_xai(track_id, score, action, uncertainty=uncertainty)
 
 
 def main() -> None:

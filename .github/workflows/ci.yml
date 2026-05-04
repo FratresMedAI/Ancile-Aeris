@@ -1,4 +1,4 @@
-name: CounterDroneOS CI
+name: Ancile-Aeris CI
 
 on:
   push:
@@ -22,6 +22,7 @@ jobs:
       - name: Build
         run: |
           source /opt/ros/kilted/setup.bash
+          colcon list
           colcon build --symlink-install
       - name: Test
         run: |

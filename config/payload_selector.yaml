@@ -2,9 +2,11 @@ payload_selector:
   active_payload: cuas
   allowed_payloads:
     - cuas
+    - video_enhanced
     - conservation
     - generic
   scenario_labels:
     cuas: BORAP04_DenseUrban
+    video_enhanced: BORAP04_VideoEnhanced_MassGathering
     conservation: AntiPoaching_RemoteTerrain
     generic: SafetyAudit_CriticalInfrastructure

@@ -9,6 +9,7 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description() -> LaunchDescription:
     sim_mode = LaunchConfiguration('sim_mode')
     payload = LaunchConfiguration('payload')
+    video_enhanced = LaunchConfiguration('video_enhanced')
     cuas_enabled = IfCondition(PythonExpression(["'", payload, "' == 'cuas'"]))
     generic_enabled = IfCondition(PythonExpression(["'", payload, "' == 'generic'"]))
     cuas_or_generic_enabled = IfCondition(PythonExpression(["'", payload, "' in ['cuas','generic']"]))
@@ -55,6 +56,13 @@ def generate_launch_description() -> LaunchDescription:
         ]),
         condition=cuas_enabled,
     )
+    swarm_intent_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('swarm_intent_node'),
+            '/launch/swarm_intent.launch.py',
+        ]),
+        condition=cuas_or_generic_enabled,
+    )
     dashboard_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             FindPackageShare('dashboard_node'),
@@ -82,6 +90,29 @@ def generate_launch_description() -> LaunchDescription:
         ]),
         condition=cuas_or_generic_enabled,
     )
+    copilot_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('operator_copilot_node'),
+            '/launch/operator_copilot.launch.py',
+        ]),
+        condition=cuas_or_generic_enabled,
+    )
+    resilience_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('sensor_resilience_node'),
+            '/launch/sensor_resilience.launch.py',
+        ]),
+        condition=cuas_or_generic_enabled,
+    )
+    video_analytics_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('video_analytics_node'),
+            '/launch/video_analytics.launch.py',
+        ]),
+        condition=IfCondition(
+            PythonExpression(["'", payload, "' == 'cuas' and '", video_enhanced, "' == 'true'"])
+        ),
+    )
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -93,6 +124,11 @@ def generate_launch_description() -> LaunchDescription:
             'payload',
             default_value='cuas',
             description='Payload profile: cuas, conservation, or generic',
+        ),
+        DeclareLaunchArgument(
+            'video_enhanced',
+            default_value='false',
+            description='Enable video analytics payload overlay for cuas profile',
         ),
         LogInfo(msg=['Launching Ancile-Aeris full system. sim_mode=', sim_mode, ' payload=', payload]),
         LogInfo(
@@ -108,8 +144,12 @@ def generate_launch_description() -> LaunchDescription:
         ew_launch,
         cyber_launch,
         swarm_launch,
+        swarm_intent_launch,
         dashboard_launch,
         digital_twin_launch,
         hil_launch,
         c2_launch,
+        video_analytics_launch,
+        copilot_launch,
+        resilience_launch,
     ])

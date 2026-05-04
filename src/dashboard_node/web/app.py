@@ -1,9 +1,23 @@
 #!/usr/bin/env python3
 import json
 import os
+import sys
 from datetime import datetime
+from pathlib import Path
 
 import streamlit as st
+
+
+def _load_guard():
+    root = Path(__file__).resolve().parents[4]
+    guard_path = root / "payloads" / "generic"
+    if str(guard_path) not in sys.path:
+        sys.path.insert(0, str(guard_path))
+    try:
+        from darkspace_rule_guard import classify_text  # type: ignore
+        return classify_text
+    except Exception:
+        return None
 
 
 def _is_authenticated() -> bool:
@@ -65,6 +79,25 @@ def main() -> None:
     })
     st.json(state.get("latest", {}))
     st.caption(f"Last refresh: {datetime.utcnow().isoformat()}Z")
+
+    st.subheader("Operator Copilot")
+    backend = os.getenv("ANCILE_COPILOT_BACKEND", "template")
+    query = st.text_input("Ask copilot", "Summarize threats in the last interval")
+    if st.button("Run copilot query"):
+        guard = _load_guard()
+        if guard is not None:
+            verdict = guard(query)
+            if verdict.label == "block":
+                st.error("Query blocked by DARKSPACE rule guard.")
+                return
+        summary = state.get("summary", {})
+        latest = state.get("latest", {})
+        answer = (
+            f"[{backend}] tracks={summary.get('tracks', 0)}, threats={summary.get('threats', 0)}, "
+            f"commands={summary.get('commands', 0)}, audits={summary.get('audits', 0)}. "
+            f"Latest threat={json.dumps(latest.get('threat', {}))}"
+        )
+        st.success(answer)
 
 
 if __name__ == "__main__":

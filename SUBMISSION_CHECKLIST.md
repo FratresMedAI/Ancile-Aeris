@@ -39,6 +39,16 @@ Template placeholder: `artifacts/quad_chart/quad_chart_template.md`
 
 Video placeholder: `artifacts/demo_video/demo_video_notes.md`
 
+## Next-Gen Cognitive Layer Evidence
+
+- Include simulation outputs for:
+  - `video_analytics_node` visual confirmation and behavior tagging.
+  - `swarm_intent_node` intent classification and layered recommendations.
+  - `operator_copilot_node` query/response examples with guard behavior.
+  - `sensor_resilience_node` anomaly alerts under sensor mismatch conditions.
+- Attach report: `reports/borap04_urban_mass_gathering_report.json`.
+- Generate report locally with: `python scripts/demo_borap04_urban_mass_gathering.py`.
+
 ## Portal Submission Flow
 
 - Submit initial 3-page concept plus quad chart and optional video to DHS S&T LRBAA portal.

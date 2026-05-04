@@ -1,0 +1,7 @@
+video_analytics_node:
+  ros__parameters:
+    visual_tracks_topic: /sensor/visual/tracks
+    analytics_topic: /sensor/visual/analytics
+    behavioral_alerts_topic: /behavioral_alerts
+    min_confidence: 0.55
+    behavior_window_sec: 6.0

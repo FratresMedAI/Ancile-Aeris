@@ -21,6 +21,16 @@ Ancile-Aeris explicitly validates these conditions:
 - `payloads/generic/darkspace_rule_guard.py`: DARKSPACE-derived offline safeguard classifier for prompt/tool trace abuse signals.
 - `config/payload_selector.yaml`: runtime payload profile selector.
 
+## Next-Gen Cognitive Layer
+
+Ancile-Aeris now includes additive BORAP-oriented modules under `src/`:
+- `video_analytics_node`: video-as-a-sensor enrichment and behavior tags.
+- `swarm_intent_node`: collective-intent assessment and layered recommendation outputs.
+- `operator_copilot_node`: offline query service for operator summaries (`template` or optional `ollama` backend).
+- `sensor_resilience_node`: cross-modal anomaly alerts for contested sensing environments.
+
+These modules remain simulation-safe and feed existing hard safety gates, XAI outputs, and immutable audit pathways.
+
 ## Max-Defensive Safety Gates
 
 - PID gate `>= 0.999` with required multi-modal evidence before any non-monitor action.

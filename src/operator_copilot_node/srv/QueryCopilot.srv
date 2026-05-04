@@ -1,0 +1,6 @@
+string query
+---
+bool blocked
+string backend
+string answer
+string reason

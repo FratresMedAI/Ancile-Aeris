@@ -20,9 +20,16 @@ docker run --rm -v "c:/Users/Besn Daddy/Desktop/Ancile Aeris/Ancile-Aeris:/opt/c
 docker compose -f docker/docker-compose.yml up ancile-aeris
 ```
 
+Video-enhanced C-UAS profile:
+
+```bash
+ANCILE_PAYLOAD=cuas ANCILE_SIM_MODE=true docker compose -f docker/docker-compose.yml up ancile-aeris
+```
+
 Expected indicators:
 - selected payload nodes plus shared dashboard and safety paths start
 - `/fused_tracks`, `/predicted_trajectories`, `/threats`, `/effector_commands`, `/audit/events`, `/dashboard/state` active
+- `/sensor/visual/analytics`, `/swarm/intent_assessment`, `/sensor/resilience_alerts` active
 
 ## Soldier-Safety Gate Validation
 
@@ -64,3 +71,13 @@ Pass criteria:
 - detect/track outputs are generated from conservation payload data.
 - any non-monitor recommendation remains blocked without operator authorization.
 - report is generated at `reports/conservation_anti_poaching_report.json`.
+
+## BORAP 04 Urban Mass-Gathering Demo
+
+```bash
+python scripts/demo_borap04_urban_mass_gathering.py
+```
+
+Pass criteria:
+- report generated at `reports/borap04_urban_mass_gathering_report.json`.
+- report includes video analytics, uncertainty-aware fusion, swarm intent, copilot, and sensor resilience flags.

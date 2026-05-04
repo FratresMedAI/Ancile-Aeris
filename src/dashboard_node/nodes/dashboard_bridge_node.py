@@ -17,6 +17,7 @@ class DashboardBridgeNode(Node):
         self.declare_parameter("threats_topic", "/threats")
         self.declare_parameter("effector_topic", "/effector_commands")
         self.declare_parameter("audit_topic", "/audit/events")
+        self.declare_parameter("resilience_topic", "/sensor/resilience_alerts")
         self.declare_parameter("dashboard_state_topic", "/dashboard/state")
         self.declare_parameter("publish_hz", 5.0)
         self.declare_parameter("state_file", "/tmp/counterdrone_dashboard_state.json")
@@ -31,11 +32,13 @@ class DashboardBridgeNode(Node):
         self.threats = deque(maxlen=100)
         self.commands = deque(maxlen=100)
         self.audits = deque(maxlen=200)
+        self.resilience_alerts = deque(maxlen=100)
 
         self.create_subscription(String, self.get_parameter("fused_tracks_topic").value, self._on_tracks, qos)
         self.create_subscription(String, self.get_parameter("threats_topic").value, self._on_threats, qos)
         self.create_subscription(String, self.get_parameter("effector_topic").value, self._on_commands, qos)
         self.create_subscription(String, self.get_parameter("audit_topic").value, self._on_audit, qos)
+        self.create_subscription(String, self.get_parameter("resilience_topic").value, self._on_resilience, qos)
 
         self.publisher = self.create_publisher(String, self.get_parameter("dashboard_state_topic").value, qos)
         hz = float(self.get_parameter("publish_hz").value)
@@ -70,6 +73,11 @@ class DashboardBridgeNode(Node):
         if payload:
             self.audits.append(payload)
 
+    def _on_resilience(self, msg: String) -> None:
+        payload = self._safe_parse(msg.data)
+        if payload:
+            self.resilience_alerts.append(payload)
+
     def _tick(self) -> None:
         state = {
             "summary": {
@@ -77,12 +85,14 @@ class DashboardBridgeNode(Node):
                 "threats": len(self.threats),
                 "commands": len(self.commands),
                 "audits": len(self.audits),
+                "resilience_alerts": len(self.resilience_alerts),
             },
             "latest": {
                 "track": self.tracks[-1] if self.tracks else {},
                 "threat": self.threats[-1] if self.threats else {},
                 "command": self.commands[-1] if self.commands else {},
                 "audit": self.audits[-1] if self.audits else {},
+                "resilience": self.resilience_alerts[-1] if self.resilience_alerts else {},
             },
         }
         msg = String()

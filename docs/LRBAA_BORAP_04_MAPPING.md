@@ -12,6 +12,7 @@
 ## Objective Keywords To Capability Mapping
 
 - `detect`: `sensor_nodes` visual/acoustic/rf ingest and `fusion_node`.
+- `detect` (video enhanced): `video_analytics_node` overlays EO/IR-style analytics on visual tracks.
 - `track`: `fusion_node` fused tracks and `trajectory_node` prediction.
 - `identify` and `classify`: `cyber_node` identity assessment and C2 threat classification.
 - `mitigation`: `c2_decision_node` monitor/jam/spoof recommendation with hard safety gates.
@@ -20,6 +21,7 @@
 - `test & evaluation` and `forensics`: soldier safety and conservation scenario outputs plus immutable audit logs.
 - `security`: DARKSPACE-derived stateless rule guard screens operator text and tool traces for injection, exfiltration, and unsafe override patterns.
 - `critical infrastructure`, `securing aviation`, `securing borders`, `border protection`: scenario labels and mission templates in payload selector and reports.
+- `autonomous-but-vetted response`: `swarm_intent_node` recommendations are advisory and remain constrained by C2 human authorization and veto gates.
 
 ## BORAP 04 Environmental Conditions
 
@@ -37,3 +39,6 @@
 - Classify/Forensics: identity disposition and auditable decision traces.
 - Mitigation/Prevention/Preventing Terrorism/Security: monitor-first ROE, human authorization, IFF and digital twin vetoes.
 - Test & Evaluation: documented simulation scenarios and reproducible report generation.
+- Swarm and intent analysis: `swarm_intent_node` with non-kinetic layered recommendations.
+- Human-machine teaming: `operator_copilot_node` plus dashboard copilot panel for auditable operator queries.
+- Sensor resilience: `sensor_resilience_node` cross-modal mismatch alerts for degraded or spoofed inputs.
