@@ -1,0 +1,7 @@
+swarm_sim_node:
+  ros__parameters:
+    sim_mode: true
+    sim_hz: 10.0
+    sim_tracks_topic: /sim/swarm_tracks
+    rl_recommendation_topic: /sim/rl_recommendations
+    policy_id: ppo_multiagent_stub_v1

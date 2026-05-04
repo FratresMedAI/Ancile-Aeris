@@ -1,0 +1,31 @@
+sensor_nodes:
+  ros__parameters:
+    sim_mode: true
+
+visual_node:
+  ros__parameters:
+    model_name: yolo26s
+    publish_topic: /sensor/visual/tracks
+    publish_fps: 15.0
+
+acoustic_node:
+  ros__parameters:
+    model_name: crnn_melspec
+    publish_topic: /sensor/acoustic/detections
+    publish_hz: 10.0
+
+rf_node:
+  ros__parameters:
+    model_name: drone_rf_cnn
+    publish_topic: /sensor/rf/detections
+    publish_hz: 10.0
+
+lidar_node:
+  ros__parameters:
+    publish_topic: /sensor/lidar/points
+    publish_hz: 10.0
+
+sigint_node:
+  ros__parameters:
+    publish_topic: /sensor/sigint/elint
+    publish_hz: 5.0

@@ -1,0 +1,5 @@
+digital_twin_node:
+  ros__parameters:
+    fused_topic: /fused_tracks
+    output_topic: /digital_twin_state
+    publish_hz: 5.0

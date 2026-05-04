@@ -1,0 +1,8 @@
+trajectory_node:
+  ros__parameters:
+    fused_tracks_topic: /fused_tracks
+    output_topic: /predicted_trajectories
+    prediction_horizon_sec: 3.0
+    prediction_dt_sec: 0.5
+    publish_hz: 10.0
+    predictor_name: kalman_plus_transformer_stub

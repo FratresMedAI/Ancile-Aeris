@@ -1,0 +1,8 @@
+darkspace_adapter_node:
+  ros__parameters:
+    audit_topic: /audit/events
+    threat_topic: /threats
+    command_topic: /effector_commands
+    health_topic: /darkspace/health
+    db_path: /tmp/darkspace_adapter.db
+    hmac_secret_env: DARKSPACE_HMAC_SECRET

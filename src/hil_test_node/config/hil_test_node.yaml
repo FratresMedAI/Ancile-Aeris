@@ -1,0 +1,4 @@
+hil_test_node:
+  ros__parameters:
+    output_topic: /hil/status
+    publish_hz: 2.0

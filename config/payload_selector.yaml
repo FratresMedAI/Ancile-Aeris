@@ -1,0 +1,10 @@
+payload_selector:
+  active_payload: cuas
+  allowed_payloads:
+    - cuas
+    - conservation
+    - generic
+  scenario_labels:
+    cuas: BORAP04_DenseUrban
+    conservation: AntiPoaching_RemoteTerrain
+    generic: SafetyAudit_CriticalInfrastructure

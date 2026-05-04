@@ -1,0 +1,13 @@
+sensors:
+  visual:
+    enabled: true
+    topic: /sensor/visual/detections
+    qos: best_effort
+  acoustic:
+    enabled: true
+    topic: /sensor/acoustic/detections
+    qos: best_effort
+  rf:
+    enabled: true
+    topic: /sensor/rf/detections
+    qos: best_effort

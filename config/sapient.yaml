@@ -1,0 +1,9 @@
+sapient:
+  compliance_mode: mock
+  idl_namespace: counterdrone_core::idl
+  endpoints:
+    fused_tracks: /fused_tracks
+    threats: /threats
+    effector_commands: /effector_commands
+    xai_explanation: /xai_explanation
+    digital_twin_state: /digital_twin_state

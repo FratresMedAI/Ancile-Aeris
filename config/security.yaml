@@ -1,0 +1,11 @@
+security:
+  zero_trust_enabled: true
+  mtls_enabled: true
+  jwt_required: true
+  dds_security_enabled: true
+  pqc_stubs:
+    key_exchange: kyber_stub
+    signatures: dilithium_stub
+  signed_messages:
+    enabled: true
+    algorithm: ed25519_stub

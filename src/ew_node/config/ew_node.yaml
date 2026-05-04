@@ -1,0 +1,6 @@
+ew_node:
+  ros__parameters:
+    rf_topic: /sensor/rf/detections
+    sigint_topic: /sensor/sigint/elint
+    threats_topic: /threats
+    output_topic: /ew/recommendations

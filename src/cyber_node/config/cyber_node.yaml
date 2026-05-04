@@ -1,0 +1,8 @@
+cyber_node:
+  ros__parameters:
+    rf_topic: /sensor/rf/detections
+    output_topic: /cyber/identity_assessments
+    audit_topic: /audit/events
+    friendly_ouis:
+      - D8:3A:DD
+      - B8:27:EB

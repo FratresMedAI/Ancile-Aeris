@@ -1,0 +1,8 @@
+{
+  "scenario": "soldier_safety",
+  "timestamp_utc": "2026-05-04T19:30:13.331816+00:00",
+  "zero_fratricide": true,
+  "digital_twin_veto_enforced": true,
+  "operator_authorization_required_for_non_monitor": true,
+  "status": "pass"
+}

@@ -1,0 +1,11 @@
+fusion_node:
+  ros__parameters:
+    visual_topic: /sensor/visual/tracks
+    acoustic_topic: /sensor/acoustic/detections
+    rf_topic: /sensor/rf/detections
+    lidar_topic: /sensor/lidar/points
+    sigint_topic: /sensor/sigint/elint
+    fused_topic: /fused_tracks
+    publish_hz: 20.0
+    min_confidence: 0.5
+    pid_gate: 0.999

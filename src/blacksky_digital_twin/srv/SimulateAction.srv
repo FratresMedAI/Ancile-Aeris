@@ -1,0 +1,6 @@
+string action_type
+string target_id
+---
+bool success
+string reason
+float64 impact_score

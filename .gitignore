@@ -1,0 +1,21 @@
+# ROS/colcon build outputs
+build/
+install/
+log/
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local environments and editor state
+.venv/
+venv/
+.env
+.env.*
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
+.DS_Store

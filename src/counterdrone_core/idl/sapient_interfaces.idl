@@ -1,0 +1,44 @@
+module counterdrone_core {
+  module idl {
+    struct Track {
+      string track_id;
+      float confidence;
+      float x;
+      float y;
+      float vx;
+      float vy;
+      float z;
+      float qx;
+      float qy;
+      float qz;
+      float qw;
+      string classification;
+      string source;
+    };
+
+    struct Threat {
+      string track_id;
+      float score;
+      string recommended_effector;
+    };
+
+    struct EffectorCommand {
+      string command_id;
+      string track_id;
+      string action;
+      boolean authorized;
+    };
+
+    struct XaiExplanation {
+      string track_id;
+      string rationale;
+      string top_features;
+    };
+
+    struct DigitalTwinState {
+      string scenario_id;
+      long mirrored_tracks;
+      long predicted_collisions;
+    };
+  };
+};

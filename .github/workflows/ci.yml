@@ -1,0 +1,28 @@
+name: CounterDroneOS CI
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    container:
+      image: ros:kilted-ros-base
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools
+        run: |
+          apt-get update
+          apt-get install -y python3-colcon-common-extensions
+      - name: Build
+        run: |
+          source /opt/ros/kilted/setup.bash
+          colcon build --symlink-install
+      - name: Test
+        run: |
+          source /opt/ros/kilted/setup.bash
+          source install/setup.bash
+          colcon test
+          colcon test-result --verbose

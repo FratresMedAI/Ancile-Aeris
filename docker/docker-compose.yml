@@ -1,0 +1,32 @@
+services:
+  ancile-aeris:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: ancile_aeris
+    network_mode: host
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - ANCILE_PAYLOAD=${ANCILE_PAYLOAD:-cuas}
+      - ANCILE_SIM_MODE=${ANCILE_SIM_MODE:-true}
+    volumes:
+      - ../:/opt/counterdrone_ws
+    command: bash -lc "source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && ros2 launch counterdrone_core full_system.launch.py sim_mode:=${ANCILE_SIM_MODE:-true} payload:=${ANCILE_PAYLOAD:-cuas}"
+
+  ancile-aeris-jetson:
+    profiles: ["jetson"]
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: ancile_aeris_jetson
+    runtime: nvidia
+    network_mode: host
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility,video
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - ANCILE_PAYLOAD=${ANCILE_PAYLOAD:-cuas}
+      - ANCILE_SIM_MODE=${ANCILE_SIM_MODE:-true}
+    volumes:
+      - ../:/opt/counterdrone_ws
+    command: bash -lc "source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && ros2 launch counterdrone_core full_system.launch.py sim_mode:=${ANCILE_SIM_MODE:-true} payload:=${ANCILE_PAYLOAD:-cuas}"

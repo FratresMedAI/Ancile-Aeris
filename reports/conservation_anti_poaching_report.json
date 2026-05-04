@@ -1,0 +1,8 @@
+{
+  "scenario": "conservation_anti_poaching",
+  "timestamp_utc": "2026-05-04T19:30:13.331816+00:00",
+  "remote_terrain_validation": true,
+  "detect_track_identify_pipeline_operational": true,
+  "non_monitor_blocked_without_operator": true,
+  "status": "pass"
+}
