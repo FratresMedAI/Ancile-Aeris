@@ -1,0 +1,4 @@
+/copilot_node:
+  ros__parameters:
+    backend: "template_stub"
+    require_safety_gate_open: true

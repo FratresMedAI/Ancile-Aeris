@@ -42,3 +42,14 @@
 - Swarm and intent analysis: `swarm_intent_node` with non-kinetic layered recommendations.
 - Human-machine teaming: `operator_copilot_node` plus dashboard copilot panel for auditable operator queries.
 - Sensor resilience: `sensor_resilience_node` cross-modal mismatch alerts for degraded or spoofed inputs.
+
+## Cognitive Defensive Shield v2.0 Mapping
+
+- Agentic AI for C2: `agent_orchestrator` produces multi-agent proposals on `/proposed_actions`.
+- Zero-trust adversarial defense: `adversarial_defense` publishes `/sensor_health` and `/adversarial_alert`.
+- Physics-informed what-if simulation: `digital_twin` publishes `/digital_twin_result` with effectiveness and collateral estimates.
+- Adaptive RF defense: `cognitive_ew` publishes `/cognitive_ew_commands` in simulation-safe form.
+- Federated learning hooks: `federated_learning` exposes `/federated_learning/request_model_update`.
+- Runtime verifiable AI foundation: `verification` enforces PID/human-veto properties via `/safety_violation` and `/verified_action`.
+- Neuromorphic acceleration path: `neuromorphic_sim` publishes `/neuromorphic/events` for event-driven sensing experiments.
+- Supporting capability layer: `video_analytics`, `swarm_orchestrator`, and `copilot` feed explainable, safety-gated advisory context.

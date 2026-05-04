@@ -1,0 +1,4 @@
+/neuromorphic_sim_node:
+  ros__parameters:
+    event_rate_hz: 5.0
+    sensor_id: "neuromorphic_cam_stub"

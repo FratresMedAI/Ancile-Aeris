@@ -1,0 +1,4 @@
+/adversarial_defense_node:
+  ros__parameters:
+    anomaly_threshold: 0.35
+    monitor_safe_default: true

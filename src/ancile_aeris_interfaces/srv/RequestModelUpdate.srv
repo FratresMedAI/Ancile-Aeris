@@ -1,0 +1,7 @@
+string model_name
+string update_uri
+string privacy_tier
+---
+bool accepted
+string update_id
+string reason

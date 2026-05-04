@@ -1,0 +1,4 @@
+/verification_node:
+  ros__parameters:
+    pid_gate: 0.999
+    require_human_veto_path: true

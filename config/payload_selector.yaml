@@ -10,3 +10,14 @@ payload_selector:
     video_enhanced: BORAP04_VideoEnhanced_MassGathering
     conservation: AntiPoaching_RemoteTerrain
     generic: SafetyAudit_CriticalInfrastructure
+  feature_flags:
+    enable_agentic_c2: true
+    enable_adversarial_defense: true
+    enable_digital_twin_v2: true
+    enable_cognitive_ew: true
+    enable_federated_learning: true
+    enable_verification: true
+    enable_neuromorphic_sim: true
+    enable_video_analytics: true
+    enable_swarm_orchestrator: true
+    enable_copilot: true

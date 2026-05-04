@@ -1,0 +1,6 @@
+string session_id
+string query
+---
+bool blocked
+string summary
+string rationale

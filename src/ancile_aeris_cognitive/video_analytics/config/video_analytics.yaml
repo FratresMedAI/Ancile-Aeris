@@ -1,0 +1,4 @@
+/video_analytics_node_v2:
+  ros__parameters:
+    detector_backend: "yolo_stub"
+    behavior_window: 12

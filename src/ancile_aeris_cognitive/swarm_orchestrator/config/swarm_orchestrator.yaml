@@ -1,0 +1,4 @@
+/swarm_orchestrator_node:
+  ros__parameters:
+    clustering_method: "density_stub"
+    intent_model: "rule_based_stub"

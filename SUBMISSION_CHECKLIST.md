@@ -39,13 +39,17 @@ Template placeholder: `artifacts/quad_chart/quad_chart_template.md`
 
 Video placeholder: `artifacts/demo_video/demo_video_notes.md`
 
-## Next-Gen Cognitive Layer Evidence
+## Cognitive Defensive Shield v2.0 Evidence
 
 - Include simulation outputs for:
-  - `video_analytics_node` visual confirmation and behavior tagging.
-  - `swarm_intent_node` intent classification and layered recommendations.
-  - `operator_copilot_node` query/response examples with guard behavior.
-  - `sensor_resilience_node` anomaly alerts under sensor mismatch conditions.
+  - `agent_orchestrator` proposed actions with monitor-safe fallback behavior.
+  - `adversarial_defense` sensor health and spoof/anomaly alerts.
+  - `digital_twin` effectiveness and collateral risk outputs (<200 ms target).
+  - `cognitive_ew` adaptive RF strategy recommendation stubs.
+  - `federated_learning` model update service acceptance/rejection traces.
+  - `verification` runtime safety violations and verified action evidence.
+  - `neuromorphic_sim` event stream outputs.
+  - Supporting package traces from `video_analytics`, `swarm_orchestrator`, and `copilot`.
 - Attach report: `reports/borap04_urban_mass_gathering_report.json`.
 - Generate report locally with: `python scripts/demo_borap04_urban_mass_gathering.py`.
 

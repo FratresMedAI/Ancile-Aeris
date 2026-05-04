@@ -1,0 +1,4 @@
+/federated_learning_node:
+  ros__parameters:
+    aggregator_mode: "privacy_stub"
+    require_safety_gate_open: true

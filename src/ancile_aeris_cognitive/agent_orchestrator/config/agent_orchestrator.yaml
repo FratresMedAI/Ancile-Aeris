@@ -1,0 +1,4 @@
+/agent_orchestrator_node:
+  ros__parameters:
+    behavior_tree_mode: "stub"
+    monitor_safe_default: true

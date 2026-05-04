@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>ancile_aeris_cognitive</name>
+  <version>0.1.0</version>
+  <description>Meta-package for Ancile Aeris Cognitive Defensive Shield v2.0.</description>
+  <maintainer email="maintainer@example.com">Ancile-Aeris Team</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>agent_orchestrator</exec_depend>
+  <exec_depend>adversarial_defense</exec_depend>
+  <exec_depend>digital_twin</exec_depend>
+  <exec_depend>cognitive_ew</exec_depend>
+  <exec_depend>federated_learning</exec_depend>
+  <exec_depend>verification</exec_depend>
+  <exec_depend>neuromorphic_sim</exec_depend>
+  <exec_depend>video_analytics</exec_depend>
+  <exec_depend>swarm_orchestrator</exec_depend>
+  <exec_depend>copilot</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

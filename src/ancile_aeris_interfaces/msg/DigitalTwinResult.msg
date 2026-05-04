@@ -1,0 +1,6 @@
+std_msgs/Header header
+string proposal_id
+float32 effectiveness_probability
+float32 collateral_risk_score
+float32 latency_ms
+string notes

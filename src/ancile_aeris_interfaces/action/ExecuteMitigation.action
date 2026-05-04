@@ -1,0 +1,11 @@
+string proposal_id
+string requested_action
+bool simulation_only
+---
+bool completed
+string final_state
+string reason
+---
+string phase
+float32 progress
+string status_text

@@ -1,0 +1,8 @@
+std_msgs/Header header
+string proposal_id
+string track_id
+string recommended_action
+float32 effectiveness_score
+float32 collateral_risk
+string reason
+bool requires_human_authorization

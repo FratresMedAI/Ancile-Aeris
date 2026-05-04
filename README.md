@@ -25,15 +25,19 @@ Ancile-Aeris explicitly validates these conditions:
 - `payloads/generic/darkspace_rule_guard.py`: DARKSPACE-derived offline safeguard classifier for prompt/tool trace abuse signals.
 - `config/payload_selector.yaml`: runtime payload profile selector.
 
-## Next-Gen Cognitive Layer
+## Cognitive Defensive Shield v2.0
 
-Ancile-Aeris now includes additive BORAP-oriented modules under `src/`:
-- `video_analytics_node`: video-as-a-sensor enrichment and behavior tags.
-- `swarm_intent_node`: collective-intent assessment and layered recommendation outputs.
-- `operator_copilot_node`: offline query service for operator summaries (`template` or optional `ollama` backend).
-- `sensor_resilience_node`: cross-modal anomaly alerts for contested sensing environments.
+Ancile-Aeris now includes a full v2.0 skeleton under `src/ancile_aeris_cognitive/` with buildable stubs for:
+- `agent_orchestrator`: multi-agent C2 proposal generation.
+- `adversarial_defense`: spoof/anomaly assessment for sensor integrity.
+- `digital_twin`: mitigation what-if effectiveness/collateral scoring.
+- `cognitive_ew`: adaptive EW recommendation scaffolding.
+- `federated_learning`: privacy-preserving model update service hooks.
+- `verification`: runtime property checking for PID/human-veto constraints.
+- `neuromorphic_sim`: event-camera simulation and high-rate event stream.
+- `video_analytics`, `swarm_orchestrator`, and `copilot` supporting packages.
 
-These modules remain simulation-safe and feed existing hard safety gates, XAI outputs, and immutable audit pathways.
+All actionable outputs remain safety-gated, monitor-safe by default, and audit-friendly.
 
 ## Max-Defensive Safety Gates
 
@@ -61,5 +65,6 @@ Or with PowerShell payload selection:
 
 - `docs/LRBAA_BORAP_04_MAPPING.md`
 - `docs/ARCHITECTURE.md`
+- `docs/COGNITIVE_ARCHITECTURE.md`
 - `docs/TESTING.md`
 - `SUBMISSION_CHECKLIST.md`

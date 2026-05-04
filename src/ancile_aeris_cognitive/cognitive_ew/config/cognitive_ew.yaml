@@ -1,0 +1,4 @@
+/cognitive_ew_node:
+  ros__parameters:
+    baseline_frequency_hz: 2450000000.0
+    strategy_mode: "adaptive_stub"

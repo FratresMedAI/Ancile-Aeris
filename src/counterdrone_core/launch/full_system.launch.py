@@ -10,6 +10,16 @@ def generate_launch_description() -> LaunchDescription:
     sim_mode = LaunchConfiguration('sim_mode')
     payload = LaunchConfiguration('payload')
     video_enhanced = LaunchConfiguration('video_enhanced')
+    enable_agentic_c2 = LaunchConfiguration('enable_agentic_c2')
+    enable_adversarial_defense = LaunchConfiguration('enable_adversarial_defense')
+    enable_digital_twin_v2 = LaunchConfiguration('enable_digital_twin_v2')
+    enable_cognitive_ew = LaunchConfiguration('enable_cognitive_ew')
+    enable_federated_learning = LaunchConfiguration('enable_federated_learning')
+    enable_verification = LaunchConfiguration('enable_verification')
+    enable_neuromorphic_sim = LaunchConfiguration('enable_neuromorphic_sim')
+    enable_video_analytics_v2 = LaunchConfiguration('enable_video_analytics_v2')
+    enable_swarm_orchestrator = LaunchConfiguration('enable_swarm_orchestrator')
+    enable_copilot_v2 = LaunchConfiguration('enable_copilot_v2')
     cuas_enabled = IfCondition(PythonExpression(["'", payload, "' == 'cuas'"]))
     generic_enabled = IfCondition(PythonExpression(["'", payload, "' == 'generic'"]))
     cuas_or_generic_enabled = IfCondition(PythonExpression(["'", payload, "' in ['cuas','generic']"]))
@@ -113,6 +123,76 @@ def generate_launch_description() -> LaunchDescription:
             PythonExpression(["'", payload, "' == 'cuas' and '", video_enhanced, "' == 'true'"])
         ),
     )
+    agent_orchestrator_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('agent_orchestrator'),
+            '/launch/agent_orchestrator.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_agentic_c2, "' == 'true'"])),
+    )
+    adversarial_defense_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('adversarial_defense'),
+            '/launch/adversarial_defense.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_adversarial_defense, "' == 'true'"])),
+    )
+    digital_twin_v2_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('digital_twin'),
+            '/launch/digital_twin.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_digital_twin_v2, "' == 'true'"])),
+    )
+    cognitive_ew_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('cognitive_ew'),
+            '/launch/cognitive_ew.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_cognitive_ew, "' == 'true'"])),
+    )
+    federated_learning_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('federated_learning'),
+            '/launch/federated_learning.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_federated_learning, "' == 'true'"])),
+    )
+    verification_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('verification'),
+            '/launch/verification.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_verification, "' == 'true'"])),
+    )
+    neuromorphic_sim_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('neuromorphic_sim'),
+            '/launch/neuromorphic_sim.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_neuromorphic_sim, "' == 'true'"])),
+    )
+    video_analytics_v2_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('video_analytics'),
+            '/launch/video_analytics.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_video_analytics_v2, "' == 'true'"])),
+    )
+    swarm_orchestrator_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('swarm_orchestrator'),
+            '/launch/swarm_orchestrator.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_swarm_orchestrator, "' == 'true'"])),
+    )
+    copilot_v2_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('copilot'),
+            '/launch/copilot.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_copilot_v2, "' == 'true'"])),
+    )
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -130,6 +210,16 @@ def generate_launch_description() -> LaunchDescription:
             default_value='false',
             description='Enable video analytics payload overlay for cuas profile',
         ),
+        DeclareLaunchArgument('enable_agentic_c2', default_value='true'),
+        DeclareLaunchArgument('enable_adversarial_defense', default_value='true'),
+        DeclareLaunchArgument('enable_digital_twin_v2', default_value='true'),
+        DeclareLaunchArgument('enable_cognitive_ew', default_value='true'),
+        DeclareLaunchArgument('enable_federated_learning', default_value='true'),
+        DeclareLaunchArgument('enable_verification', default_value='true'),
+        DeclareLaunchArgument('enable_neuromorphic_sim', default_value='true'),
+        DeclareLaunchArgument('enable_video_analytics_v2', default_value='true'),
+        DeclareLaunchArgument('enable_swarm_orchestrator', default_value='true'),
+        DeclareLaunchArgument('enable_copilot_v2', default_value='true'),
         LogInfo(msg=['Launching Ancile-Aeris full system. sim_mode=', sim_mode, ' payload=', payload]),
         LogInfo(
             msg=[
@@ -152,4 +242,14 @@ def generate_launch_description() -> LaunchDescription:
         video_analytics_launch,
         copilot_launch,
         resilience_launch,
+        agent_orchestrator_launch,
+        adversarial_defense_launch,
+        digital_twin_v2_launch,
+        cognitive_ew_launch,
+        federated_learning_launch,
+        verification_launch,
+        neuromorphic_sim_launch,
+        video_analytics_v2_launch,
+        swarm_orchestrator_launch,
+        copilot_v2_launch,
     ])

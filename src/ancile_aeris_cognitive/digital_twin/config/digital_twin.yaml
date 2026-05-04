@@ -1,0 +1,4 @@
+/digital_twin_node:
+  ros__parameters:
+    target_latency_ms: 200.0
+    simulation_mode: "analytic_stub"
