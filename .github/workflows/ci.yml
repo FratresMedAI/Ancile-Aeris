@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ros:kilted-ros-base
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
       - name: Install tools
