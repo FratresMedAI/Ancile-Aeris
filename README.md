@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/ancile-aeris-logo.png" alt="Ancile-Aeris logo" width="480"/>
+</p>
+
 # Ancile-Aeris
 
 Ancile-Aeris unifies CounterDroneOS and EcoSentinel (Naturaii X) as a single defensive, simulation-first ROS 2 Kilted platform.
