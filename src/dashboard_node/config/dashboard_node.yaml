@@ -1,9 +1,0 @@
-dashboard_bridge_node:
-  ros__parameters:
-    fused_tracks_topic: /fused_tracks
-    threats_topic: /threats
-    effector_topic: /effector_commands
-    audit_topic: /audit/events
-    dashboard_state_topic: /dashboard/state
-    publish_hz: 5.0
-    state_file: /tmp/counterdrone_dashboard_state.json

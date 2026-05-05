@@ -7,7 +7,7 @@ from rclpy.node import Node
 from std_msgs.msg import String
 
 try:
-    from darkspace_rule_guard import classify_text
+    from ancile_rule_guard import classify_text
 except ImportError:  # pragma: no cover
     classify_text = None  # type: ignore[assignment]
 

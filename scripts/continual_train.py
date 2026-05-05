@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 def main() -> None:
-    out = Path("/tmp/counterdrone_continual_update.json")
+    out = Path("/tmp/ancile_aeris_continual_update.json")
     out.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "mode": "continual_learning_stub",
@@ -18,3 +18,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

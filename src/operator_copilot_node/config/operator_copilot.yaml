@@ -1,4 +1,0 @@
-operator_copilot_node:
-  ros__parameters:
-    backend: template
-    dashboard_state_file: /tmp/counterdrone_dashboard_state.json

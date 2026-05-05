@@ -4,7 +4,7 @@ import time
 
 import rclpy
 from ancile_aeris_interfaces.srv import ShareThreatIntel
-from darkspace_integration import AncileAuditBridge
+from ancile_aeris_integration import AncileAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 

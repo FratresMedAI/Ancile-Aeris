@@ -1,0 +1,7 @@
+ancile_aeris_swarm_intent:
+  ros__parameters:
+    fused_topic: /fused_tracks
+    predicted_topic: /predicted_trajectories
+    intent_topic: /swarm/intent_assessment
+    recommendations_topic: /swarm/layered_recommendations
+    publish_hz: 5.0

@@ -8,6 +8,7 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <exec_depend>ancile_aeris_integration</exec_depend>
   <exec_depend>agent_orchestrator</exec_depend>
   <exec_depend>adversarial_defense</exec_depend>
   <exec_depend>digital_twin</exec_depend>
@@ -25,6 +26,8 @@
   <exec_depend>zero_knowledge_sharing</exec_depend>
   <exec_depend>resilient_pnt</exec_depend>
   <exec_depend>generative_red_team</exec_depend>
+  <exec_depend>scout_mothership</exec_depend>
+  <exec_depend>baby_interceptor</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

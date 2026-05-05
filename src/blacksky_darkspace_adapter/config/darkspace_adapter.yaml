@@ -1,8 +1,0 @@
-ancile_bridge_adapter_node:
-  ros__parameters:
-    audit_topic: /audit/events
-    threat_topic: /threats
-    command_topic: /effector_commands
-    health_topic: /ancile_guard/health
-    db_path: /tmp/ancile_bridge_adapter.db
-    hmac_secret_env: ANCILE_HMAC_SECRET

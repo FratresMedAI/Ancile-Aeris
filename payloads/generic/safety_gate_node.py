@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, Dict, Tuple
 
 try:
-    from darkspace_rule_guard import classify_text
+    from ancile_rule_guard import classify_text
 except ImportError:  # pragma: no cover - optional when copied as a package module
     classify_text = None  # type: ignore[assignment]
 
@@ -47,10 +47,10 @@ class SafetyGateNode:
             allow = False
             reasons.append("jamming_detected_offline_hold")
         if classify_text is not None and (operator_text or tool_trace):
-            darkspace_verdict = classify_text(operator_text, tool_trace=tool_trace)
-            if darkspace_verdict.label == "block":
+            ancile_verdict = classify_text(operator_text, tool_trace=tool_trace)
+            if ancile_verdict.label == "block":
                 allow = False
-                reasons.append("darkspace_rule_guard_block")
+                reasons.append("ancile_rule_guard_block")
 
         return allow, {
             "allow": allow,

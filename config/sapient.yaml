@@ -1,6 +1,6 @@
 sapient:
   compliance_mode: mock
-  idl_namespace: counterdrone_core::idl
+  idl_namespace: ancile_aeris::idl
   endpoints:
     fused_tracks: /fused_tracks
     threats: /threats

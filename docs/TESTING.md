@@ -1,4 +1,4 @@
-# Ancile-Aeris Testing
+# Ancile-Aeris Testing`r`n`r`n**Property of Fratres X AI**
 
 ## Build Validation
 
@@ -11,7 +11,7 @@ docker compose -f docker/docker-compose.yml build ancile-aeris
 ## Package Tests
 
 ```bash
-docker run --rm -v "c:/Users/Besn Daddy/Desktop/Ancile Aeris/Ancile-Aeris:/opt/counterdrone_ws" -w /opt/counterdrone_ws ancile-aeris bash -lc "source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && colcon test && colcon test-result --verbose"
+docker run --rm -v "c:/Users/Besn Daddy/Desktop/Ancile Aeris/Ancile-Aeris:/opt/ancile_aeris_ws" -w /opt/ancile_aeris_ws ancile-aeris bash -lc "rm -rf build install log && source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && colcon test && colcon test-result --verbose"
 ```
 
 ## Launch Smoke Test
@@ -36,7 +36,7 @@ Expected indicators:
 Run mixed friendly/hostile defensive scenario validation:
 
 ```bash
-docker run --rm -v "c:/Users/Besn Daddy/Desktop/Ancile Aeris/Ancile-Aeris:/opt/counterdrone_ws" -w /opt/counterdrone_ws ancile-aeris bash -lc "python3 scripts/soldier_safety_scenario.py"
+docker run --rm -v "c:/Users/Besn Daddy/Desktop/Ancile Aeris/Ancile-Aeris:/opt/ancile_aeris_ws" -w /opt/ancile_aeris_ws ancile-aeris bash -lc "python3 scripts/soldier_safety_scenario.py"
 ```
 
 Pass criteria:
@@ -48,7 +48,7 @@ Pass criteria:
 
 ## Performance Baseline Targets
 
-- Detection→Fusion→C2 pipeline latency: target `<150 ms` (sim baseline)
+- Detectionâ†’Fusionâ†’C2 pipeline latency: target `<150 ms` (sim baseline)
 - Visual pipeline effective throughput (simulated): target `>=30 FPS` on Jetson-class target
 - Dashboard update cadence: `>=5 Hz`
 
@@ -81,3 +81,4 @@ python scripts/demo_borap04_urban_mass_gathering.py
 Pass criteria:
 - report generated at `reports/borap04_urban_mass_gathering_report.json`.
 - report includes video analytics, uncertainty-aware fusion, swarm intent, copilot, and sensor resilience flags.
+

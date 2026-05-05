@@ -2,7 +2,7 @@
 
 
 def main() -> None:
-    print("Model export stub (ONNX/TensorRT) for CounterDroneOS")
+    print("Model export stub (ONNX/TensorRT) for Ancile Aeris")
 
 
 if __name__ == "__main__":

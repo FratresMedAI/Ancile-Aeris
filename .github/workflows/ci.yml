@@ -27,7 +27,7 @@ jobs:
           echo "- Decision: digital_twin, causal_xai, verification"
           echo "- Action/Resilience: copilot, federated_learning, continual_learning"
           echo "- Advanced coordination: defensive_swarm_coordinator, zero_knowledge_sharing, resilient_pnt, generative_red_team"
-          echo "- Optional layered interceptors (default-off in config/launch): scout_mothership, baby_interceptor"
+          echo "- Audit/XAI helper Python package: ancile_aeris_integration (installed alongside cognitive nodes)"
       - name: Build
         run: |
           source /opt/ros/kilted/setup.bash

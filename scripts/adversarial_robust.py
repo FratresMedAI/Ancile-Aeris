@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 def main() -> None:
-    out = Path("/tmp/counterdrone_adversarial_report.json")
+    out = Path("/tmp/ancile_aeris_adversarial_report.json")
     out.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "attack_suite": ["fgsm_stub", "pgd_stub"],
@@ -17,3 +17,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

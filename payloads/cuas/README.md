@@ -1,6 +1,6 @@
 ## C-UAS Payload
 
-This payload contains CounterDroneOS-origin nodes for defensive counter-UAS sensing, fusion, and command support.
+This payload contains Ancile Aeris defensive counter-UAS sensing, fusion, and command-support nodes.
 
 Dual-use mapping:
 - Primary: DHS LRBAA BORAP 04 counter-UAS mission alignment.

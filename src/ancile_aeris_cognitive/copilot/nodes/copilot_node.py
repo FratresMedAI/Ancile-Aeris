@@ -7,7 +7,7 @@ from rclpy.node import Node
 from std_msgs.msg import String
 
 try:
-    from darkspace_rule_guard import classify_text
+    from ancile_rule_guard import classify_text
 except ImportError:  # pragma: no cover
     classify_text = None  # type: ignore[assignment]
 
@@ -37,7 +37,7 @@ class CopilotNode(Node):
             blocked = blocked or classify_text(request.query).label == "block"
         response.blocked = blocked
         response.summary = "Blocked by safety guard." if blocked else build_summary(request.query)
-        response.rationale = "safety_gate_or_darkspace_block" if blocked else "template_backend_stub"
+        response.rationale = "safety_gate_or_ancile_guard_block" if blocked else "template_backend_stub"
         self.audit_pub.publish(String(data=json.dumps({"event": "copilot_query", "blocked": blocked, "session_id": request.session_id})))
         return response
 

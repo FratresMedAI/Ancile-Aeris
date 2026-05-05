@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ancile-aeris-core
+  namespace: ancile-aeris
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ancile-aeris-core
+  template:
+    metadata:
+      labels:
+        app: ancile-aeris-core
+    spec:
+      containers:
+        - name: ancile-aeris-core
+          image: docker-ancile-aeris-x86:latest
+          imagePullPolicy: IfNotPresent
+          command: ["bash", "-lc", "source /opt/ros/kilted/setup.bash && source /opt/ancile_aeris_ws/install/setup.bash && ros2 launch ancile_aeris_bringup bringup.launch.py"]

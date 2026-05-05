@@ -1,8 +1,7 @@
+# ROS/colcon — never bake host caches into images or mounts
 build/
 install/
 log/
+
 .git/
-.vscode/
-__pycache__/
-**/__pycache__/
-**/*.pyc
+.github/

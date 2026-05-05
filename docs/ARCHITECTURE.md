@@ -1,53 +1,26 @@
-# Ancile-Aeris Architecture
+# Ancile Aeris Architecture`r`n`r`n**Property of Fratres X AI**
 
 ```mermaid
 flowchart LR
-  PS[payload_selector.yaml] --> LS[counterdrone_core full_system launch]
-  LS --> CUAS[C-UAS payload]
-  LS --> CONS[Conservation payload]
-  LS --> GEN[Generic safety payload]
-  V[visual_node] --> F[fusion_node]
-  A[acoustic_node] --> F
-  R[rf_node] --> F
-  R --> CY[cyber_node]
-
-  F --> T[trajectory_node]
-  F --> C2[c2_decision_node]
-  T --> C2
-  CY --> C2
-  SIM[swarm_sim_node] --> C2
-
-  C2 --> TH[/threats/]
-  C2 --> EC[/effector_commands/]
-  C2 --> AU[/audit/events/]
-
-  F --> DB[dashboard_bridge_node]
-  TH --> DB
-  EC --> DB
-  AU --> DB
-  DB --> DS[/dashboard/state/]
-  DS --> ST[Streamlit UI]
-  GEN --> AU
-  CONS --> F
+  payloadSelector[payload_selector.yaml] --> bringup[ancile_aeris_bringup]
+  bringup --> sensors[ancile_aeris_sensors]
+  bringup --> fusion[ancile_aeris_fusion]
+  bringup --> safetyGate[ancile_aeris_safety_gate]
+  bringup --> cognitiveLayer[ancile_aeris_cognitive]
+  sensors --> fusion
+  fusion --> fusedTracks[/fused_tracks/]
+  fusedTracks --> cognitiveLayer
+  safetyGate --> safetyStatus[/safety_gate_status/]
+  safetyStatus --> cognitiveLayer
+  cognitiveLayer --> audit[/audit/events/]
+  cognitiveLayer --> xai[/xai_explanation/]
 ```
 
 ## Node Responsibilities
 
-- `sensor_nodes`: visual/acoustic/rf observations
-- `fusion_node`: confidence voting + EKF-style fused tracks
-- `trajectory_node`: short-horizon trajectory projection
-- `cyber_node`: passive identity/fingerprint assessment
-- `swarm_sim_node`: simulation swarm tracks + RL recommendations
-- `c2_decision_node`: threat scoring, ROE gating, command and audit generation
-- `dashboard_node`: state aggregation and operator display
+- `ancile_aeris_sensors`: visual, acoustic, and RF sensor stubs
+- `ancile_aeris_fusion`: multimodal confidence fusion and `/fused_tracks` publication
+- `ancile_aeris_safety_gate`: policy gate state on `/safety_gate_status`
+- `ancile_aeris_bringup`: unified launch orchestration for all capabilities
+- `ancile_aeris_cognitive/*`: 21-capability cognitive defensive stack
 
-## Payload Profiles
-
-- `cuas`: full defensive C-UAS launch graph.
-- `conservation`: conservation and anti-poaching node set with shared monitor-safe governance.
-- `generic`: safety, fusion, audit, and dashboard baseline for cross-domain T&E.
-
-## Deployment Modes
-
-- `sim_mode=true`: simulation-safe test mode for all payloads.
-- `sim_mode=false`: non-monitor outputs remain constrained by operator and safety guardrails.

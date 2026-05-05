@@ -3,7 +3,7 @@ import json
 import time
 
 import rclpy
-from darkspace_integration import AncileAuditBridge
+from ancile_aeris_integration import AncileAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 

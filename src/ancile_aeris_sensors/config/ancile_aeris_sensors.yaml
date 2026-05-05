@@ -1,0 +1,3 @@
+ancile_aeris_sensors:
+  ros__parameters:
+    sim_mode: true

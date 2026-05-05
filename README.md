@@ -1,72 +1,39 @@
-<p align="center">
-  <img src="assets/ancile-aeris-logo.png" alt="Ancile-Aeris logo" width="480"/>
-</p>
+# Ancile Aeris
 
-# Ancile Aeris 2.0
+**Ancile Aeris** is the definitive cognitive autonomous defensive shield platform — a unified, simulation-first ROS 2 system designed to dominate the counter-unmanned aircraft systems mission space.
 
-## Cognitive Autonomous Defensive Shield with Neuromorphic Perception, Agentic Multi-Agent C2, and Verifiable Trust
+**Property of Fratres X AI**
 
-Ancile-Aeris is a single defensive, simulation-first ROS 2 Kilted platform for trustworthy multi-layer C-UAS and conservation security operations.
+## Mission
 
-## BORAP 04 Objective Alignment
+Ancile Aeris delivers layered, trustworthy, human-on-the-loop defense against drone threats in dense urban environments, mass gatherings, critical infrastructure, and remote terrain — while maintaining full dual-use capability for conservation and wildlife protection.
 
-The BORAP 04 objective is to "develop enhanced technologies and methods that allow for the detection, tracking, identification, and mitigation of unmanned aircraft systems under varied terrains and environmental conditions."
+## Core Philosophy
 
-Ancile-Aeris explicitly validates these conditions:
-- dense urban environments
-- mass gatherings
-- critical infrastructure
-- mobile platforms
-- remote terrain
+- Max-Defensive Safety Gates (PID ≥ 0.999 + multi-modal evidence)
+- Human-on-the-Loop (no autonomous kill-chain)
+- DARKSPACE Immutable Audit (HMAC hash-chain on every event)
+- Explainable AI (XAI) on every recommendation
+- Layered Defensive Architecture (Ground Sensors → High-Altitude Scout → Deployable Kinetic Interceptors)
+- Zero Trust + Adversarial Resilience
 
-## Payload Architecture
+## 21-Capability Cognitive Architecture
 
-- `payloads/cuas`: C-UAS detection, fusion, and C2 defensive workflows.
-- `payloads/conservation`: conservation and anti-poaching derived workflows.
-- `payloads/generic`: shared safety, explainability, and immutable audit components.
-- `payloads/generic/darkspace_rule_guard.py`: offline safeguard classifier for prompt/tool trace abuse signals.
-- `config/payload_selector.yaml`: runtime payload profile selector.
-
-## Cognitive Autonomous Defensive Shield v2.0
-
-Ancile-Aeris now includes a full v2.0 skeleton with a 21-capability integrated defensive chain (19 software capability packages plus 2 foundational governance rails: hard safety gate + immutable audit).
-- Perception Layer: `video_analytics`, `neuromorphic_sim`, `hyperspectral_stub`.
-- Cognition Layer: `adversarial_defense`, `cognitive_ew`, `agent_orchestrator`, `swarm_orchestrator`.
-- Decision Layer: `digital_twin`, `causal_xai`, `verification`.
-- Action and Resilience Layer: `copilot`, `federated_learning`, `continual_learning`.
-- Advanced Coordination Layer: `defensive_swarm_coordinator`, `zero_knowledge_sharing`, `resilient_pnt`, `generative_red_team`.
-- Optional Layered Interceptor Architecture (default OFF): `scout_mothership` and `baby_interceptor`.
-- Foundation Rails: existing `safety_gate_node` hard gate and immutable audit/event chain.
-
-All actionable outputs remain safety-gated, monitor-safe by default, and audit-friendly.
-Scout/interceptor flows require explicit launch + terminal human authorization and remain disabled by default in `payload_selector.yaml`.
-
-## Max-Defensive Safety Gates
-
-- PID gate `>= 0.999` with required multi-modal evidence before any non-monitor action.
-- Human-on-the-loop authorization for non-monitor commands.
-- Friendly IFF veto and digital-twin veto for soldier-safety preservation.
-- Immutable HMAC hash-chain audit events on `/audit/events`.
-- XAI decision outputs on `/xai_explanation`.
-- No offensive autonomous kill-chain behavior.
+Ancile Aeris integrates 21 advanced capabilities including neuromorphic perception, cognitive electronic warfare, agentic multi-agent C2, generative digital twin, causal XAI, adversarial defense, high-altitude scout mothership with deployable kinetic interceptors, and more. All capabilities are modular and fully integrated with DARKSPACE and safety gates.
 
 ## Quick Start
 
 ```bash
-docker compose -f docker/docker-compose.yml build ancile-aeris
-docker compose -f docker/docker-compose.yml up ancile-aeris
-```
-
-Or with PowerShell payload selection:
-
-```powershell
-./scripts/run_all.ps1 -Payload cuas -SimMode true
+docker compose -f docker/docker-compose.yml build
+docker compose -f docker/docker-compose.yml up
 ```
 
 ## Documentation
 
-- `docs/LRBAA_BORAP_04_MAPPING.md`
-- `docs/ARCHITECTURE.md`
-- `docs/COGNITIVE_ARCHITECTURE.md`
-- `docs/TESTING.md`
-- `SUBMISSION_CHECKLIST.md`
+- docs/COGNITIVE_ARCHITECTURE.md
+- docs/LRBAA_BORAP_04_MAPPING.md
+- SUBMISSION_CHECKLIST.md
+
+## Ownership
+
+Ancile Aeris is the exclusive property of Fratres X AI. All rights reserved.

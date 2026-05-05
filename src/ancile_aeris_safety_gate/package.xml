@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>ancile_aeris_safety_gate</name>
+  <version>0.1.0</version>
+  <description>Ancile Aeris safety gate publisher with human authorization controls.</description>
+  <maintainer email="maintainer@example.com">Ancile-Aeris Team</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>launch</depend>
+  <depend>launch_ros</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

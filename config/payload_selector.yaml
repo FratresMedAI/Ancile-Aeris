@@ -1,33 +1,23 @@
-payload_selector:
-  active_payload: cuas
-  allowed_payloads:
-    - cuas
-    - video_enhanced
-    - conservation
-    - generic
-  scenario_labels:
-    cuas: BORAP04_DenseUrban
-    video_enhanced: BORAP04_VideoEnhanced_MassGathering
-    conservation: AntiPoaching_RemoteTerrain
-    generic: SafetyAudit_CriticalInfrastructure
-  feature_flags:
-    enable_agentic_c2: true
-    enable_adversarial_defense: true
-    enable_digital_twin_v2: true
-    enable_cognitive_ew: true
-    enable_federated_learning: true
-    enable_verification: true
-    enable_neuromorphic_sim: true
-    enable_neuromorphic: true
-    enable_video_analytics: true
-    enable_swarm_orchestrator: true
-    enable_copilot: true
-    enable_hyperspectral_stub: true
-    enable_causal_xai: true
-    enable_continual_learning: true
-    enable_defensive_swarm_coordinator: true
-    enable_zero_knowledge_sharing: true
-    enable_resilient_pnt: true
-    enable_generative_red_team: true
-    enable_scout_mothership: false
-    enable_baby_interceptor: false
+# Ancile Aeris Payload Selector v2.0
+# Property of Fratres X AI
+default_payload: cuas
+capabilities:
+  video_analytics: true
+  neuromorphic_sim: true
+  hyperspectral_stub: true
+  adversarial_defense: true
+  cognitive_ew: true
+  agent_orchestrator: true
+  swarm_orchestrator: true
+  digital_twin: true
+  causal_xai: true
+  verification: true
+  copilot: true
+  federated_learning: true
+  continual_learning: true
+  scout_mothership: true
+  baby_interceptor: false          # Optional - requires double human authorization
+  defensive_swarm_coordinator: true
+  zero_knowledge_sharing: true
+  resilient_pnt: true
+  generative_red_team: true
