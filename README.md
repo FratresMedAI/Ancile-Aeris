@@ -1,5 +1,13 @@
 # Ancile Aeris
 
+## ✅ Basic Demo Now Working — Fusion + DARKSPACE + Safety Gates + Scout + Copilot
+
+Run the full basic demo stack with:
+
+```bash
+ANCILE_LAUNCH_FILE=ancile_aeris_basic_demo.launch.py docker compose -f docker/docker-compose.yml up --build
+```
+
 **Ancile Aeris** is the definitive cognitive autonomous defensive shield platform — a unified, simulation-first ROS 2 system designed to dominate the counter-unmanned aircraft systems mission space.
 
 **Property of Fratres X AI**
@@ -24,8 +32,16 @@ Ancile Aeris integrates 21 advanced capabilities including neuromorphic percepti
 ## Quick Start
 
 ```bash
-docker compose -f docker/docker-compose.yml build
-docker compose -f docker/docker-compose.yml up
+ANCILE_LAUNCH_FILE=ancile_aeris_basic_demo.launch.py docker compose -f docker/docker-compose.yml up --build
+```
+
+Native workspace launch:
+
+```bash
+source /opt/ros/kilted/setup.bash
+colcon build --symlink-install
+source install/setup.bash
+ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py
 ```
 
 ## Documentation

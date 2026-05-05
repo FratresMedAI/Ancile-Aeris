@@ -55,7 +55,7 @@ class VisualNode(Node):
         simulated_track = VisualTrack(
             track_id=f"vis-{self.frame_idx:05d}",
             cls="drone",
-            confidence=0.88,
+            confidence=0.999,
             x=0.4 + 0.1 * (self.frame_idx % 5) / 5.0,
             y=0.35,
             w=0.12,

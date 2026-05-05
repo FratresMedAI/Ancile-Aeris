@@ -4,6 +4,7 @@ from collections import deque
 from dataclasses import asdict, dataclass
 
 import rclpy
+from ancile_aeris_integration.helpers import AncileAuditBridge
 from rclpy.node import Node
 from rclpy.qos import HistoryPolicy, QoSProfile, ReliabilityPolicy
 from std_msgs.msg import String
@@ -25,6 +26,7 @@ class FusionNode(Node):
         super().__init__("fusion_node")
 
         self.declare_parameter("visual_topic", "/sensor/visual/tracks")
+        self.declare_parameter("thermal_topic", "/sensor/thermal/tracks")
         self.declare_parameter("acoustic_topic", "/sensor/acoustic/detections")
         self.declare_parameter("rf_topic", "/sensor/rf/detections")
         self.declare_parameter("lidar_topic", "/sensor/lidar/points")
@@ -47,14 +49,17 @@ class FusionNode(Node):
         )
 
         self.visual_obs = deque(maxlen=20)
+        self.thermal_obs = deque(maxlen=20)
         self.acoustic_obs = deque(maxlen=20)
         self.rf_obs = deque(maxlen=20)
         self.lidar_obs = deque(maxlen=20)
         self.sigint_obs = deque(maxlen=20)
+        self.audit_bridge = AncileAuditBridge(self, "fusion_node")
         self.state = {"x": 0.0, "y": 0.0, "vx": 0.0, "vy": 0.0}
         self.track_idx = 0
 
         self.create_subscription(String, self.get_parameter("visual_topic").value, self._on_visual, sensor_qos)
+        self.create_subscription(String, self.get_parameter("thermal_topic").value, self._on_thermal, sensor_qos)
         self.create_subscription(String, self.get_parameter("acoustic_topic").value, self._on_acoustic, sensor_qos)
         self.create_subscription(String, self.get_parameter("rf_topic").value, self._on_rf, sensor_qos)
         self.create_subscription(String, self.get_parameter("lidar_topic").value, self._on_lidar, sensor_qos)
@@ -79,6 +84,13 @@ class FusionNode(Node):
             self.acoustic_obs.append(payload)
         except json.JSONDecodeError:
             self.get_logger().warning("invalid acoustic payload")
+
+    def _on_thermal(self, msg: String) -> None:
+        try:
+            payload = json.loads(msg.data)
+            self.thermal_obs.append(payload)
+        except json.JSONDecodeError:
+            self.get_logger().warning("invalid thermal payload")
 
     def _on_rf(self, msg: String) -> None:
         try:
@@ -110,6 +122,10 @@ class FusionNode(Node):
         if self.acoustic_obs and self.acoustic_obs[-1].get("detections"):
             acoustic_conf = float(self.acoustic_obs[-1]["detections"][0].get("confidence", 0.0))
 
+        thermal_conf = 0.0
+        if self.thermal_obs and self.thermal_obs[-1].get("tracks"):
+            thermal_conf = float(self.thermal_obs[-1]["tracks"][0].get("confidence", 0.0))
+
         rf_conf = 0.0
         if self.rf_obs and self.rf_obs[-1].get("fingerprints"):
             rf_conf = float(self.rf_obs[-1]["fingerprints"][0].get("confidence", 0.0))
@@ -123,17 +139,20 @@ class FusionNode(Node):
             sigint_conf = float(self.sigint_obs[-1].get("confidence", 0.0))
 
         return (
-            0.35 * visual_conf
+            0.25 * visual_conf
+            + 0.2 * thermal_conf
             + 0.2 * acoustic_conf
             + 0.2 * rf_conf
-            + 0.15 * lidar_conf
-            + 0.1 * sigint_conf
+            + 0.1 * lidar_conf
+            + 0.05 * sigint_conf
         )
 
     def _modalities_present(self) -> list[str]:
         present: list[str] = []
         if self.visual_obs and self.visual_obs[-1].get("tracks"):
             present.append("visual")
+        if self.thermal_obs and self.thermal_obs[-1].get("tracks"):
+            present.append("thermal")
         if self.acoustic_obs and self.acoustic_obs[-1].get("detections"):
             present.append("acoustic")
         if self.rf_obs and self.rf_obs[-1].get("fingerprints"):
@@ -167,7 +186,7 @@ class FusionNode(Node):
             return
 
         modalities = self._modalities_present()
-        required = {"visual", "acoustic", "rf"}
+        required = {"visual", "thermal", "acoustic", "rf"}
         pid_gate = float(self.get_parameter("pid_gate").value)
         pid_passed = required.issubset(set(modalities)) and conf >= pid_gate
 
@@ -189,7 +208,7 @@ class FusionNode(Node):
             "fusion": {
                 "method": "multimodal_cross_attention_transformer_stub",
                 "model": str(self.get_parameter("fusion_model").value),
-                "sources": ["visual", "acoustic", "rf", "lidar", "sigint"],
+                "sources": ["visual", "thermal", "acoustic", "rf", "lidar", "sigint"],
             },
             "pid": {
                 "gate": pid_gate,
@@ -202,6 +221,16 @@ class FusionNode(Node):
         msg = String()
         msg.data = json.dumps(payload)
         self.fused_pub.publish(msg)
+        self.audit_bridge.emit(
+            "fusion_track_update",
+            {
+                "track_id": fused.track_id,
+                "confidence": conf,
+                "pid_passed": pid_passed,
+                "present_modalities": modalities,
+            },
+            xai_text=f"Fusion confidence {conf:.3f}; PID gate {'passed' if pid_passed else 'blocked'}.",
+        )
 
 
 def main() -> None:

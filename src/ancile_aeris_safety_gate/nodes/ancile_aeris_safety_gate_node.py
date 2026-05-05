@@ -1,10 +1,11 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 import json
 import os
 import sys
 from pathlib import Path
 
 import rclpy
+from ancile_aeris_integration.helpers import AncileAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -17,12 +18,17 @@ class AncileAerisSafetyGateNode(Node):
 
         self.latest_track: dict = {}
         self.latest_operator: dict = {"human_veto": False, "approved": False, "terminal_approved": False}
+        self.latest_iff: dict = {"friendly": False}
+        self.latest_twin: dict = {"veto": False, "risk": 0.0}
         self.guard = self._load_guard()
+        self.audit_bridge = AncileAuditBridge(self, "ancile_aeris_safety_gate_node")
 
         self.create_subscription(String, "/fused_tracks", self._on_fused_tracks, 20)
         self.create_subscription(String, "/operator/launch_authorizations", self._on_launch_auth, 20)
         self.create_subscription(String, "/operator/terminal_authorizations", self._on_terminal_auth, 20)
         self.create_subscription(String, "/operator/veto", self._on_veto, 20)
+        self.create_subscription(String, "/iff/status", self._on_iff_status, 20)
+        self.create_subscription(String, "/digital_twin/veto", self._on_twin_veto, 20)
 
         self.status_pub = self.create_publisher(String, "/safety_gate_status", 20)
         hz = float(self.get_parameter("publish_hz").value)
@@ -69,6 +75,21 @@ class AncileAerisSafetyGateNode(Node):
         except json.JSONDecodeError:
             pass
 
+    def _on_iff_status(self, msg: String) -> None:
+        try:
+            payload = json.loads(msg.data)
+            self.latest_iff["friendly"] = bool(payload.get("friendly", False))
+        except json.JSONDecodeError:
+            pass
+
+    def _on_twin_veto(self, msg: String) -> None:
+        try:
+            payload = json.loads(msg.data)
+            self.latest_twin["veto"] = bool(payload.get("veto", False))
+            self.latest_twin["risk"] = float(payload.get("risk", 0.0))
+        except (json.JSONDecodeError, ValueError, TypeError):
+            pass
+
     def _tick(self) -> None:
         confidence = float(self.latest_track.get("confidence", 0.0)) if self.latest_track else 0.0
         pid_target = float(self.get_parameter("pid_target").value)
@@ -84,6 +105,12 @@ class AncileAerisSafetyGateNode(Node):
         if bool(self.latest_operator.get("human_veto", False)):
             allow = False
             reasons.append("human_veto")
+        if bool(self.latest_iff.get("friendly", False)):
+            allow = False
+            reasons.append("friendly_iff_lockout")
+        if bool(self.latest_twin.get("veto", False)) or float(self.latest_twin.get("risk", 0.0)) > 0.7:
+            allow = False
+            reasons.append("digital_twin_veto")
 
         guard_block = False
         if self.guard is not None:
@@ -101,8 +128,16 @@ class AncileAerisSafetyGateNode(Node):
             "fused_confidence": confidence,
             "launch_authorized": bool(self.latest_operator.get("approved", False)),
             "terminal_authorized": bool(self.latest_operator.get("terminal_approved", False)),
+            "friendly_iff": bool(self.latest_iff.get("friendly", False)),
+            "digital_twin_veto": bool(self.latest_twin.get("veto", False)),
+            "digital_twin_risk": float(self.latest_twin.get("risk", 0.0)),
         }
         self.status_pub.publish(String(data=json.dumps(out)))
+        self.audit_bridge.emit(
+            "safety_gate_evaluation",
+            {"allow": allow, "reasons": reasons, "fused_confidence": confidence},
+            xai_text=f"Safety gate {'allowed' if allow else 'blocked'} action.",
+        )
 
 
 def main() -> None:

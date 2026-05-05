@@ -21,6 +21,18 @@ install(PROGRAMS
   RENAME ancile_aeris_rf_node
 )
 
+install(PROGRAMS
+  nodes/thermal_node.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME ancile_aeris_thermal_node
+)
+
+install(PROGRAMS
+  nodes/demo_context_node.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME ancile_aeris_demo_context_node
+)
+
 install(DIRECTORY
   launch
   config

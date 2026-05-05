@@ -16,6 +16,7 @@
   <exec_depend>ancile_aeris_sensor_resilience</exec_depend>
   <exec_depend>ancile_aeris_swarm_intent</exec_depend>
   <exec_depend>ancile_aeris_operator_copilot</exec_depend>
+  <exec_depend>ancile_aeris_darkspace_integration</exec_depend>
   <exec_depend>agent_orchestrator</exec_depend>
   <exec_depend>adversarial_defense</exec_depend>
   <exec_depend>cognitive_ew</exec_depend>

@@ -6,12 +6,13 @@ services:
     container_name: ancile_aeris
     network_mode: host
     environment:
-      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
       - ANCILE_PAYLOAD=${ANCILE_PAYLOAD:-cuas}
       - ANCILE_SIM_MODE=${ANCILE_SIM_MODE:-true}
+      - ANCILE_LAUNCH_FILE=${ANCILE_LAUNCH_FILE:-bringup.launch.py}
     volumes:
       - ../:/opt/ancile_aeris_ws
-    command: bash -lc "cd /opt/ancile_aeris_ws && rm -rf build install log && source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && ros2 launch ancile_aeris_bringup bringup.launch.py"
+    command: bash -lc "cd /opt/ancile_aeris_ws && find src -name '*.py' -exec sed -i 's/\r$//' {} + && rm -rf build install log && source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && ros2 launch ancile_aeris_bringup $${ANCILE_LAUNCH_FILE}"
 
   ancile-aeris-jetson:
     profiles: ["jetson"]
@@ -24,10 +25,11 @@ services:
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=compute,utility,video
-      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
       - ANCILE_PAYLOAD=${ANCILE_PAYLOAD:-cuas}
       - ANCILE_SIM_MODE=${ANCILE_SIM_MODE:-true}
+      - ANCILE_LAUNCH_FILE=${ANCILE_LAUNCH_FILE:-bringup.launch.py}
     volumes:
       - ../:/opt/ancile_aeris_ws
-    command: bash -lc "cd /opt/ancile_aeris_ws && rm -rf build install log && source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && ros2 launch ancile_aeris_bringup bringup.launch.py"
+    command: bash -lc "cd /opt/ancile_aeris_ws && find src -name '*.py' -exec sed -i 's/\r$//' {} + && rm -rf build install log && source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && ros2 launch ancile_aeris_bringup $${ANCILE_LAUNCH_FILE}"
 

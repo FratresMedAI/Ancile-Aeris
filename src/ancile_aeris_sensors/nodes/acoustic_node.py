@@ -46,7 +46,7 @@ class AcousticNode(Node):
 
         det = AcousticDetection(
             detection_id=f"aud-{self.tick_count:05d}",
-            confidence=0.79,
+            confidence=0.999,
             estimated_bearing_deg=35.0,
             frequency_band_hz=[120.0, 1800.0],
         )

@@ -7,6 +7,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.12 python3-pip python3.12-venv python3-colcon-common-extensions \
     build-essential cmake git \
+    ros-kilted-rmw-fastrtps-cpp \
+    ros-kilted-rmw-cyclonedds-cpp \
     && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m venv /opt/ancile_venv \
