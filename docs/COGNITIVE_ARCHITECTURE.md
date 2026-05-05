@@ -103,13 +103,13 @@ flowchart LR
 - Runtime verification provides additional policy checks for PID thresholds and human-veto availability.
 - Non-monitor recommendations are proposals requiring human authorization; autonomous domestic actuation is not present.
 - Every package includes TODO markers where real model/control logic will be inserted later.
-- All new cognitive and layered-defense nodes use DARKSPACE-style immutable HMAC hash-chain event bridging via `darkspace_integration` and publish to `/audit/events`.
+- All new cognitive and layered-defense nodes use immutable HMAC hash-chain event bridging via `darkspace_integration` and publish to `/audit/events`.
 - Every advanced node contributes summary explanations to `/xai_explanation` for operator and reviewer traceability.
 
-## Legacy Naturaii X and CounterDroneOS Reuse
+## Legacy System Reuse
 
-- Naturaii X EcoSentinel patterns are preserved and extended via conservation detection/fusion logic and dual-use payload modes.
-- CounterDroneOS safety controls remain the hard constraint: PID gate, human-on-the-loop, IFF veto, and digital twin veto.
+- Legacy conservation and C-UAS patterns are preserved and extended via unified detection/fusion logic and dual-use payload modes.
+- Existing safety controls remain the hard constraint: PID gate, human-on-the-loop, IFF veto, and digital twin veto.
 - Unified fusion extends multi-modal ingestion across visual, acoustic, thermal, RF, LiDAR, conservation acoustic, neuromorphic, and hyperspectral sources into `/fused_tracks`.
 
 ## Defensive Decision Chain
@@ -117,7 +117,7 @@ flowchart LR
 The system models a defensive decision chain rather than an autonomous kill chain:
 
 1. Sense: multimodal tracks, video AI context, and neuromorphic events.
-2. Validate: adversarial resilience checks, DARKSPACE-informed operator/tool-trace guards, and sensor health scoring.
+2. Validate: adversarial resilience checks, operator/tool-trace guards, and sensor health scoring.
 3. Fuse: confidence, uncertainty, PID state, and degraded-sensor penalties.
 4. Reason: multi-agent C2 proposes monitor-safe or human-review actions.
 5. Simulate: the digital twin runs deterministic and generative what-if stubs.

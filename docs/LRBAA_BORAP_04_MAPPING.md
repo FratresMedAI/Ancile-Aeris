@@ -19,7 +19,7 @@
 - `sensor` and `situational awareness`: dashboard bridge and Streamlit dashboard state views.
 - `analysis` and `data analytics`: fused confidence scoring, trajectory estimates, and scenario reports.
 - `test & evaluation` and `forensics`: soldier safety and conservation scenario outputs plus immutable audit logs.
-- `security`: DARKSPACE-derived stateless rule guard screens operator text and tool traces for injection, exfiltration, and unsafe override patterns.
+- `security`: stateless rule guard screens operator text and tool traces for injection, exfiltration, and unsafe override patterns.
 - `critical infrastructure`, `securing aviation`, `securing borders`, `border protection`: scenario labels and mission templates in payload selector and reports.
 - `autonomous-but-vetted response`: `swarm_intent_node` recommendations are advisory and remain constrained by C2 human authorization and veto gates.
 
@@ -79,4 +79,4 @@
 - FIFA 2026 and America250 readiness: architecture supports dense-urban, high-crowd monitoring with conservative escalation controls.
 - SLTT deployment posture: interceptor capability is optional, disabled by default, and requires explicit policy enablement.
 - Domestic legal framing: even optional kinetic-adjacent stubs require safety gate and two-stage human authorization before simulated engagement.
-- DARKSPACE immutable audit and XAI continuity: new nodes emit hash-chain audit traces on `/audit/events` and explanation context on `/xai_explanation`.
+- Immutable audit and XAI continuity: new nodes emit hash-chain audit traces on `/audit/events` and explanation context on `/xai_explanation`.

@@ -2,7 +2,7 @@
 <package format="3">
   <name>blacksky_darkspace_adapter</name>
   <version>0.1.0</version>
-  <description>DARKSPACE host runtime adapter for BlackSky telemetry and audit bridging</description>
+  <description>Ancile runtime adapter for legacy BlackSky telemetry and audit bridging</description>
   <maintainer email="maintainer@example.com">BlackSky Team</maintainer>
   <license>Apache-2.0</license>
 

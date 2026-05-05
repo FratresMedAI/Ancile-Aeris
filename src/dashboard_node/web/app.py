@@ -88,7 +88,7 @@ def main() -> None:
         if guard is not None:
             verdict = guard(query)
             if verdict.label == "block":
-                st.error("Query blocked by DARKSPACE rule guard.")
+                st.error("Query blocked by Ancile safety rule guard.")
                 return
         summary = state.get("summary", {})
         latest = state.get("latest", {})

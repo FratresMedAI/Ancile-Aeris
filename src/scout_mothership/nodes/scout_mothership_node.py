@@ -3,7 +3,7 @@ import json
 import time
 
 import rclpy
-from darkspace_integration import DarkspaceAuditBridge
+from darkspace_integration import AncileAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -17,7 +17,7 @@ class ScoutMothershipNode(Node):
         super().__init__("scout_mothership_node")
         self.safety_open = False
         self.launch_authorized = False
-        self.audit_bridge = DarkspaceAuditBridge(self, "scout_mothership")
+        self.audit_bridge = AncileAuditBridge(self, "scout_mothership")
         self.create_subscription(String, "/fused_tracks", self._on_fused, 20)
         self.create_subscription(String, "/safety_gate_status", self._on_safety, 20)
         self.create_subscription(String, "/operator/launch_authorizations", self._on_launch_auth, 20)

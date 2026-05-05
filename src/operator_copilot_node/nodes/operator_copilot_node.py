@@ -50,8 +50,8 @@ class OperatorCopilotNode(Node):
             if verdict.label == "block":
                 response.blocked = True
                 response.backend = backend
-                response.reason = "darkspace_rule_guard_block"
-                response.answer = "Query blocked by DARKSPACE rule guard."
+                response.reason = "ancile_rule_guard_block"
+                response.answer = "Query blocked by Ancile safety rule guard."
                 return response
 
         state_file = str(self.get_parameter("dashboard_state_file").value)

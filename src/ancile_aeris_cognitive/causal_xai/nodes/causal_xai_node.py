@@ -2,7 +2,7 @@
 import json
 
 import rclpy
-from darkspace_integration import DarkspaceAuditBridge
+from darkspace_integration import AncileAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -15,7 +15,7 @@ class CausalXaiNode(Node):
     def __init__(self) -> None:
         super().__init__("causal_xai_node")
         self.safety_open = False
-        self.audit_bridge = DarkspaceAuditBridge(self, "causal_xai")
+        self.audit_bridge = AncileAuditBridge(self, "causal_xai")
         self.create_subscription(String, "/digital_twin_result", self._on_result, 20)
         self.create_subscription(String, "/safety_gate_status", self._on_safety_status, 20)
         self.pub = self.create_publisher(String, "/xai/causal_explanations", 20)

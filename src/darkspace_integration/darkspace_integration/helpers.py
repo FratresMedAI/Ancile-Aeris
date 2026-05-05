@@ -10,8 +10,8 @@ from typing import Any
 from std_msgs.msg import String
 
 
-class DarkspaceAuditBridge:
-    """DARKSPACE-style immutable hash-chain + ROS audit/XAI publishers."""
+class AncileAuditBridge:
+    """Ancile immutable hash-chain + ROS audit/XAI publishers."""
 
     def __init__(self, node: Any, component: str) -> None:
         self.node = node

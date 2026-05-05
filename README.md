@@ -6,7 +6,7 @@
 
 ## Cognitive Autonomous Defensive Shield with Neuromorphic Perception, Agentic Multi-Agent C2, and Verifiable Trust
 
-Ancile-Aeris unifies CounterDroneOS and EcoSentinel (Naturaii X) as a single defensive, simulation-first ROS 2 Kilted platform.
+Ancile-Aeris is a single defensive, simulation-first ROS 2 Kilted platform for trustworthy multi-layer C-UAS and conservation security operations.
 
 ## BORAP 04 Objective Alignment
 
@@ -22,9 +22,9 @@ Ancile-Aeris explicitly validates these conditions:
 ## Payload Architecture
 
 - `payloads/cuas`: C-UAS detection, fusion, and C2 defensive workflows.
-- `payloads/conservation`: EcoSentinel conservation and anti-poaching derived workflows.
+- `payloads/conservation`: conservation and anti-poaching derived workflows.
 - `payloads/generic`: shared safety, explainability, and immutable audit components.
-- `payloads/generic/darkspace_rule_guard.py`: DARKSPACE-derived offline safeguard classifier for prompt/tool trace abuse signals.
+- `payloads/generic/darkspace_rule_guard.py`: offline safeguard classifier for prompt/tool trace abuse signals.
 - `config/payload_selector.yaml`: runtime payload profile selector.
 
 ## Cognitive Autonomous Defensive Shield v2.0

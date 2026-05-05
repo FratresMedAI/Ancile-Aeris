@@ -12,4 +12,4 @@ Contained node copies:
 - `xai_node.py`
 - `darkspace_rule_guard.py`
 
-`darkspace_rule_guard.py` is adapted from DARKSPACE CCopy's stateless safeguard adapter. It adds offline rule-based detection for prompt injection, unsafe tool traces, credential exfiltration patterns, and encoded override attempts.
+`darkspace_rule_guard.py` is an Ancile stateless safeguard adapter. It adds offline rule-based detection for prompt injection, unsafe tool traces, credential exfiltration patterns, and encoded override attempts.

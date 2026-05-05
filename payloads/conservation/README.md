@@ -1,6 +1,6 @@
 ## Conservation Payload
 
-This payload contains EcoSentinel/Naturaii X-origin node logic refactored for conservation and anti-poaching workflows.
+This payload contains Ancile-Aeris conservation node logic for anti-poaching and wildlife-protection workflows.
 
 Dual-use mapping:
 - Primary: wildlife protection and protected-area monitoring.

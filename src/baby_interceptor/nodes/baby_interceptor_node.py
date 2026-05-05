@@ -3,7 +3,7 @@ import json
 import time
 
 import rclpy
-from darkspace_integration import DarkspaceAuditBridge
+from darkspace_integration import AncileAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -14,7 +14,7 @@ class BabyInterceptorNode(Node):
         self.safety_open = False
         self.launch_authorized = False
         self.terminal_authorized = False
-        self.audit_bridge = DarkspaceAuditBridge(self, "baby_interceptor")
+        self.audit_bridge = AncileAuditBridge(self, "baby_interceptor")
         self.create_subscription(String, "/interceptor_handoff", self._on_handoff, 20)
         self.create_subscription(String, "/safety_gate_status", self._on_safety, 20)
         self.create_subscription(String, "/operator/launch_authorizations", self._on_launch_auth, 20)

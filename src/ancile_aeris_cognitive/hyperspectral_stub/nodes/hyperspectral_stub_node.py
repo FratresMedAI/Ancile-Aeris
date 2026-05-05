@@ -2,7 +2,7 @@
 import json
 
 import rclpy
-from darkspace_integration import DarkspaceAuditBridge
+from darkspace_integration import AncileAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -19,7 +19,7 @@ class HyperspectralStubNode(Node):
     def __init__(self) -> None:
         super().__init__("hyperspectral_stub_node")
         self.safety_open = False
-        self.audit_bridge = DarkspaceAuditBridge(self, "hyperspectral_stub")
+        self.audit_bridge = AncileAuditBridge(self, "hyperspectral_stub")
         self.create_subscription(String, "/sensor/hyperspectral/raw", self._on_raw, 20)
         self.create_subscription(String, "/safety_gate_status", self._on_safety_status, 20)
         self.pub = self.create_publisher(String, "/sensor/hyperspectral/observations", 20)

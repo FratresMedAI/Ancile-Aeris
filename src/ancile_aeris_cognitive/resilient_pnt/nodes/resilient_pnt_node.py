@@ -2,7 +2,7 @@
 import json
 
 import rclpy
-from darkspace_integration import DarkspaceAuditBridge
+from darkspace_integration import AncileAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -19,7 +19,7 @@ class ResilientPntNode(Node):
     def __init__(self) -> None:
         super().__init__("resilient_pnt_node")
         self.safety_open = False
-        self.audit_bridge = DarkspaceAuditBridge(self, "resilient_pnt")
+        self.audit_bridge = AncileAuditBridge(self, "resilient_pnt")
         self.create_subscription(String, "/sensor/pnt_status", self._on_pnt_status, 20)
         self.create_subscription(String, "/safety_gate_status", self._on_safety_status, 20)
         self.pub = self.create_publisher(String, "/navigation/resilient_pnt", 20)

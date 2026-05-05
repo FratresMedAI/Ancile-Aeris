@@ -1,5 +1,5 @@
 """
-Stateless safeguard scoring: DARKSPACE rebuff + enforcer patterns without SQLite.
+Stateless safeguard scoring: Ancile safeguard rebuff + enforcer patterns without SQLite.
 
 Hot path must stay pure (no DB, no network) for classifier latency and Arena policy.
 Many rules target *injection method* and *information phishing* (lures that fish for
@@ -30,7 +30,7 @@ def _normalize_for_match(text: str) -> str:
         norm = norm.replace("\u597d\u7684", "")
     return unicodedata.normalize("NFKC", norm)
 
-# Duplicated from config.py to avoid importing full DARKSPACE config in the hot path.
+# Duplicated from config.py to avoid importing full guard config in the hot path.
 MCP_SIGNATURES: list[str] = [
     r'"tool"\s*:\s*"[^"]+"',
     r'"function_call"\s*:\s*\{',
@@ -497,7 +497,7 @@ _FULLTHREAD_PATTERNS: list[tuple[str, float]] = [
     (r"(?i)dummy data for the layout", 8.8),
     (r"(?i)delegating to sub-?agent", 9.0),
     (r"(?i)\bsub-?agent\b", 8.7),
-    # DARKSPACE advanced_guards-style ChatML / boundary hints (orbit-safe train)
+    # Advanced guard-style ChatML / boundary hints (orbit-safe train)
     (r"<\|im_start\|>\s*system", 9.0),
     (r"<\|im_end\|>", 8.5),
     # Voucher / delegation exfil variants (Orbit train: 0 benign hits each)
