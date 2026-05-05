@@ -71,4 +71,12 @@
 - Defensive swarm coordination: coordinated friendly drone tasking remains recommendation-only and human-vetted.
 - Resilient navigation: PNT fallback stubs preserve defensive continuity in GNSS-degraded conditions.
 - Generative red teaming: synthetic threat generation continuously stress-tests resilience assumptions.
+- Optional layered high/low architecture: `scout_mothership` and `baby_interceptor` support premium event-defense concepts while remaining default-off and human-vetted.
 - Dual-use mission continuity: the same architecture supports C-UAS and conservation monitoring without weaponized autonomy.
+
+## Major Event Security Relevance
+
+- FIFA 2026 and America250 readiness: architecture supports dense-urban, high-crowd monitoring with conservative escalation controls.
+- SLTT deployment posture: interceptor capability is optional, disabled by default, and requires explicit policy enablement.
+- Domestic legal framing: even optional kinetic-adjacent stubs require safety gate and two-stage human authorization before simulated engagement.
+- DARKSPACE immutable audit and XAI continuity: new nodes emit hash-chain audit traces on `/audit/events` and explanation context on `/xai_explanation`.

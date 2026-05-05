@@ -58,6 +58,8 @@ Video placeholder: `artifacts/demo_video/demo_video_notes.md`
   - `zero_knowledge_sharing` privacy-tiered threat intel sharing traces.
   - `resilient_pnt` GNSS-denied fallback navigation estimates.
   - `generative_red_team` synthetic future threat scenario generation.
+  - `scout_mothership` high-altitude ISR handoff traces.
+  - `baby_interceptor` double-human-authorization engagement gating traces.
   - `verification` runtime safety violations and verified action evidence.
   - `neuromorphic_sim` event stream outputs.
   - Supporting package traces from `video_analytics`, `swarm_orchestrator`, and `copilot`.
@@ -74,5 +76,6 @@ Video placeholder: `artifacts/demo_video/demo_video_notes.md`
 
 - No offensive autonomous kill-chain content.
 - Non-monitor outputs are recommendations requiring human authorization and final safety-gate approval.
+- Optional scout/interceptor capability remains disabled by default and requires explicit launch + terminal operator authorization.
 - No classified or controlled sensitive data.
 - No unreleasable hardware details in public artifacts.

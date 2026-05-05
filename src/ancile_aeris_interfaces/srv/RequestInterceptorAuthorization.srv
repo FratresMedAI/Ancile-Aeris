@@ -1,0 +1,7 @@
+string interceptor_id
+string phase
+string rationale
+---
+bool approved
+string authorization_id
+string reason

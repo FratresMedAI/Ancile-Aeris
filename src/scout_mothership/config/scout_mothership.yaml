@@ -1,0 +1,4 @@
+/scout_mothership_node:
+  ros__parameters:
+    max_interceptors_onboard: 3
+    isr_mode: "persistent_stub"

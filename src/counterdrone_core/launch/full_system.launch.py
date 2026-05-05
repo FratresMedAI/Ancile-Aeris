@@ -28,6 +28,8 @@ def generate_launch_description() -> LaunchDescription:
     enable_zero_knowledge_sharing = LaunchConfiguration('enable_zero_knowledge_sharing')
     enable_resilient_pnt = LaunchConfiguration('enable_resilient_pnt')
     enable_generative_red_team = LaunchConfiguration('enable_generative_red_team')
+    enable_scout_mothership = LaunchConfiguration('enable_scout_mothership')
+    enable_baby_interceptor = LaunchConfiguration('enable_baby_interceptor')
     cuas_enabled = IfCondition(PythonExpression(["'", payload, "' == 'cuas'"]))
     generic_enabled = IfCondition(PythonExpression(["'", payload, "' == 'generic'"]))
     cuas_or_generic_enabled = IfCondition(PythonExpression(["'", payload, "' in ['cuas','generic']"]))
@@ -252,6 +254,20 @@ def generate_launch_description() -> LaunchDescription:
         ]),
         condition=IfCondition(PythonExpression(["'", enable_generative_red_team, "' == 'true'"])),
     )
+    scout_mothership_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('scout_mothership'),
+            '/launch/scout_mothership.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_scout_mothership, "' == 'true'"])),
+    )
+    baby_interceptor_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('baby_interceptor'),
+            '/launch/baby_interceptor.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_baby_interceptor, "' == 'true'"])),
+    )
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -287,6 +303,8 @@ def generate_launch_description() -> LaunchDescription:
         DeclareLaunchArgument('enable_zero_knowledge_sharing', default_value='true'),
         DeclareLaunchArgument('enable_resilient_pnt', default_value='true'),
         DeclareLaunchArgument('enable_generative_red_team', default_value='true'),
+        DeclareLaunchArgument('enable_scout_mothership', default_value='false'),
+        DeclareLaunchArgument('enable_baby_interceptor', default_value='false'),
         LogInfo(msg=['Launching Ancile-Aeris full system. sim_mode=', sim_mode, ' payload=', payload]),
         LogInfo(
             msg=[
@@ -326,4 +344,6 @@ def generate_launch_description() -> LaunchDescription:
         zero_knowledge_sharing_launch,
         resilient_pnt_launch,
         generative_red_team_launch,
+        scout_mothership_launch,
+        baby_interceptor_launch,
     ])

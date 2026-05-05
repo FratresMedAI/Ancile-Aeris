@@ -11,7 +11,8 @@ This document defines the buildable skeleton for Ancile Aeris Cognitive Autonomo
 3. Decision: `digital_twin`, `causal_xai`, and `verification`.
 4. Action and resilience: `copilot`, `federated_learning`, and `continual_learning`.
 5. Advanced coordination: `defensive_swarm_coordinator`, `zero_knowledge_sharing`, `resilient_pnt`, `generative_red_team`.
-6. Foundation rails: `safety_gate_node`, immutable audit/XAI streams, and payload feature controls.
+6. Optional layered interceptors (default off): `scout_mothership`, `baby_interceptor`.
+7. Foundation rails: `safety_gate_node`, immutable audit/XAI streams, and payload feature controls.
 
 ## Package Layout
 
@@ -34,6 +35,8 @@ This document defines the buildable skeleton for Ancile Aeris Cognitive Autonomo
 - `src/ancile_aeris_cognitive/zero_knowledge_sharing`
 - `src/ancile_aeris_cognitive/resilient_pnt`
 - `src/ancile_aeris_cognitive/generative_red_team`
+- `src/scout_mothership`
+- `src/baby_interceptor`
 
 ## Runtime Dataflow
 
@@ -68,6 +71,11 @@ flowchart LR
   zkSharing[zero_knowledge_sharing] --> threatShare[/threat_intel/shares/]
   resilientPnt[resilient_pnt] --> pntTopic[/navigation/resilient_pnt/]
   redTeam[generative_red_team] --> redTeamTopic[/red_team/scenarios/]
+  scoutMothership[scout_mothership] --> scoutEyes[/scout_eyes/]
+  scoutMothership --> interceptorHandoff[/interceptor_handoff/]
+  interceptorHandoff --> babyInterceptor[baby_interceptor]
+  babyInterceptor --> interceptorStatus[/interceptor_status/]
+  babyInterceptor --> engagementResult[/engagement_result/]
   copilot[copilot] --> auditEvents[/audit/events/]
   safetyGate[/safety_gate_status/] --> agentOrchestrator
   safetyGate --> adversarialDefense
@@ -84,6 +92,8 @@ flowchart LR
   safetyGate --> zkSharing
   safetyGate --> resilientPnt
   safetyGate --> redTeam
+  safetyGate --> scoutMothership
+  safetyGate --> babyInterceptor
 ```
 
 ## Safety Philosophy
@@ -93,6 +103,14 @@ flowchart LR
 - Runtime verification provides additional policy checks for PID thresholds and human-veto availability.
 - Non-monitor recommendations are proposals requiring human authorization; autonomous domestic actuation is not present.
 - Every package includes TODO markers where real model/control logic will be inserted later.
+- All new cognitive and layered-defense nodes use DARKSPACE-style immutable HMAC hash-chain event bridging via `darkspace_integration` and publish to `/audit/events`.
+- Every advanced node contributes summary explanations to `/xai_explanation` for operator and reviewer traceability.
+
+## Legacy Naturaii X and CounterDroneOS Reuse
+
+- Naturaii X EcoSentinel patterns are preserved and extended via conservation detection/fusion logic and dual-use payload modes.
+- CounterDroneOS safety controls remain the hard constraint: PID gate, human-on-the-loop, IFF veto, and digital twin veto.
+- Unified fusion extends multi-modal ingestion across visual, acoustic, thermal, RF, LiDAR, conservation acoustic, neuromorphic, and hyperspectral sources into `/fused_tracks`.
 
 ## Defensive Decision Chain
 
@@ -106,7 +124,8 @@ The system models a defensive decision chain rather than an autonomous kill chai
 6. Explain: causal XAI generates counterfactual narratives for operator trust and after-action review.
 7. Verify: runtime properties block PID, human-veto, and safety-gate violations.
 8. Coordinate: defensive swarm, privacy-preserving intel sharing, resilient PNT, and synthetic red-team pressure testing.
-9. Audit: every consequential event is explainable and emitted for immutable audit.
+9. Escalate (optional, default off): high-altitude scout mothership can hand off to attritable interceptors only with double human authorization.
+10. Audit: every consequential event is explainable and emitted for immutable audit.
 
 ## Full Skeleton Launch
 
@@ -120,5 +139,5 @@ ros2 launch counterdrone_core full_system.launch.py \
   enable_neuromorphic:=true enable_neuromorphic_sim:=true enable_video_analytics_v2:=true enable_swarm_orchestrator:=true \
   enable_copilot_v2:=true enable_hyperspectral_stub:=true enable_causal_xai:=true enable_continual_learning:=true \
   enable_defensive_swarm_coordinator:=true enable_zero_knowledge_sharing:=true enable_resilient_pnt:=true \
-  enable_generative_red_team:=true
+  enable_generative_red_team:=true enable_scout_mothership:=false enable_baby_interceptor:=false
 ```

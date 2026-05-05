@@ -23,9 +23,13 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/ThreatIntelShare.msg"
   "msg/ResilientPntEstimate.msg"
   "msg/RedTeamScenario.msg"
+  "msg/ScoutTrack.msg"
+  "msg/InterceptorStatus.msg"
+  "msg/EngagementResult.msg"
   "srv/RequestModelUpdate.srv"
   "srv/QueryCopilot.srv"
   "srv/ShareThreatIntel.srv"
+  "srv/RequestInterceptorAuthorization.srv"
   "action/ExecuteMitigation.action"
   DEPENDENCIES std_msgs builtin_interfaces
 )

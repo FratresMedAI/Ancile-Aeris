@@ -2,6 +2,7 @@
 import json
 
 import rclpy
+from darkspace_integration import DarkspaceAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -18,6 +19,7 @@ class ResilientPntNode(Node):
     def __init__(self) -> None:
         super().__init__("resilient_pnt_node")
         self.safety_open = False
+        self.audit_bridge = DarkspaceAuditBridge(self, "resilient_pnt")
         self.create_subscription(String, "/sensor/pnt_status", self._on_pnt_status, 20)
         self.create_subscription(String, "/safety_gate_status", self._on_safety_status, 20)
         self.pub = self.create_publisher(String, "/navigation/resilient_pnt", 20)
@@ -44,6 +46,11 @@ class ResilientPntNode(Node):
             "monitor_only": not self.safety_open,
         }
         self.pub.publish(String(data=json.dumps(out)))
+        self.audit_bridge.emit(
+            "resilient_pnt_estimate",
+            out,
+            xai_text=f"Resilient PNT selected integrity mode {out['integrity_state']} from simulated GPS health.",
+        )
 
 
 def main() -> None:

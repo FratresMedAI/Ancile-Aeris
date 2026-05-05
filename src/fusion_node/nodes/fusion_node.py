@@ -30,6 +30,8 @@ class FusionNode(Node):
         self.declare_parameter("rf_topic", "/sensor/rf/detections")
         self.declare_parameter("lidar_topic", "/sensor/lidar/points")
         self.declare_parameter("sigint_topic", "/sensor/sigint/elint")
+        self.declare_parameter("thermal_topic", "/sensor/thermal/tracks")
+        self.declare_parameter("wildlife_acoustic_topic", "/sensor/conservation/acoustic")
         self.declare_parameter("video_analytics_topic", "/sensor/visual/analytics")
         self.declare_parameter("hyperspectral_topic", "/sensor/hyperspectral/observations")
         self.declare_parameter("neuromorphic_topic", "/neuromorphic_events")
@@ -58,6 +60,8 @@ class FusionNode(Node):
         self.rf_obs = deque(maxlen=20)
         self.lidar_obs = deque(maxlen=20)
         self.sigint_obs = deque(maxlen=20)
+        self.thermal_obs = deque(maxlen=20)
+        self.wildlife_acoustic_obs = deque(maxlen=20)
         self.video_analytics_obs = deque(maxlen=20)
         self.hyperspectral_obs = deque(maxlen=20)
         self.neuromorphic_obs = deque(maxlen=50)
@@ -72,6 +76,10 @@ class FusionNode(Node):
         self.create_subscription(String, self.get_parameter("rf_topic").value, self._on_rf, sensor_qos)
         self.create_subscription(String, self.get_parameter("lidar_topic").value, self._on_lidar, sensor_qos)
         self.create_subscription(String, self.get_parameter("sigint_topic").value, self._on_sigint, sensor_qos)
+        self.create_subscription(String, self.get_parameter("thermal_topic").value, self._on_thermal, sensor_qos)
+        self.create_subscription(
+            String, self.get_parameter("wildlife_acoustic_topic").value, self._on_wildlife_acoustic, sensor_qos
+        )
         self.create_subscription(
             String, self.get_parameter("video_analytics_topic").value, self._on_video_analytics, sensor_qos
         )
@@ -139,6 +147,20 @@ class FusionNode(Node):
         except json.JSONDecodeError:
             self.get_logger().warning("invalid sigint payload")
 
+    def _on_thermal(self, msg: String) -> None:
+        try:
+            payload = json.loads(msg.data)
+            self.thermal_obs.append(payload)
+        except json.JSONDecodeError:
+            self.get_logger().warning("invalid thermal payload")
+
+    def _on_wildlife_acoustic(self, msg: String) -> None:
+        try:
+            payload = json.loads(msg.data)
+            self.wildlife_acoustic_obs.append(payload)
+        except json.JSONDecodeError:
+            self.get_logger().warning("invalid wildlife acoustic payload")
+
     def _on_video_analytics(self, msg: String) -> None:
         try:
             payload = json.loads(msg.data)
@@ -194,6 +216,12 @@ class FusionNode(Node):
         sigint_conf = 0.0
         if self.sigint_obs:
             sigint_conf = float(self.sigint_obs[-1].get("confidence", 0.0))
+        thermal_conf = 0.0
+        if self.thermal_obs:
+            thermal_conf = float(self.thermal_obs[-1].get("confidence", 0.0))
+        wildlife_acoustic_conf = 0.0
+        if self.wildlife_acoustic_obs:
+            wildlife_acoustic_conf = float(self.wildlife_acoustic_obs[-1].get("confidence", 0.0))
         video_conf = 0.0
         if self.video_analytics_obs:
             latest_video = self.video_analytics_obs[-1]
@@ -217,8 +245,10 @@ class FusionNode(Node):
                 0.26 * visual_conf
                 + 0.16 * acoustic_conf
                 + 0.16 * rf_conf
-                + 0.10 * lidar_conf
+                + 0.08 * lidar_conf
                 + 0.08 * sigint_conf
+                + 0.10 * thermal_conf
+                + 0.06 * wildlife_acoustic_conf
                 + 0.14 * video_conf
                 + 0.08 * neuromorphic_conf
                 + 0.08 * hyperspectral_conf
@@ -238,6 +268,10 @@ class FusionNode(Node):
             present.append("lidar")
         if self.sigint_obs:
             present.append("sigint")
+        if self.thermal_obs:
+            present.append("thermal")
+        if self.wildlife_acoustic_obs:
+            present.append("wildlife_acoustic")
         if self.video_analytics_obs:
             present.append("video_analytics")
         if self.neuromorphic_obs:
@@ -277,7 +311,7 @@ class FusionNode(Node):
             self.state["vy"] = (self.state["y"] - prev_y) / 0.05
 
     def _uncertainty(self, conf: float, modalities: list[str]) -> dict:
-        modality_score = min(1.0, len(set(modalities)) / 8.0)
+        modality_score = min(1.0, len(set(modalities)) / 10.0)
         epistemic = round(max(0.0, 1.0 - modality_score), 4)
         aleatoric = round(min(1.0, max(0.0, 1.0 - conf) + self._sensor_health_penalty()), 4)
         total = round(min(1.0, 0.55 * epistemic + 0.45 * aleatoric), 4)
@@ -324,6 +358,8 @@ class FusionNode(Node):
                     "rf",
                     "lidar",
                     "sigint",
+                    "thermal",
+                    "wildlife_acoustic",
                     "video_analytics",
                     "neuromorphic",
                     "hyperspectral",

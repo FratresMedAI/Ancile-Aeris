@@ -2,6 +2,7 @@
 import json
 
 import rclpy
+from darkspace_integration import DarkspaceAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -14,6 +15,7 @@ class DefensiveSwarmCoordinatorNode(Node):
     def __init__(self) -> None:
         super().__init__("defensive_swarm_coordinator_node")
         self.safety_open = False
+        self.audit_bridge = DarkspaceAuditBridge(self, "defensive_swarm_coordinator")
         self.create_subscription(String, "/swarm/intent_assessment", self._on_intent, 20)
         self.create_subscription(String, "/safety_gate_status", self._on_safety_status, 20)
         self.pub = self.create_publisher(String, "/defensive_swarm/coordination", 20)
@@ -38,6 +40,11 @@ class DefensiveSwarmCoordinatorNode(Node):
             "monitor_only": not self.safety_open,
         }
         self.pub.publish(String(data=json.dumps(out)))
+        self.audit_bridge.emit(
+            "defensive_swarm_coordination",
+            out,
+            xai_text="Friendly defensive swarm coordination remains recommendation-only and human-vetted.",
+        )
 
 
 def main() -> None:

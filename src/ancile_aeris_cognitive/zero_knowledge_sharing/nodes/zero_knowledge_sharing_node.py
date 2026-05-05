@@ -4,6 +4,7 @@ import time
 
 import rclpy
 from ancile_aeris_interfaces.srv import ShareThreatIntel
+from darkspace_integration import DarkspaceAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -16,6 +17,7 @@ class ZeroKnowledgeSharingNode(Node):
     def __init__(self) -> None:
         super().__init__("zero_knowledge_sharing_node")
         self.safety_open = False
+        self.audit_bridge = DarkspaceAuditBridge(self, "zero_knowledge_sharing")
         self.create_subscription(String, "/safety_gate_status", self._on_safety_status, 20)
         self.pub = self.create_publisher(String, "/threat_intel/shares", 20)
         self.create_service(ShareThreatIntel, "/threat_intel/share", self._on_share)
@@ -39,6 +41,11 @@ class ZeroKnowledgeSharingNode(Node):
             "privacy_tier": request.privacy_tier,
             "approved": accepted,
         })))
+        self.audit_bridge.emit(
+            "threat_intel_share",
+            {"partner": request.partner, "approved": accepted, "privacy_tier": request.privacy_tier},
+            xai_text="Threat intel sharing decision evaluated safety gate and privacy tier policy.",
+        )
         return response
 
 

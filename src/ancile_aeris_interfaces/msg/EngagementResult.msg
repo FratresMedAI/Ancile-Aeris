@@ -1,0 +1,6 @@
+std_msgs/Header header
+string engagement_id
+string interceptor_id
+string outcome
+float32 collateral_risk
+bool authorized_path_verified

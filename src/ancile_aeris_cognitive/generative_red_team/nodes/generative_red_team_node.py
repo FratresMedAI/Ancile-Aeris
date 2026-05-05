@@ -3,6 +3,7 @@ import json
 import random
 
 import rclpy
+from darkspace_integration import DarkspaceAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -15,6 +16,7 @@ class GenerativeRedTeamNode(Node):
     def __init__(self) -> None:
         super().__init__("generative_red_team_node")
         self.safety_open = False
+        self.audit_bridge = DarkspaceAuditBridge(self, "generative_red_team")
         self.create_subscription(String, "/safety_gate_status", self._on_safety_status, 20)
         self.pub = self.create_publisher(String, "/red_team/scenarios", 20)
         self.timer = self.create_timer(1.0, self._on_tick)
@@ -37,6 +39,11 @@ class GenerativeRedTeamNode(Node):
             "monitor_only": not self.safety_open,
         }
         self.pub.publish(String(data=json.dumps(out)))
+        self.audit_bridge.emit(
+            "red_team_scenario",
+            out,
+            xai_text="Generative red team created a synthetic defensive stress-test scenario.",
+        )
 
 
 def main() -> None:

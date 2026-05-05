@@ -3,6 +3,7 @@ import json
 import time
 
 import rclpy
+from darkspace_integration import DarkspaceAuditBridge
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -15,6 +16,7 @@ class ContinualLearningNode(Node):
     def __init__(self) -> None:
         super().__init__("continual_learning_node")
         self.safety_open = False
+        self.audit_bridge = DarkspaceAuditBridge(self, "continual_learning")
         self.create_subscription(String, "/fused_tracks", self._on_fused, 20)
         self.create_subscription(String, "/safety_gate_status", self._on_safety_status, 20)
         self.pub = self.create_publisher(String, "/continual_learning/status", 20)
@@ -35,6 +37,11 @@ class ContinualLearningNode(Node):
             "reason": "safety_gate_closed" if not self.safety_open else f"bounded_update_{int(time.time())}",
         }
         self.pub.publish(String(data=json.dumps(out)))
+        self.audit_bridge.emit(
+            "continual_learning_status",
+            out,
+            xai_text="Continual learning remains bounded and safety-constrained.",
+        )
 
 
 def main() -> None:

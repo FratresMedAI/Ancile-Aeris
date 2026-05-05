@@ -29,3 +29,5 @@ payload_selector:
     enable_zero_knowledge_sharing: true
     enable_resilient_pnt: true
     enable_generative_red_team: true
+    enable_scout_mothership: false
+    enable_baby_interceptor: false
