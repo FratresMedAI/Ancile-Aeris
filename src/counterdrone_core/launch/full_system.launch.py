@@ -17,6 +17,7 @@ def generate_launch_description() -> LaunchDescription:
     enable_federated_learning = LaunchConfiguration('enable_federated_learning')
     enable_verification = LaunchConfiguration('enable_verification')
     enable_neuromorphic_sim = LaunchConfiguration('enable_neuromorphic_sim')
+    enable_neuromorphic = LaunchConfiguration('enable_neuromorphic')
     enable_video_analytics_v2 = LaunchConfiguration('enable_video_analytics_v2')
     enable_swarm_orchestrator = LaunchConfiguration('enable_swarm_orchestrator')
     enable_copilot_v2 = LaunchConfiguration('enable_copilot_v2')
@@ -170,7 +171,9 @@ def generate_launch_description() -> LaunchDescription:
             FindPackageShare('neuromorphic_sim'),
             '/launch/neuromorphic_sim.launch.py',
         ]),
-        condition=IfCondition(PythonExpression(["'", enable_neuromorphic_sim, "' == 'true'"])),
+        condition=IfCondition(
+            PythonExpression(["'", enable_neuromorphic_sim, "' == 'true' or '", enable_neuromorphic, "' == 'true'"])
+        ),
     )
     video_analytics_v2_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
@@ -217,6 +220,7 @@ def generate_launch_description() -> LaunchDescription:
         DeclareLaunchArgument('enable_federated_learning', default_value='true'),
         DeclareLaunchArgument('enable_verification', default_value='true'),
         DeclareLaunchArgument('enable_neuromorphic_sim', default_value='true'),
+        DeclareLaunchArgument('enable_neuromorphic', default_value='true'),
         DeclareLaunchArgument('enable_video_analytics_v2', default_value='true'),
         DeclareLaunchArgument('enable_swarm_orchestrator', default_value='true'),
         DeclareLaunchArgument('enable_copilot_v2', default_value='true'),

@@ -41,6 +41,10 @@ Video placeholder: `artifacts/demo_video/demo_video_notes.md`
 
 ## Cognitive Defensive Shield v2.0 Evidence
 
+- Positioning language:
+  - Ancile Aeris 2.0 is a Cognitive Autonomous Defensive Shield for DHS/DoD rapid prototyping audiences, including JIATF-401-style C-UAS experimentation.
+  - It combines neuromorphic perception, adversarial resilience, agentic multi-agent C2, cognitive EW recommendations, digital-twin what-if simulation, federated learning hooks, and verifiable safety.
+  - It remains defensive-only, human-on-the-loop, XAI-first, and immutable-audit-ready.
 - Include simulation outputs for:
   - `agent_orchestrator` proposed actions with monitor-safe fallback behavior.
   - `adversarial_defense` sensor health and spoof/anomaly alerts.
@@ -62,5 +66,6 @@ Video placeholder: `artifacts/demo_video/demo_video_notes.md`
 ## Compliance Guardrails
 
 - No offensive autonomous kill-chain content.
+- Non-monitor outputs are recommendations requiring human authorization and final safety-gate approval.
 - No classified or controlled sensitive data.
 - No unreleasable hardware details in public artifacts.

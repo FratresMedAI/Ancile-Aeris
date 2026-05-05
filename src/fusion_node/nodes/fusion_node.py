@@ -31,6 +31,9 @@ class FusionNode(Node):
         self.declare_parameter("lidar_topic", "/sensor/lidar/points")
         self.declare_parameter("sigint_topic", "/sensor/sigint/elint")
         self.declare_parameter("video_analytics_topic", "/sensor/visual/analytics")
+        self.declare_parameter("neuromorphic_topic", "/neuromorphic_events")
+        self.declare_parameter("sensor_health_topic", "/sensor_health")
+        self.declare_parameter("adversarial_alert_topic", "/adversarial_alert")
         self.declare_parameter("fused_topic", "/fused_tracks")
         self.declare_parameter("publish_hz", 20.0)
         self.declare_parameter("min_confidence", 0.5)
@@ -55,6 +58,9 @@ class FusionNode(Node):
         self.lidar_obs = deque(maxlen=20)
         self.sigint_obs = deque(maxlen=20)
         self.video_analytics_obs = deque(maxlen=20)
+        self.neuromorphic_obs = deque(maxlen=50)
+        self.sensor_health_obs = deque(maxlen=20)
+        self.adversarial_alert_obs = deque(maxlen=20)
         self.state = {"x": 0.0, "y": 0.0, "vx": 0.0, "vy": 0.0}
         self.track_idx = 0
         self.onnx_backend = self._load_tensorrt_onnx_backend_stub()
@@ -66,6 +72,11 @@ class FusionNode(Node):
         self.create_subscription(String, self.get_parameter("sigint_topic").value, self._on_sigint, sensor_qos)
         self.create_subscription(
             String, self.get_parameter("video_analytics_topic").value, self._on_video_analytics, sensor_qos
+        )
+        self.create_subscription(String, self.get_parameter("neuromorphic_topic").value, self._on_neuromorphic, sensor_qos)
+        self.create_subscription(String, self.get_parameter("sensor_health_topic").value, self._on_sensor_health, c2_qos)
+        self.create_subscription(
+            String, self.get_parameter("adversarial_alert_topic").value, self._on_adversarial_alert, c2_qos
         )
 
         self.fused_pub = self.create_publisher(String, self.get_parameter("fused_topic").value, c2_qos)
@@ -132,6 +143,27 @@ class FusionNode(Node):
         except json.JSONDecodeError:
             self.get_logger().warning("invalid video analytics payload")
 
+    def _on_neuromorphic(self, msg: String) -> None:
+        try:
+            payload = json.loads(msg.data)
+            self.neuromorphic_obs.append(payload)
+        except json.JSONDecodeError:
+            self.get_logger().warning("invalid neuromorphic payload")
+
+    def _on_sensor_health(self, msg: String) -> None:
+        try:
+            payload = json.loads(msg.data)
+            self.sensor_health_obs.append(payload)
+        except json.JSONDecodeError:
+            self.get_logger().warning("invalid sensor health payload")
+
+    def _on_adversarial_alert(self, msg: String) -> None:
+        try:
+            payload = json.loads(msg.data)
+            self.adversarial_alert_obs.append(payload)
+        except json.JSONDecodeError:
+            self.get_logger().warning("invalid adversarial alert payload")
+
     def _confidence_vote(self) -> float:
         visual_conf = 0.0
         if self.visual_obs and self.visual_obs[-1].get("tracks"):
@@ -153,16 +185,31 @@ class FusionNode(Node):
         if self.sigint_obs:
             sigint_conf = float(self.sigint_obs[-1].get("confidence", 0.0))
         video_conf = 0.0
-        if self.video_analytics_obs and self.video_analytics_obs[-1].get("video_analytics"):
-            video_conf = float(self.video_analytics_obs[-1]["video_analytics"][0].get("confidence", 0.0))
+        if self.video_analytics_obs:
+            latest_video = self.video_analytics_obs[-1]
+            if latest_video.get("video_analytics"):
+                video_conf = float(latest_video["video_analytics"][0].get("confidence", 0.0))
+            else:
+                video_conf = float(latest_video.get("confidence", 0.65))
+
+        neuromorphic_conf = 0.0
+        if self.neuromorphic_obs:
+            neuromorphic_conf = float(self.neuromorphic_obs[-1].get("confidence", 0.0))
+
+        health_penalty = self._sensor_health_penalty()
 
         return (
-            0.30 * visual_conf
-            + 0.18 * acoustic_conf
-            + 0.18 * rf_conf
-            + 0.12 * lidar_conf
-            + 0.08 * sigint_conf
-            + 0.14 * video_conf
+            max(
+                0.0,
+                0.26 * visual_conf
+                + 0.16 * acoustic_conf
+                + 0.16 * rf_conf
+                + 0.10 * lidar_conf
+                + 0.08 * sigint_conf
+                + 0.14 * video_conf
+                + 0.10 * neuromorphic_conf
+                - health_penalty,
+            )
         )
 
     def _modalities_present(self) -> list[str]:
@@ -177,9 +224,25 @@ class FusionNode(Node):
             present.append("lidar")
         if self.sigint_obs:
             present.append("sigint")
-        if self.video_analytics_obs and self.video_analytics_obs[-1].get("video_analytics"):
+        if self.video_analytics_obs:
             present.append("video_analytics")
+        if self.neuromorphic_obs:
+            present.append("neuromorphic")
         return present
+
+    def _sensor_health_penalty(self) -> float:
+        penalty = 0.0
+        if self.sensor_health_obs:
+            latest = self.sensor_health_obs[-1]
+            health_score = float(latest.get("health_score", 1.0))
+            penalty += max(0.0, 1.0 - health_score) * 0.12
+            if bool(latest.get("spoof_suspected", False)):
+                penalty += 0.18
+        if self.adversarial_alert_obs:
+            latest_alert = self.adversarial_alert_obs[-1]
+            if str(latest_alert.get("severity", "")).lower() in {"medium", "high", "critical"}:
+                penalty += 0.20
+        return min(0.5, penalty)
 
     def _ekf_predict_update(self) -> None:
         self.state["x"] += self.state["vx"] * 0.05
@@ -198,9 +261,9 @@ class FusionNode(Node):
             self.state["vy"] = (self.state["y"] - prev_y) / 0.05
 
     def _uncertainty(self, conf: float, modalities: list[str]) -> dict:
-        modality_score = min(1.0, len(set(modalities)) / 6.0)
+        modality_score = min(1.0, len(set(modalities)) / 7.0)
         epistemic = round(max(0.0, 1.0 - modality_score), 4)
-        aleatoric = round(max(0.0, 1.0 - conf), 4)
+        aleatoric = round(min(1.0, max(0.0, 1.0 - conf) + self._sensor_health_penalty()), 4)
         total = round(min(1.0, 0.55 * epistemic + 0.45 * aleatoric), 4)
         return {
             "epistemic": epistemic,
@@ -239,7 +302,11 @@ class FusionNode(Node):
                 "method": "multimodal_cross_attention_transformer_stub",
                 "model": str(self.get_parameter("fusion_model").value),
                 "onnx_backend": self.onnx_backend,
-                "sources": ["visual", "acoustic", "rf", "lidar", "sigint", "video_analytics"],
+                "sources": ["visual", "acoustic", "rf", "lidar", "sigint", "video_analytics", "neuromorphic"],
+                "adversarial_resilience": {
+                    "sensor_health_penalty": self._sensor_health_penalty(),
+                    "latest_alert": self.adversarial_alert_obs[-1] if self.adversarial_alert_obs else None,
+                },
             },
             "pid": {
                 "gate": pid_gate,

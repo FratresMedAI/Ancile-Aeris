@@ -36,7 +36,13 @@ class CognitiveEwNode(Node):
             return
         score = float(payload.get("effectiveness_probability", 0.0))
         params = derive_rf_parameters(score if self.safety_open else 0.0)
-        out = {"command_id": payload.get("proposal_id", "unknown"), "strategy": "monitor" if not self.safety_open else "deception_stub", **params}
+        out = {
+            "command_id": payload.get("proposal_id", "unknown"),
+            "strategy": "monitor" if not self.safety_open else "recommend_human_vetted_deception_stub",
+            "requires_human_authorization": self.safety_open,
+            "monitor_only": not self.safety_open,
+            **params,
+        }
         self.pub.publish(String(data=json.dumps(out)))
 
 

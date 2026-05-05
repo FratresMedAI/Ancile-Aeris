@@ -15,7 +15,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/DigitalTwinResult.msg"
   "msg/SafetyViolation.msg"
   "msg/VerifiedAction.msg"
-  "msg/CognitiveEwCommand.msg"
+  "msg/CognitiveEWCommand.msg"
   "msg/NeuromorphicEvent.msg"
   "srv/RequestModelUpdate.srv"
   "srv/QueryCopilot.srv"

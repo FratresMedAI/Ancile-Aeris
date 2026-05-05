@@ -45,11 +45,22 @@
 
 ## Cognitive Defensive Shield v2.0 Mapping
 
+- JIATF-401 relevance: the architecture supports rapid, simulation-first C-UAS experimentation across dense urban, mass-gathering, border, aviation, and critical-infrastructure contexts.
+- DHS S&T transition value: every advanced autonomy feature is human-vetted, explainable, auditable, and controlled by deployment-specific feature flags.
 - Agentic AI for C2: `agent_orchestrator` produces multi-agent proposals on `/proposed_actions`.
 - Zero-trust adversarial defense: `adversarial_defense` publishes `/sensor_health` and `/adversarial_alert`.
 - Physics-informed what-if simulation: `digital_twin` publishes `/digital_twin_result` with effectiveness and collateral estimates.
 - Adaptive RF defense: `cognitive_ew` publishes `/cognitive_ew_commands` in simulation-safe form.
 - Federated learning hooks: `federated_learning` exposes `/federated_learning/request_model_update`.
 - Runtime verifiable AI foundation: `verification` enforces PID/human-veto properties via `/safety_violation` and `/verified_action`.
-- Neuromorphic acceleration path: `neuromorphic_sim` publishes `/neuromorphic/events` for event-driven sensing experiments.
+- Neuromorphic acceleration path: `neuromorphic_sim` publishes `/neuromorphic_events` for event-driven sensing experiments.
 - Supporting capability layer: `video_analytics`, `swarm_orchestrator`, and `copilot` feed explainable, safety-gated advisory context.
+
+## 2026 State-of-the-Art Claims
+
+- Cognitive EW: AI-assisted RF recommendations are generated as human-review proposals, never autonomous domestic actuation.
+- Neuromorphic perception: event-stream stubs provide a path to low-latency, high-rate detection under clutter and motion.
+- Adversarial resilience: spoof/anomaly signals directly degrade fusion confidence and raise audit-visible alerts.
+- Agentic C2: specialist agents negotiate recommendations while preserving safety-agent veto semantics.
+- Verifiable safety: runtime verification monitors PID thresholds, human-veto availability, and safety-gate bypass attempts.
+- Dual-use mission continuity: the same architecture supports C-UAS and conservation monitoring without weaponized autonomy.

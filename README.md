@@ -2,7 +2,9 @@
   <img src="assets/ancile-aeris-logo.png" alt="Ancile-Aeris logo" width="480"/>
 </p>
 
-# Ancile-Aeris
+# Ancile Aeris 2.0
+
+## Cognitive Autonomous Defensive Shield with Neuromorphic Perception, Agentic Multi-Agent C2, and Verifiable Trust
 
 Ancile-Aeris unifies CounterDroneOS and EcoSentinel (Naturaii X) as a single defensive, simulation-first ROS 2 Kilted platform.
 
@@ -25,17 +27,14 @@ Ancile-Aeris explicitly validates these conditions:
 - `payloads/generic/darkspace_rule_guard.py`: DARKSPACE-derived offline safeguard classifier for prompt/tool trace abuse signals.
 - `config/payload_selector.yaml`: runtime payload profile selector.
 
-## Cognitive Defensive Shield v2.0
+## Cognitive Autonomous Defensive Shield v2.0
 
-Ancile-Aeris now includes a full v2.0 skeleton under `src/ancile_aeris_cognitive/` with buildable stubs for:
-- `agent_orchestrator`: multi-agent C2 proposal generation.
-- `adversarial_defense`: spoof/anomaly assessment for sensor integrity.
-- `digital_twin`: mitigation what-if effectiveness/collateral scoring.
-- `cognitive_ew`: adaptive EW recommendation scaffolding.
-- `federated_learning`: privacy-preserving model update service hooks.
-- `verification`: runtime property checking for PID/human-veto constraints.
-- `neuromorphic_sim`: event-camera simulation and high-rate event stream.
-- `video_analytics`, `swarm_orchestrator`, and `copilot` supporting packages.
+Ancile-Aeris now includes a full v2.0 skeleton under `src/ancile_aeris_cognitive/` organized into Perception, Cognition, Decision, Action/Resilience, and Verification/Trust layers:
+- Perception: `video_analytics`, `neuromorphic_sim`, and uncertainty-aware `fusion_node` ingestion.
+- Cognition: `adversarial_defense`, `agent_orchestrator`, and `cognitive_ew`.
+- Decision: `digital_twin` and `swarm_orchestrator`.
+- Action/Resilience: `copilot` and `federated_learning`.
+- Verification/Trust: `verification`, immutable audit hooks, XAI outputs, and final hard gating through the existing safety gate.
 
 All actionable outputs remain safety-gated, monitor-safe by default, and audit-friendly.
 

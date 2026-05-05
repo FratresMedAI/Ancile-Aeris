@@ -36,7 +36,14 @@ class DigitalTwinNode(Node):
             return
         effectiveness, collateral = score_effectiveness(float(payload.get("score", 0.5)), 0.6 if self.safety_open else 0.2)
         elapsed_ms = (time.perf_counter() - start) * 1000.0
-        out = {"proposal_id": payload.get("proposal_id", "unknown"), "effectiveness_probability": effectiveness, "collateral_risk_score": collateral, "latency_ms": elapsed_ms}
+        out = {
+            "proposal_id": payload.get("proposal_id", "unknown"),
+            "effectiveness_probability": effectiveness,
+            "collateral_risk_score": collateral,
+            "latency_ms": elapsed_ms,
+            "generative_what_if": "stubbed counterfactual simulation; no autonomous actuation",
+            "monitor_only": not self.safety_open,
+        }
         self.result_pub.publish(String(data=json.dumps(out)))
 
 

@@ -41,6 +41,8 @@ class VerificationNode(Node):
         verified, reason = verify_action(pid_score, pid_gate, True)
         if not self.safety_open:
             verified, reason = False, "blocked_by_safety_gate_status"
+        if payload.get("requires_human_authorization", False) and not payload.get("operator_authorized", False):
+            verified, reason = False, "blocked_pending_human_authorization"
         out = {"action_id": payload.get("proposal_id", "unknown"), "proposal_id": payload.get("proposal_id", "unknown"), "approved_action": payload.get("action", "monitor"), "verified": verified, "verification_reason": reason}
         if verified:
             self.verified_pub.publish(String(data=json.dumps(out)))

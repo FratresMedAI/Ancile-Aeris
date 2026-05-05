@@ -18,6 +18,7 @@ payload_selector:
     enable_federated_learning: true
     enable_verification: true
     enable_neuromorphic_sim: true
+    enable_neuromorphic: true
     enable_video_analytics: true
     enable_swarm_orchestrator: true
     enable_copilot: true

@@ -24,7 +24,7 @@ class NeuromorphicSimNode(Node):
         self.safety_open = False
         self.counter = 0
         self.create_subscription(String, "/safety_gate_status", self._on_safety_status, 20)
-        self.pub = self.create_publisher(String, "/neuromorphic/events", 20)
+        self.pub = self.create_publisher(String, "/neuromorphic_events", 20)
         self.timer = self.create_timer(0.2, self._on_tick)
 
     def _on_safety_status(self, msg: String) -> None:

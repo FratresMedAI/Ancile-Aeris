@@ -47,8 +47,16 @@ class AgentOrchestratorNode(Node):
             return
         track = tracks[0]
         score = aggregate_agent_score(AgentScore(0.6, 0.6, 0.55, 0.9 if self.safety_open else 0.2))
-        action = "monitor" if (not self.safety_open or score < 0.7) else "jam_candidate"
-        out = {"proposal_id": f"ao-{track.get('id', 'unknown')}", "track_id": track.get("id", "unknown"), "action": action, "score": score}
+        action = "monitor" if (not self.safety_open or score < 0.7) else "request_human_review_for_non_kinetic_option"
+        out = {
+            "proposal_id": f"ao-{track.get('id', 'unknown')}",
+            "track_id": track.get("id", "unknown"),
+            "action": action,
+            "score": score,
+            "requires_human_authorization": action != "monitor",
+            "monitor_only": not self.safety_open,
+            "agents": ["DetectionAgent", "IntentAgent", "MitigationAgent", "SafetyAgent"],
+        }
         self.proposed_pub.publish(String(data=json.dumps(out)))
         self.audit_pub.publish(String(data=json.dumps({"event": "agent_orchestrator_proposal", "proposal": out})))
 
