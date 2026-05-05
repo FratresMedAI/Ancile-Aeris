@@ -22,3 +22,10 @@ payload_selector:
     enable_video_analytics: true
     enable_swarm_orchestrator: true
     enable_copilot: true
+    enable_hyperspectral_stub: true
+    enable_causal_xai: true
+    enable_continual_learning: true
+    enable_defensive_swarm_coordinator: true
+    enable_zero_knowledge_sharing: true
+    enable_resilient_pnt: true
+    enable_generative_red_team: true

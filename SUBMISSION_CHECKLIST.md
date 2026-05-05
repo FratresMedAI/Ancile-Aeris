@@ -44,6 +44,7 @@ Video placeholder: `artifacts/demo_video/demo_video_notes.md`
 - Positioning language:
   - Ancile Aeris 2.0 is a Cognitive Autonomous Defensive Shield for DHS/DoD rapid prototyping audiences, including JIATF-401-style C-UAS experimentation.
   - It combines neuromorphic perception, adversarial resilience, agentic multi-agent C2, cognitive EW recommendations, digital-twin what-if simulation, federated learning hooks, and verifiable safety.
+  - It also includes causal XAI, constrained continual learning, defensive swarm coordination, privacy-preserving interagency threat sharing, resilient PNT, and generative red-team simulation.
   - It remains defensive-only, human-on-the-loop, XAI-first, and immutable-audit-ready.
 - Include simulation outputs for:
   - `agent_orchestrator` proposed actions with monitor-safe fallback behavior.
@@ -51,6 +52,12 @@ Video placeholder: `artifacts/demo_video/demo_video_notes.md`
   - `digital_twin` effectiveness and collateral risk outputs (<200 ms target).
   - `cognitive_ew` adaptive RF strategy recommendation stubs.
   - `federated_learning` model update service acceptance/rejection traces.
+  - `causal_xai` counterfactual explanation traces for operator and reviewer trust.
+  - `continual_learning` bounded-update status with safety-lock behavior.
+  - `defensive_swarm_coordinator` recommendation-only friendly swarm plans.
+  - `zero_knowledge_sharing` privacy-tiered threat intel sharing traces.
+  - `resilient_pnt` GNSS-denied fallback navigation estimates.
+  - `generative_red_team` synthetic future threat scenario generation.
   - `verification` runtime safety violations and verified action evidence.
   - `neuromorphic_sim` event stream outputs.
   - Supporting package traces from `video_analytics`, `swarm_orchestrator`, and `copilot`.

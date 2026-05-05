@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>hyperspectral_stub</name>
+  <version>0.1.0</version>
+  <description>Hyperspectral simulation stub for material identification and anomaly cues.</description>
+  <maintainer email="maintainer@example.com">Ancile-Aeris Team</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclpy</depend><depend>std_msgs</depend><depend>ancile_aeris_interfaces</depend>
+  <depend>launch</depend><depend>launch_ros</depend>
+  <test_depend>ament_cmake_pytest</test_depend><test_depend>python3-pytest</test_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

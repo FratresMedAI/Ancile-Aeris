@@ -1,0 +1,3 @@
+/zero_knowledge_sharing_node:
+  ros__parameters:
+    policy_mode: "privacy_preserving_stub"

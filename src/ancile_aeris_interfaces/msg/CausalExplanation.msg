@@ -1,0 +1,6 @@
+std_msgs/Header header
+string explanation_id
+string action_id
+string causal_summary
+string counterfactual_summary
+float32 confidence

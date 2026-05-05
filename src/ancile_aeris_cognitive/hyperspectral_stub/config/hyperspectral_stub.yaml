@@ -1,0 +1,4 @@
+/hyperspectral_stub_node:
+  ros__parameters:
+    mode: "simulation_stub"
+    material_model: "spectral_library_stub"

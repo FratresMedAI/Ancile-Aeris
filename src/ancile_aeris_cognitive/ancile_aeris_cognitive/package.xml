@@ -18,6 +18,13 @@
   <exec_depend>video_analytics</exec_depend>
   <exec_depend>swarm_orchestrator</exec_depend>
   <exec_depend>copilot</exec_depend>
+  <exec_depend>hyperspectral_stub</exec_depend>
+  <exec_depend>causal_xai</exec_depend>
+  <exec_depend>continual_learning</exec_depend>
+  <exec_depend>defensive_swarm_coordinator</exec_depend>
+  <exec_depend>zero_knowledge_sharing</exec_depend>
+  <exec_depend>resilient_pnt</exec_depend>
+  <exec_depend>generative_red_team</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

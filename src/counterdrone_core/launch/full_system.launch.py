@@ -21,6 +21,13 @@ def generate_launch_description() -> LaunchDescription:
     enable_video_analytics_v2 = LaunchConfiguration('enable_video_analytics_v2')
     enable_swarm_orchestrator = LaunchConfiguration('enable_swarm_orchestrator')
     enable_copilot_v2 = LaunchConfiguration('enable_copilot_v2')
+    enable_hyperspectral_stub = LaunchConfiguration('enable_hyperspectral_stub')
+    enable_causal_xai = LaunchConfiguration('enable_causal_xai')
+    enable_continual_learning = LaunchConfiguration('enable_continual_learning')
+    enable_defensive_swarm_coordinator = LaunchConfiguration('enable_defensive_swarm_coordinator')
+    enable_zero_knowledge_sharing = LaunchConfiguration('enable_zero_knowledge_sharing')
+    enable_resilient_pnt = LaunchConfiguration('enable_resilient_pnt')
+    enable_generative_red_team = LaunchConfiguration('enable_generative_red_team')
     cuas_enabled = IfCondition(PythonExpression(["'", payload, "' == 'cuas'"]))
     generic_enabled = IfCondition(PythonExpression(["'", payload, "' == 'generic'"]))
     cuas_or_generic_enabled = IfCondition(PythonExpression(["'", payload, "' in ['cuas','generic']"]))
@@ -196,6 +203,55 @@ def generate_launch_description() -> LaunchDescription:
         ]),
         condition=IfCondition(PythonExpression(["'", enable_copilot_v2, "' == 'true'"])),
     )
+    hyperspectral_stub_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('hyperspectral_stub'),
+            '/launch/hyperspectral_stub.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_hyperspectral_stub, "' == 'true'"])),
+    )
+    causal_xai_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('causal_xai'),
+            '/launch/causal_xai.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_causal_xai, "' == 'true'"])),
+    )
+    continual_learning_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('continual_learning'),
+            '/launch/continual_learning.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_continual_learning, "' == 'true'"])),
+    )
+    defensive_swarm_coordinator_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('defensive_swarm_coordinator'),
+            '/launch/defensive_swarm_coordinator.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_defensive_swarm_coordinator, "' == 'true'"])),
+    )
+    zero_knowledge_sharing_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('zero_knowledge_sharing'),
+            '/launch/zero_knowledge_sharing.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_zero_knowledge_sharing, "' == 'true'"])),
+    )
+    resilient_pnt_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('resilient_pnt'),
+            '/launch/resilient_pnt.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_resilient_pnt, "' == 'true'"])),
+    )
+    generative_red_team_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('generative_red_team'),
+            '/launch/generative_red_team.launch.py',
+        ]),
+        condition=IfCondition(PythonExpression(["'", enable_generative_red_team, "' == 'true'"])),
+    )
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -224,6 +280,13 @@ def generate_launch_description() -> LaunchDescription:
         DeclareLaunchArgument('enable_video_analytics_v2', default_value='true'),
         DeclareLaunchArgument('enable_swarm_orchestrator', default_value='true'),
         DeclareLaunchArgument('enable_copilot_v2', default_value='true'),
+        DeclareLaunchArgument('enable_hyperspectral_stub', default_value='true'),
+        DeclareLaunchArgument('enable_causal_xai', default_value='true'),
+        DeclareLaunchArgument('enable_continual_learning', default_value='true'),
+        DeclareLaunchArgument('enable_defensive_swarm_coordinator', default_value='true'),
+        DeclareLaunchArgument('enable_zero_knowledge_sharing', default_value='true'),
+        DeclareLaunchArgument('enable_resilient_pnt', default_value='true'),
+        DeclareLaunchArgument('enable_generative_red_team', default_value='true'),
         LogInfo(msg=['Launching Ancile-Aeris full system. sim_mode=', sim_mode, ' payload=', payload]),
         LogInfo(
             msg=[
@@ -256,4 +319,11 @@ def generate_launch_description() -> LaunchDescription:
         video_analytics_v2_launch,
         swarm_orchestrator_launch,
         copilot_v2_launch,
+        hyperspectral_stub_launch,
+        causal_xai_launch,
+        continual_learning_launch,
+        defensive_swarm_coordinator_launch,
+        zero_knowledge_sharing_launch,
+        resilient_pnt_launch,
+        generative_red_team_launch,
     ])

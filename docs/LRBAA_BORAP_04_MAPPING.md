@@ -52,8 +52,12 @@
 - Physics-informed what-if simulation: `digital_twin` publishes `/digital_twin_result` with effectiveness and collateral estimates.
 - Adaptive RF defense: `cognitive_ew` publishes `/cognitive_ew_commands` in simulation-safe form.
 - Federated learning hooks: `federated_learning` exposes `/federated_learning/request_model_update`.
+- Continual constrained learning: `continual_learning` tracks bounded online updates that remain gate-compliant.
 - Runtime verifiable AI foundation: `verification` enforces PID/human-veto properties via `/safety_violation` and `/verified_action`.
 - Neuromorphic acceleration path: `neuromorphic_sim` publishes `/neuromorphic_events` for event-driven sensing experiments.
+- Hyperspectral path: `hyperspectral_stub` adds spectral/material identification hooks for future hardware integration.
+- Causal trust layer: `causal_xai` emits counterfactual narratives for operator and reviewer trust.
+- Advanced coordination: `defensive_swarm_coordinator`, `zero_knowledge_sharing`, `resilient_pnt`, and `generative_red_team` support interagency defensive readiness.
 - Supporting capability layer: `video_analytics`, `swarm_orchestrator`, and `copilot` feed explainable, safety-gated advisory context.
 
 ## 2026 State-of-the-Art Claims
@@ -63,4 +67,8 @@
 - Adversarial resilience: spoof/anomaly signals directly degrade fusion confidence and raise audit-visible alerts.
 - Agentic C2: specialist agents negotiate recommendations while preserving safety-agent veto semantics.
 - Verifiable safety: runtime verification monitors PID thresholds, human-veto availability, and safety-gate bypass attempts.
+- Privacy-preserving collaboration: zero-knowledge sharing stubs provide an interagency-safe path for JIATF-401 style threat intel exchange.
+- Defensive swarm coordination: coordinated friendly drone tasking remains recommendation-only and human-vetted.
+- Resilient navigation: PNT fallback stubs preserve defensive continuity in GNSS-degraded conditions.
+- Generative red teaming: synthetic threat generation continuously stress-tests resilience assumptions.
 - Dual-use mission continuity: the same architecture supports C-UAS and conservation monitoring without weaponized autonomy.

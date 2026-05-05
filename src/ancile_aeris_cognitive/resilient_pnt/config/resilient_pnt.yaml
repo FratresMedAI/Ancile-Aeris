@@ -1,0 +1,3 @@
+/resilient_pnt_node:
+  ros__parameters:
+    fallback_mode: "inertial_visual_stub"

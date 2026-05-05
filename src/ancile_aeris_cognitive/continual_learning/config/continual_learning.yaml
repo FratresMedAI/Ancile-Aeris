@@ -1,0 +1,4 @@
+/continual_learning_node:
+  ros__parameters:
+    max_update_rate_hz: 0.5
+    rollback_enabled: true

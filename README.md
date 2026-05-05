@@ -29,12 +29,13 @@ Ancile-Aeris explicitly validates these conditions:
 
 ## Cognitive Autonomous Defensive Shield v2.0
 
-Ancile-Aeris now includes a full v2.0 skeleton under `src/ancile_aeris_cognitive/` organized into Perception, Cognition, Decision, Action/Resilience, and Verification/Trust layers:
-- Perception: `video_analytics`, `neuromorphic_sim`, and uncertainty-aware `fusion_node` ingestion.
-- Cognition: `adversarial_defense`, `agent_orchestrator`, and `cognitive_ew`.
-- Decision: `digital_twin` and `swarm_orchestrator`.
-- Action/Resilience: `copilot` and `federated_learning`.
-- Verification/Trust: `verification`, immutable audit hooks, XAI outputs, and final hard gating through the existing safety gate.
+Ancile-Aeris now includes a full v2.0 skeleton under `src/ancile_aeris_cognitive/` with a 20-capability cognitive chain (17 software capability packages plus 3 foundational control rails: safety gate, immutable audit, and payload-governed deployment toggles):
+- Perception Layer: `video_analytics`, `neuromorphic_sim`, `hyperspectral_stub`.
+- Cognition Layer: `adversarial_defense`, `cognitive_ew`, `agent_orchestrator`, `swarm_orchestrator`.
+- Decision Layer: `digital_twin`, `causal_xai`, `verification`.
+- Action and Resilience Layer: `copilot`, `federated_learning`, `continual_learning`.
+- Advanced Coordination Layer: `defensive_swarm_coordinator`, `zero_knowledge_sharing`, `resilient_pnt`, `generative_red_team`.
+- Foundation Rails: existing `safety_gate_node` hard gate, immutable audit/event chain, and `payload_selector.yaml` feature controls.
 
 All actionable outputs remain safety-gated, monitor-safe by default, and audit-friendly.
 

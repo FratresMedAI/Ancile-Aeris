@@ -1,0 +1,3 @@
+/causal_xai_node:
+  ros__parameters:
+    model: "causal_graph_stub"

@@ -8,7 +8,7 @@ def pid_passed(confidence: float, modalities: set[str], gate: float = 0.999) -> 
 
 
 def uncertainty(confidence: float, modalities: set[str]) -> dict:
-    modality_score = min(1.0, len(modalities) / 7.0)
+    modality_score = min(1.0, len(modalities) / 8.0)
     epistemic = max(0.0, 1.0 - modality_score)
     aleatoric = max(0.0, 1.0 - confidence)
     total = min(1.0, 0.55 * epistemic + 0.45 * aleatoric)
@@ -46,7 +46,7 @@ def test_pid_passes_only_with_required_inputs_and_threshold() -> None:
 
 def test_uncertainty_lower_with_more_modalities() -> None:
     sparse = uncertainty(0.9, {"visual"})
-    rich = uncertainty(0.9, {"visual", "acoustic", "rf", "lidar", "sigint", "video_analytics", "neuromorphic"})
+    rich = uncertainty(0.9, {"visual", "acoustic", "rf", "lidar", "sigint", "video_analytics", "neuromorphic", "hyperspectral"})
     assert rich["total"] < sparse["total"]
 
 

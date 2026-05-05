@@ -17,8 +17,15 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/VerifiedAction.msg"
   "msg/CognitiveEWCommand.msg"
   "msg/NeuromorphicEvent.msg"
+  "msg/HyperspectralObservation.msg"
+  "msg/CausalExplanation.msg"
+  "msg/ContinualLearningStatus.msg"
+  "msg/ThreatIntelShare.msg"
+  "msg/ResilientPntEstimate.msg"
+  "msg/RedTeamScenario.msg"
   "srv/RequestModelUpdate.srv"
   "srv/QueryCopilot.srv"
+  "srv/ShareThreatIntel.srv"
   "action/ExecuteMitigation.action"
   DEPENDENCIES std_msgs builtin_interfaces
 )

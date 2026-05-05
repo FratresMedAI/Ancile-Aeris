@@ -1,0 +1,7 @@
+string partner
+string summary
+string privacy_tier
+---
+bool accepted
+string share_id
+string reason

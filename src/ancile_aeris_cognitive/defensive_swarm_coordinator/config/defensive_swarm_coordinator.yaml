@@ -1,0 +1,4 @@
+/defensive_swarm_coordinator_node:
+  ros__parameters:
+    max_friendly_drones: 12
+    coordinator_mode: "stub"
