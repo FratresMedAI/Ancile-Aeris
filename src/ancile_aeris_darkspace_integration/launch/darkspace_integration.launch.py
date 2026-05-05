@@ -10,6 +10,7 @@ def generate_launch_description() -> LaunchDescription:
                 executable="darkspace_audit_node",
                 name="darkspace_audit_node",
                 output="screen",
+                prefix="python3",
             )
         ]
     )

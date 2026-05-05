@@ -12,6 +12,22 @@ ANCILE_LAUNCH_FILE=ancile_aeris_basic_demo.launch.py docker compose -f docker/do
 
 **Property of Fratres X AI**
 
+## Repository layout notes
+
+- Payload selector file path: `config/payload_selector.yaml` (workspace root inside this repo folder).
+- Some cognitive capabilities live under `src/ancile_aeris_cognitive/`, including:
+  - `src/ancile_aeris_cognitive/scout_mothership/`
+  - `src/ancile_aeris_cognitive/baby_interceptor/`
+
+## Cross-platform Docker note (Windows bind mounts)
+
+When `/opt/ancile_aeris_ws` is bind-mounted from Windows, Python entry scripts can pick up CRLF line endings and fail on Linux with `OSError: [Errno 8] Exec format error`. The Docker Compose command strips `\\r` from `src/**/*.py` before building, and the basic demo launch files run Python nodes under `python3` for additional hardening.
+
+If you are fixing wrappers manually, the installed script names match the ROS executables, for example:
+
+- `install/ancile_aeris_safety_gate/lib/ancile_aeris_safety_gate/ancile_aeris_safety_gate_node`
+- `install/ancile_aeris_operator_copilot/lib/ancile_aeris_operator_copilot/ancile_aeris_operator_copilot_node`
+
 ## Mission
 
 Ancile Aeris delivers layered, trustworthy, human-on-the-loop defense against drone threats in dense urban environments, mass gatherings, critical infrastructure, and remote terrain — while maintaining full dual-use capability for conservation and wildlife protection.

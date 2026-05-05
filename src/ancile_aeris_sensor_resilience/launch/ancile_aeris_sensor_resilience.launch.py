@@ -9,5 +9,6 @@ def generate_launch_description() -> LaunchDescription:
             executable="ancile_aeris_sensor_resilience_node",
             name="ancile_aeris_sensor_resilience_node",
             output="screen",
+            prefix="python3",
         ),
     ])
