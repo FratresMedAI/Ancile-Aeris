@@ -37,6 +37,15 @@ ros2 topic list | grep -E '^/fused_tracks|^/audit/events|^/scout_eyes|^/safety_g
 ros2 service list | grep -E '/ancile_aeris_operator_copilot/query'
 ```
 
+Run two mesh mothership simulators (shared heartbeat topic, distinct IDs):
+
+```bash
+ros2 run scout_mothership scout_mothership_node --ros-args -p mothership_id:=mhs-001 -p enable_mesh_publish:=true
+ros2 run scout_mothership scout_mothership_node --ros-args -p mothership_id:=mhs-002 -p enable_mesh_publish:=true
+ros2 topic pub /mesh/mothership_peers/heartbeat std_msgs/msg/String '{"data":"{\"mothership_id\":\"mhs-002\"}"}' -1
+ros2 topic echo /mesh/mothership_swarm_status
+```
+
 ## Repository layout notes
 
 - Payload selector file path: `src/ancile_aeris_bringup/config/payload_selector.yaml`.
@@ -51,7 +60,7 @@ If you are fixing wrappers manually, Python nodes (`scout_mothership_node`, `bab
 
 ## Mission
 
-Ancile Aeris delivers layered, trustworthy, human-on-the-loop defense against drone threats in dense urban environments, **mass gatherings**, **critical infrastructure**, and homeland security perimeter operations — interoperable with modernization threads seen across **Anduril Lattice**, **JIATF-401 marketplace** sourcing constructs, kinetic catch envelopes such as **Fortem Technologies DroneHunter F700-class** systems, high-power microwave concepts comparable to **Epirus Leonidas**, acquisition velocity doctrines exemplified by **Replicator**, and oversight models championed by the **U.S. DHS Program Executive Office for UAS/C-UAS**.
+Ancile Aeris delivers layered, trustworthy, human-on-the-loop defense against drone threats in dense urban environments, **mass gatherings**, **critical infrastructure**, and homeland security perimeter operations — interoperable with modernization threads seen across **Anduril Lattice**, **JIATF-401 Marketplace** sourcing constructs, kinetic catch envelopes such as **Fortem Technologies DroneHunter F700-class** systems, high-power microwave concepts comparable to **Epirus Leonidas**, acquisition velocity doctrines exemplified by **Replicator 2**, and oversight models championed by the **U.S. DHS Program Executive Office for UAS/C-UAS**.
 
 ## Core Philosophy
 

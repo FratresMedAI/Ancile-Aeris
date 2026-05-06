@@ -10,10 +10,10 @@ The demonstration is defensive in character: it does not implement nor legitimiz
 
 ## Technical Approach — Layered C-UAS Integration
 
-1. **Tiered sensing & fusion** emulate DHS PEO UAS/C-UAS interoperability needs: fuse RF, EO/IR, acoustic, and ancillary modalities into JSON track contracts on `/fused_tracks`, preserving confidence, class hypotheses, and PID metadata for gate evaluation.  
+1. **Tiered sensing & fusion** emulate DHS Program Executive Office for UAS/C-UAS interoperability needs: fuse RF, EO/IR, acoustic, and ancillary modalities into JSON track contracts on `/fused_tracks`, preserving confidence, class hypotheses, and PID metadata for gate evaluation.  
 2. **Mesh ISR motherships** abstract **Anduril Lattice**-style battle-digital awareness: each simulated mothership publishes heartbeat-quality swarm matrices, sector assignments, redundancy factors, and latency budgets so integrators can rehearsal data flows before connecting real sensors.  
 3. **Kinetic & non-kinetic effector analogs** articulate how fusion outputs would interface with fielded families without vendor lock: net-capture platforms in the **Fortem Technologies DroneHunter F700** class for low-collateral interdiction, and directed-energy envelopes comparable to **Epirus Leonidas** for controlled non-kinetic defeat—always downstream of human authorization in this repository.  
-4. **Acquisition realism** references **Replicator**-style iterative fielding and federated marketplace sourcing exemplified by collaboration frameworks like the **JIATF-401 Marketplace**, ensuring Ancile Aeris narrates how software-defined C2 layers ride atop modern defense acquisition pathways.  
+4. **Acquisition realism** references **Replicator 2**-style iterative fielding and federated marketplace sourcing exemplified by collaboration frameworks like the **JIATF-401 Marketplace**, ensuring Ancile Aeris narrates how software-defined C2 layers ride atop modern defense acquisition pathways.  
 5. **Trust services** deliver DARKSPACE-class immutable audit narratives, causal XAI strings, and scout-to-interceptor handoffs that include mesh identifiers for traceable custody.
 
 ## Operational Impact — Homeland & Critical Infrastructure
@@ -22,10 +22,10 @@ Urban mass gatherings—stadiums, national commemorative events, transportation 
 
 ## Trust, Safety, & Compliance Posture
 
-Every high-consequence pathway routes through safety gate JSON on `/safety_gate_status`, operator authorizations, terminal consent (for interceptor simulations), and `/audit/events`. Mesh publications inherit the same policy: they describe coordination geometry, not weapon release authority. Causal XAI overlays justify why the stack elevated or suppressed arson-like thermal correlations, satisfying oversight expectations aligned with **DHS PEO UAS/C-UAS** risk frameworks.
+Every high-consequence pathway routes through safety gate JSON on `/safety_gate_status`, operator authorizations, terminal consent (for interceptor simulations), and `/audit/events`. Mesh publications inherit the same policy: they describe coordination geometry, not weapon release authority. Causal XAI overlays justify why the stack elevated or suppressed arson-like thermal correlations, satisfying oversight expectations aligned with **DHS Program Executive Office for UAS/C-UAS** risk frameworks.
 
 ## Path Forward
 
-Near-term engineering hardens message typing, couples to hardware-in-the-loop RF/EO benches, extends DARKSPACE hashing, and aligns service interfaces with Lattice-like threat boards and JIATF-401 catalog components. Mid-term goals include formal verification of safety gate logic, supervised learning on arson precursor classifiers, and exercise integration with kinetic catch teams training on DroneHunter-class hardware and HPM families similar to Leonidas—always with human command primacy.
+Near-term engineering hardens message typing, couples to hardware-in-the-loop RF/EO benches, extends DARKSPACE hashing, and aligns service interfaces with Lattice-like threat boards and JIATF-401 Marketplace catalog components. Mid-term goals include formal verification of safety gate logic, supervised learning on arson precursor classifiers, and exercise integration with kinetic catch teams training on DroneHunter-class hardware and HPM families similar to Leonidas—always with human command primacy.
 
 **Ancile Aeris — Property of Fratres X AI**

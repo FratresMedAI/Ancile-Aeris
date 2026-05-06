@@ -4,6 +4,8 @@
 
 Ancile Aeris directly addresses the BORAP 04 objective: enhanced technologies for detection, tracking, identification, and mitigation of unmanned aircraft systems under varied terrains and environmental conditions.
 
+Defensive interoperability narratives are framed against **Anduril Lattice**, **JIATF-401 Marketplace**, **Fortem DroneHunter F700**, **Epirus Leonidas**, **Replicator 2**, and **U.S. DHS Program Executive Office for UAS/C-UAS** modernization references.
+
 **Key Capabilities Mapped to BORAP 04:**
 
 - Multi-modal + Neuromorphic Perception → Detection & Tracking

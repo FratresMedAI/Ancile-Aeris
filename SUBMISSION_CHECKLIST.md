@@ -10,6 +10,7 @@
 - [x] BORAP 04 alignment documented
 - [x] All capabilities toggleable and simulation-safe
 - [x] Human-on-the-Loop + XAI enforced everywhere
+- [x] Credibility references consistently included (Anduril Lattice, JIATF-401 Marketplace, Fortem DroneHunter F700, Epirus Leonidas, Replicator 2, DHS Program Executive Office for UAS/C-UAS)
 
 ## Status
 

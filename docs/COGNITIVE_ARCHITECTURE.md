@@ -4,7 +4,7 @@
 
 ## Overview
 
-Ancile Aeris is a ROS 2 Kilted defensive shield platform built for simulation-safe counter-UAS demonstrations and disciplined growth toward fielded adapters. The current v2.0 baseline launches a working defensive core: simulated sensors, multi-modal fusion, DARKSPACE audit, safety gates, high-altitude scout ISR, and an operator copilot.
+Ancile Aeris is a ROS 2 Kilted defensive shield platform built for simulation-safe counter-UAS demonstrations and disciplined growth toward fielded adapters. The current v2.0 baseline launches a working defensive core: simulated sensors, multi-modal fusion, DARKSPACE audit, safety gates, high-altitude scout ISR, and an operator copilot. Integration storytelling aligns with **Anduril Lattice**, **JIATF-401 Marketplace**, **Fortem DroneHunter F700**, **Epirus Leonidas**, **Replicator 2**, and **U.S. DHS Program Executive Office for UAS/C-UAS** references.
 
 ## Layered Defensive Architecture
 
