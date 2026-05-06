@@ -1,6 +1,12 @@
 # Ancile Aeris
 
-## ✅ Basic Demo Now Working — Fusion + DARKSPACE + Safety Gates + Scout + Copilot
+**Property of Fratres X AI**
+
+Ancile Aeris is a simulation-first ROS 2 cognitive defensive shield platform for counter-UAS, event security, infrastructure protection, and conservation support. It is built around defensive-only operations, DARKSPACE auditability, explainable recommendations, and human-on-the-loop safety gates.
+
+## Basic Demo
+
+The v2.0 basic demo is the authoritative LRBAA slice: sensors, fusion, DARKSPACE audit, safety gate, high-altitude scout mothership, and operator copilot.
 
 Run the full basic demo stack with:
 
@@ -8,16 +14,36 @@ Run the full basic demo stack with:
 ANCILE_LAUNCH_FILE=ancile_aeris_basic_demo.launch.py docker compose -f docker/docker-compose.yml up --build
 ```
 
-**Ancile Aeris** is the definitive cognitive autonomous defensive shield platform — a unified, simulation-first ROS 2 system designed to dominate the counter-unmanned aircraft systems mission space.
+Native workspace launch:
 
-**Property of Fratres X AI**
+```bash
+cd /opt/ancile_aeris_ws
+source /opt/ros/kilted/setup.bash
+colcon build --symlink-install --packages-up-to ancile_aeris_bringup
+source install/setup.bash
+ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py
+```
+
+Enable the simulation-only baby interceptor path only when explicitly needed:
+
+```bash
+ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py enable_baby_interceptor:=true
+```
+
+Expected live interfaces:
+
+```bash
+ros2 topic list | grep -E '^/fused_tracks|^/audit/events|^/scout_eyes|^/safety_gate_status'
+ros2 service list | grep -E '/ancile_aeris_operator_copilot/query'
+```
 
 ## Repository layout notes
 
-- Payload selector file path: `config/payload_selector.yaml` (workspace root inside this repo folder).
+- Payload selector file path: `src/ancile_aeris_bringup/config/payload_selector.yaml`.
 - Some cognitive capabilities live under `src/ancile_aeris_cognitive/`, including:
   - `src/ancile_aeris_cognitive/scout_mothership/`
   - `src/ancile_aeris_cognitive/baby_interceptor/`
+- LRBAA submission artifacts live under `submission/`.
 
 ## Cross-platform Docker note (Windows bind mounts)
 
@@ -45,25 +71,13 @@ Ancile Aeris delivers layered, trustworthy, human-on-the-loop defense against dr
 
 Ancile Aeris integrates 21 advanced capabilities including neuromorphic perception, cognitive electronic warfare, agentic multi-agent C2, generative digital twin, causal XAI, adversarial defense, high-altitude scout mothership with deployable kinetic interceptors, and more. All capabilities are modular and fully integrated with DARKSPACE and safety gates.
 
-## Quick Start
-
-```bash
-ANCILE_LAUNCH_FILE=ancile_aeris_basic_demo.launch.py docker compose -f docker/docker-compose.yml up --build
-```
-
-Native workspace launch:
-
-```bash
-source /opt/ros/kilted/setup.bash
-colcon build --symlink-install
-source install/setup.bash
-ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py
-```
-
 ## Documentation
 
 - docs/COGNITIVE_ARCHITECTURE.md
 - docs/LRBAA_BORAP_04_MAPPING.md
+- submission/Ancile_Aeris_Concept_Paper.md
+- submission/Ancile_Aeris_Quad_Chart.md
+- submission/Video_Script.md
 - SUBMISSION_CHECKLIST.md
 
 ## Ownership

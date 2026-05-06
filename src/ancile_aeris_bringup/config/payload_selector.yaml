@@ -1,0 +1,29 @@
+# Ancile Aeris - Property of Fratres X AI
+# Simulation-safe payload selector for demo and roadmap capabilities.
+demo_profile: basic
+
+features:
+  # Baseline LRBAA demo path: sensors, fusion, DARKSPACE, safety gate, scout, copilot.
+  enable_copilot: true
+  enable_scout_mothership: true
+
+  # Optional defensive action simulator. Default false to preserve human-on-loop demo safety.
+  enable_baby_interceptor: false
+
+  # Buildable local packages that are outside the basic demo slice.
+  enable_agent_orchestrator: false
+  enable_adversarial_defense: false
+  enable_causal_xai: false
+  enable_cognitive_ew: false
+  enable_continual_learning: false
+  enable_defensive_swarm_coordinator: false
+  enable_digital_twin: false
+  enable_federated_learning: false
+  enable_generative_red_team: false
+  enable_hyperspectral_stub: false
+  enable_neuromorphic_sim: false
+  enable_resilient_pnt: false
+  enable_swarm_orchestrator: false
+  enable_verification: false
+  enable_video_analytics: false
+  enable_zero_knowledge_sharing: false

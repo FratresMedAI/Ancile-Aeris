@@ -1,9 +1,59 @@
+from pathlib import Path
+
+import yaml
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.substitutions import FindPackageShare
+
+
+FEATURE_DEFAULTS = {
+    "enable_video_analytics": "true",
+    "enable_neuromorphic_sim": "true",
+    "enable_hyperspectral_stub": "true",
+    "enable_adversarial_defense": "true",
+    "enable_cognitive_ew": "true",
+    "enable_agent_orchestrator": "true",
+    "enable_swarm_orchestrator": "true",
+    "enable_digital_twin": "true",
+    "enable_causal_xai": "true",
+    "enable_verification": "true",
+    "enable_copilot": "true",
+    "enable_federated_learning": "true",
+    "enable_continual_learning": "true",
+    "enable_defensive_swarm_coordinator": "true",
+    "enable_zero_knowledge_sharing": "true",
+    "enable_resilient_pnt": "true",
+    "enable_generative_red_team": "true",
+    "enable_scout_mothership": "true",
+    "enable_baby_interceptor": "false",
+}
+
+
+def _load_feature_defaults() -> dict[str, str]:
+    defaults = dict(FEATURE_DEFAULTS)
+    config_path = Path(get_package_share_directory("ancile_aeris_bringup")) / "config" / "payload_selector.yaml"
+    if not config_path.exists():
+        return defaults
+
+    with config_path.open("r", encoding="utf-8") as config_file:
+        config = yaml.safe_load(config_file) or {}
+
+    features = config.get("features", {})
+    if not isinstance(features, dict):
+        return defaults
+
+    for feature_name in defaults:
+        if feature_name in features:
+            defaults[feature_name] = "true" if bool(features[feature_name]) else "false"
+    return defaults
+
+
+def _feature_arg(name: str, defaults: dict[str, str]) -> DeclareLaunchArgument:
+    return DeclareLaunchArgument(name, default_value=defaults[name])
 
 
 def _include(pkg: str, launch_file: str, condition=None):
@@ -14,6 +64,7 @@ def _include(pkg: str, launch_file: str, condition=None):
 
 
 def generate_launch_description() -> LaunchDescription:
+    feature_defaults = _load_feature_defaults()
     enable_video_analytics = LaunchConfiguration("enable_video_analytics")
     enable_neuromorphic_sim = LaunchConfiguration("enable_neuromorphic_sim")
     enable_hyperspectral_stub = LaunchConfiguration("enable_hyperspectral_stub")
@@ -35,25 +86,25 @@ def generate_launch_description() -> LaunchDescription:
     enable_baby_interceptor = LaunchConfiguration("enable_baby_interceptor")
 
     actions = [
-        DeclareLaunchArgument("enable_video_analytics", default_value="true"),
-        DeclareLaunchArgument("enable_neuromorphic_sim", default_value="true"),
-        DeclareLaunchArgument("enable_hyperspectral_stub", default_value="true"),
-        DeclareLaunchArgument("enable_adversarial_defense", default_value="true"),
-        DeclareLaunchArgument("enable_cognitive_ew", default_value="true"),
-        DeclareLaunchArgument("enable_agent_orchestrator", default_value="true"),
-        DeclareLaunchArgument("enable_swarm_orchestrator", default_value="true"),
-        DeclareLaunchArgument("enable_digital_twin", default_value="true"),
-        DeclareLaunchArgument("enable_causal_xai", default_value="true"),
-        DeclareLaunchArgument("enable_verification", default_value="true"),
-        DeclareLaunchArgument("enable_copilot", default_value="true"),
-        DeclareLaunchArgument("enable_federated_learning", default_value="true"),
-        DeclareLaunchArgument("enable_continual_learning", default_value="true"),
-        DeclareLaunchArgument("enable_defensive_swarm_coordinator", default_value="true"),
-        DeclareLaunchArgument("enable_zero_knowledge_sharing", default_value="true"),
-        DeclareLaunchArgument("enable_resilient_pnt", default_value="true"),
-        DeclareLaunchArgument("enable_generative_red_team", default_value="true"),
-        DeclareLaunchArgument("enable_scout_mothership", default_value="true"),
-        DeclareLaunchArgument("enable_baby_interceptor", default_value="false"),
+        _feature_arg("enable_video_analytics", feature_defaults),
+        _feature_arg("enable_neuromorphic_sim", feature_defaults),
+        _feature_arg("enable_hyperspectral_stub", feature_defaults),
+        _feature_arg("enable_adversarial_defense", feature_defaults),
+        _feature_arg("enable_cognitive_ew", feature_defaults),
+        _feature_arg("enable_agent_orchestrator", feature_defaults),
+        _feature_arg("enable_swarm_orchestrator", feature_defaults),
+        _feature_arg("enable_digital_twin", feature_defaults),
+        _feature_arg("enable_causal_xai", feature_defaults),
+        _feature_arg("enable_verification", feature_defaults),
+        _feature_arg("enable_copilot", feature_defaults),
+        _feature_arg("enable_federated_learning", feature_defaults),
+        _feature_arg("enable_continual_learning", feature_defaults),
+        _feature_arg("enable_defensive_swarm_coordinator", feature_defaults),
+        _feature_arg("enable_zero_knowledge_sharing", feature_defaults),
+        _feature_arg("enable_resilient_pnt", feature_defaults),
+        _feature_arg("enable_generative_red_team", feature_defaults),
+        _feature_arg("enable_scout_mothership", feature_defaults),
+        _feature_arg("enable_baby_interceptor", feature_defaults),
 
         _include("ancile_aeris_sensors", "ancile_aeris_sensors.launch.py"),
         _include("ancile_aeris_fusion", "ancile_aeris_fusion.launch.py"),
