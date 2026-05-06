@@ -79,9 +79,9 @@ Ancile Aeris integrates 21 advanced capabilities including neuromorphic percepti
 
 - docs/COGNITIVE_ARCHITECTURE.md
 - docs/LRBAA_BORAP_04_MAPPING.md
-- `submission/Ancile_Aeris_LRBAA_Concept_Paper.md`
+- `submission/Ancile_Aeris_Concept_Paper.md`
 - `submission/Ancile_Aeris_Quad_Chart.md`
-- `submission/Demo_Video_Script.md`
+- `submission/Video_Script.md`
 - SUBMISSION_CHECKLIST.md
 
 ## Ownership

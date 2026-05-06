@@ -42,6 +42,7 @@ class OperatorCopilotNode(Node):
         self.declare_parameter("dashboard_state_file", "/tmp/ancile_aeris_dashboard_state.json")
         self.guard = _load_guard()
         self.service = self.create_service(QueryCopilot, "ancile_aeris_operator_copilot/query", self._on_query)
+        self.query_copilot_alias = self.create_service(QueryCopilot, "QueryCopilot", self._on_query)
         self.get_logger().info("ancile_aeris_operator_copilot_node initialized")
 
     def _on_query(self, request: QueryCopilot.Request, response: QueryCopilot.Response) -> QueryCopilot.Response:
