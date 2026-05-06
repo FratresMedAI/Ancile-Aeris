@@ -4,7 +4,7 @@ project(baby_interceptor)
 find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_pytest REQUIRED)
 
-install(PROGRAMS nodes/baby_interceptor_node.py DESTINATION lib/${PROJECT_NAME} RENAME baby_interceptor_node)
+install(PROGRAMS baby_interceptor/interceptor_node.py DESTINATION lib/${PROJECT_NAME} RENAME baby_interceptor_node)
 
 install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
 

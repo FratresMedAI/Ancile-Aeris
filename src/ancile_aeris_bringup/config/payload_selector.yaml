@@ -4,22 +4,18 @@
 demo_profile: basic
 
 features:
-  # baseline LRBAA demo path: sensors, fusion, DARKSPACE, safety gate,
-  # operator copilot, and scout_mothership. Note: scout_mothership always starts
-  # when launching ancile_aeris_basic_demo.launch.py; this flag remains for tooling
-  # and clarity (leave true for the standard slice).
-
+  # Baseline demo path keeps copilot and scout mesh enabled.
   enable_copilot: true
   enable_scout_mothership: true
 
-  # Mesh coordination topics (/mesh/...) — enabled by default in scout_config.yaml;
-  # flag documents policy for integrators (Anduril Lattice-like mesh analogs).
-  enable_mesh_mothership_coordination: true
+  # Explicit nested controls consumed by ancile_aeris_basic_demo.launch.py.
+  mesh_motherships:
+    enabled: true
+    count: 2
 
-  # Optional simulation-only interceptor. Default false: preserves defensive-only posture.
-  # When true, aligns with YAML default unless overridden by ros2 launch enable_baby_interceptor:=...
-
-  enable_baby_interceptor: false
+  baby_interceptor:
+    enabled: false
+    require_double_authorization: true
 
   # Buildable local packages that are outside the basic demo slice.
   enable_agent_orchestrator: false
