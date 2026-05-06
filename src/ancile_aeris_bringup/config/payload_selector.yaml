@@ -1,13 +1,24 @@
 # Ancile Aeris - Property of Fratres X AI
 # Simulation-safe payload selector for demo and roadmap capabilities.
+
 demo_profile: basic
 
 features:
-  # Baseline LRBAA demo path: sensors, fusion, DARKSPACE, safety gate, scout, copilot.
+  # baseline LRBAA demo path: sensors, fusion, DARKSPACE, safety gate,
+  # operator copilot, and scout_mothership. Note: scout_mothership always starts
+  # when launching ancile_aeris_basic_demo.launch.py; this flag remains for tooling
+  # and clarity (leave true for the standard slice).
+
   enable_copilot: true
   enable_scout_mothership: true
 
-  # Optional defensive action simulator. Default false to preserve human-on-loop demo safety.
+  # Mesh coordination topics (/mesh/...) — enabled by default in scout_config.yaml;
+  # flag documents policy for integrators (Anduril Lattice-like mesh analogs).
+  enable_mesh_mothership_coordination: true
+
+  # Optional simulation-only interceptor. Default false: preserves defensive-only posture.
+  # When true, aligns with YAML default unless overridden by ros2 launch enable_baby_interceptor:=...
+
   enable_baby_interceptor: false
 
   # Buildable local packages that are outside the basic demo slice.

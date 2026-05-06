@@ -2,7 +2,7 @@
 
 **Property of Fratres X AI**
 
-Ancile Aeris is a simulation-first ROS 2 cognitive defensive shield platform for counter-UAS, event security, infrastructure protection, and conservation support. It is built around defensive-only operations, DARKSPACE auditability, explainable recommendations, and human-on-the-loop safety gates.
+Ancile Aeris is a simulation-first ROS 2 cognitive defensive shield platform for **counter-UAS, anti-terrorism perimeter security, mass-gathering protection, and critical infrastructure defense**. It is built around defensive-only operations, DARKSPACE auditability, explainable recommendations, and human-on-the-loop safety gates.
 
 ## Basic Demo
 
@@ -40,23 +40,18 @@ ros2 service list | grep -E '/ancile_aeris_operator_copilot/query'
 ## Repository layout notes
 
 - Payload selector file path: `src/ancile_aeris_bringup/config/payload_selector.yaml`.
-- Some cognitive capabilities live under `src/ancile_aeris_cognitive/`, including:
-  - `src/ancile_aeris_cognitive/scout_mothership/`
-  - `src/ancile_aeris_cognitive/baby_interceptor/`
+- LRBAA core packages (`scout_mothership`, `baby_interceptor`) live at `src/scout_mothership/` and `src/baby_interceptor/` (`ament_cmake` + `install(PROGRAMS …)`). Mesh ISR topics publish under `/mesh/...`. Additional roadmap cognitive modules remain under `src/ancile_aeris_cognitive/`.
 - LRBAA submission artifacts live under `submission/`.
 
 ## Cross-platform Docker note (Windows bind mounts)
 
 When `/opt/ancile_aeris_ws` is bind-mounted from Windows, Python entry scripts can pick up CRLF line endings and fail on Linux with `OSError: [Errno 8] Exec format error`. The Docker Compose command strips `\\r` from `src/**/*.py` before building, and the basic demo launch files run Python nodes under `python3` for additional hardening.
 
-If you are fixing wrappers manually, the installed script names match the ROS executables, for example:
-
-- `install/ancile_aeris_safety_gate/lib/ancile_aeris_safety_gate/ancile_aeris_safety_gate_node`
-- `install/ancile_aeris_operator_copilot/lib/ancile_aeris_operator_copilot/ancile_aeris_operator_copilot_node`
+If you are fixing wrappers manually, Python nodes (`scout_mothership_node`, `baby_interceptor_node`) install via CMake `install(PROGRAMS …)` under `install/<pkg>/lib/<pkg>/`. Launches prepend `python3` to survive Docker bind-mount CRLF quirks.
 
 ## Mission
 
-Ancile Aeris delivers layered, trustworthy, human-on-the-loop defense against drone threats in dense urban environments, mass gatherings, critical infrastructure, and remote terrain — while maintaining full dual-use capability for conservation and wildlife protection.
+Ancile Aeris delivers layered, trustworthy, human-on-the-loop defense against drone threats in dense urban environments, **mass gatherings**, **critical infrastructure**, and homeland security perimeter operations — interoperable with modernization threads seen across **Anduril Lattice**, **JIATF-401 marketplace** sourcing constructs, kinetic catch envelopes such as **Fortem Technologies DroneHunter F700-class** systems, high-power microwave concepts comparable to **Epirus Leonidas**, acquisition velocity doctrines exemplified by **Replicator**, and oversight models championed by the **U.S. DHS Program Executive Office for UAS/C-UAS**.
 
 ## Core Philosophy
 
@@ -75,9 +70,9 @@ Ancile Aeris integrates 21 advanced capabilities including neuromorphic percepti
 
 - docs/COGNITIVE_ARCHITECTURE.md
 - docs/LRBAA_BORAP_04_MAPPING.md
-- submission/Ancile_Aeris_Concept_Paper.md
-- submission/Ancile_Aeris_Quad_Chart.md
-- submission/Video_Script.md
+- `submission/Ancile_Aeris_LRBAA_Concept_Paper.md`
+- `submission/Ancile_Aeris_Quad_Chart.md`
+- `submission/Demo_Video_Script.md`
 - SUBMISSION_CHECKLIST.md
 
 ## Ownership

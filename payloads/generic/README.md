@@ -1,12 +1,16 @@
 ## Generic Safety, XAI, and Audit Payload
 
-This payload contains shared safety governance, explainability, and immutable auditing components intended for all mission profiles.
+**Ancile Aeris — Property of Fratres X AI**
 
-Dual-use mapping:
-- Primary: trustworthy, operator-governed defensive C-UAS operations.
-- Secondary: transparent AI governance for public-safety and conservation deployments.
+This payload contains shared safety governance, explainability, and immutable auditing components intended for all **counter-UAS and anti-terror defensive** mission profiles.
+
+Mission posture:
+
+- **Primary:** Sovereign-aligned defensive C-UAS operations with causal XAI, DARKSPACE-class audit traces, and strict human-on-the-loop gates (PID ≥ 0.999).
+- **Secondary:** Critical infrastructure perimeter monitoring and homeland mass-gathering security patterns with identical safety posture.
 
 Contained node copies:
+
 - `safety_gate_node.py`
 - `audit_logger.py`
 - `xai_node.py`

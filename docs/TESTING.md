@@ -59,18 +59,19 @@ Pass criteria:
 - no schema regressions in JSON payload contracts
 - ROE safety gates continue to block non-authorized actions in non-sim mode
 
-## Conservation Anti-Poaching Scenario
+## Mass-Gathering Perimeter Counter-UAS / Anti-Terror Scenario
 
-Run conservation scenario generator:
+Run perimeter security scenario generator:
 
 ```bash
-python scripts/conservation_anti_poaching_scenario.py
+python scripts/mass_gathering_perimeter_ct_scenario.py
 ```
 
 Pass criteria:
-- detect/track outputs are generated from conservation payload data.
+
+- detect/track outputs reference mass-gathering / critical-infrastructure defensive posture.
 - any non-monitor recommendation remains blocked without operator authorization.
-- report is generated at `reports/conservation_anti_poaching_report.json`.
+- report is generated at `reports/mass_gathering_perimeter_ct_report.json`.
 
 ## BORAP 04 Urban Mass-Gathering Demo
 

@@ -6,9 +6,10 @@ from pathlib import Path
 
 def main() -> None:
     report = {
-        "scenario": "conservation_anti_poaching",
+        "scenario": "mass_gathering_perimeter_ct",
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
-        "environment": "remote_terrain",
+        "environment": "urban_mass_gathering_critical_infrastructure",
+        "mission": "counter_uas_anti_terror_perimeter_security",
         "summary": {
             "detections": 14,
             "tracked_targets": 5,
@@ -20,7 +21,7 @@ def main() -> None:
 
     out_dir = Path("reports")
     out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / "conservation_anti_poaching_report.json"
+    out_path = out_dir / "mass_gathering_perimeter_ct_report.json"
     out_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(f"Wrote {out_path}")
 

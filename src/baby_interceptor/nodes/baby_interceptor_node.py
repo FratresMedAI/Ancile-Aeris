@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+"""Ancile Aeris simulation-only baby interceptor (human-on-loop, defensive-only)."""
+
 import json
 import time
 
@@ -16,9 +18,12 @@ def auth_path_ok(safety_open: bool, launch: bool, terminal: bool, release_author
 class BabyInterceptorNode(Node):
     def __init__(self) -> None:
         super().__init__("baby_interceptor_node")
+        self.declare_parameter("require_simulate_only_deploy_cmd", False)
+
         self.safety_open = False
         self.launch_authorized = False
         self.terminal_authorized = False
+        self.simulate_only_deploy_registered = False
         self.audit_bridge = AncileAuditBridge(self, "baby_interceptor")
 
         reliable_qos = QoSProfile(
@@ -28,6 +33,7 @@ class BabyInterceptorNode(Node):
         )
 
         self.create_subscription(String, "/interceptor_handoff", self._on_handoff, reliable_qos)
+        self.create_subscription(String, "/interceptor_deploy_cmd", self._on_deploy_cmd, reliable_qos)
         self.create_subscription(String, "/safety_gate_status", self._on_safety, reliable_qos)
         self.create_subscription(String, "/operator/launch_authorizations", self._on_launch_auth, reliable_qos)
         self.create_subscription(String, "/operator/terminal_authorizations", self._on_terminal_auth, reliable_qos)
@@ -35,6 +41,35 @@ class BabyInterceptorNode(Node):
         self.result_pub = self.create_publisher(String, "/engagement_result", reliable_qos)
         self.audit_pub = self.create_publisher(String, "/audit/events", reliable_qos)
         self.get_logger().info("baby_interceptor_node initialized")
+
+    def _require_deploy_cmd_gate(self) -> bool:
+        return bool(self.get_parameter("require_simulate_only_deploy_cmd").value)
+
+    def _on_deploy_cmd(self, msg: String) -> None:
+        try:
+            payload = json.loads(msg.data)
+        except json.JSONDecodeError:
+            self.get_logger().warning("Ignoring non-JSON interceptor deploy command")
+            return
+
+        if not payload.get("simulate_only", False):
+            self.get_logger().info("Deploy command rejected: simulate_only flag must be true (defensive sim policy)")
+            return
+
+        self.simulate_only_deploy_registered = True
+        ack = {
+            "interceptor_id": "baby-int-sim-001",
+            "state": "simulate_only_deploy_command_registered",
+            "mode": "simulation_only",
+            "notes": "Human-gated Ancile Aeris path; no autonomous deployment.",
+        }
+        self.status_pub.publish(String(data=json.dumps(ack)))
+        self.audit_pub.publish(String(data=json.dumps({"event": "interceptor_deploy_cmd", "command": payload})))
+        self.audit_bridge.emit(
+            "interceptor_deploy_cmd",
+            ack,
+            xai_text="Simulator-only deployment command acknowledged; engagement still gated by safety gate and authorizations.",
+        )
 
     def _on_safety(self, msg: String) -> None:
         try:
@@ -60,13 +95,16 @@ class BabyInterceptorNode(Node):
         except json.JSONDecodeError:
             return
 
+        deploy_gate_ok = (not self._require_deploy_cmd_gate()) or self.simulate_only_deploy_registered
+
         release_authorized = bool(payload.get("release_authorized", False))
-        allowed = auth_path_ok(
+        allowed = deploy_gate_ok and auth_path_ok(
             self.safety_open,
             self.launch_authorized,
             self.terminal_authorized,
             release_authorized,
         )
+
         status = {
             "interceptor_id": "baby-int-sim-001",
             "engagement_id": payload.get("engagement_id", f"eng-{int(time.time())}"),
@@ -76,6 +114,7 @@ class BabyInterceptorNode(Node):
             "safety_gate_open": self.safety_open,
             "launch_authorized": self.launch_authorized,
             "terminal_authorized": self.terminal_authorized,
+            "simulate_only_deploy_registered": self.simulate_only_deploy_registered,
             "release_authorized": release_authorized,
         }
         result = {
@@ -92,7 +131,7 @@ class BabyInterceptorNode(Node):
         self.audit_bridge.emit(
             "interceptor_engagement",
             result,
-            xai_text="Baby interceptor remains blocked unless safety gate, launch authorization, and terminal authorization are all true.",
+            xai_text="Baby interceptor remains blocked unless safety gate, launch authorization, terminal authorization, and optional simulate-only deploy command policy are satisfied.",
         )
 
 

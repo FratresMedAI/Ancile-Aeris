@@ -1,12 +1,11 @@
 ## C-UAS Payload
 
-This payload contains Ancile Aeris defensive counter-UAS sensing, fusion, and command-support nodes.
+**Ancile Aeris — Property of Fratres X AI**
 
-Dual-use mapping:
-- Primary: DHS LRBAA BORAP 04 counter-UAS mission alignment.
-- Secondary: shared sensing and tracking patterns can support non-defense perimeter monitoring.
+This payload contains Ancile Aeris defensive **counter-UAS** sensing, fusion, and command-support nodes aligned with U.S. Department of Homeland Security Program Executive Office for UAS/C-UAS priorities and analogous federal integrator interoperability (e.g., Anduril Lattice-style mesh ISR concepts, kinetic catch solutions such as Fortem DroneHunter-class systems, directional RF countermeasures analogous to Epirus Leonidas envelopes, accelerated fielding doctrines echoing DIU Replicator, and interoperable sourcing patterns reflected in initiatives like the JIATF-401 marketplace).
 
 Contained node copies:
+
 - `visual_node.py`
 - `acoustic_node.py`
 - `rf_node.py`

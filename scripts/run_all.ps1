@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("cuas", "conservation", "generic")]
+    [ValidateSet("cuas", "perimeter_ct_cuas", "generic")]
     [string]$Payload = "cuas",
     [ValidateSet("true", "false")]
     [string]$SimMode = "true"

@@ -18,6 +18,7 @@ capabilities:
   federated_learning: true
   continual_learning: true
   scout_mothership: true
+  mesh_mothership_coordination: true
   operator_copilot_node: true
   baby_interceptor: false          # Optional - requires double human authorization
   defensive_swarm_coordinator: true

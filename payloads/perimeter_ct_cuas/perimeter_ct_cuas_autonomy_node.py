@@ -42,11 +42,11 @@ class AutonomyNode:
         escalation = "routine"
         if priority == "immediate" or control.get("jammed", False):
             escalation = "critical"
-            actions.append("dispatch_ranger_priority")
+            actions.append("dispatch_security_interdiction_ready")
 
         return {
             "mode": "monitor",
             "actions": actions,
             "escalation": escalation,
-            "cloud_event": "anti_poaching_threat_alert",
+            "cloud_event": "counterterror_perimeter_threat_alert",
         }

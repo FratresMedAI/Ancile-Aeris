@@ -1,0 +1,11 @@
+# Ancile Aeris — Property of Fratres X AI
+# Optional simulation interceptor (default: deploy command gate disabled for demo compatibility)
+
+/**:
+  ros__parameters:
+    require_simulate_only_deploy_cmd: false
+
+/baby_interceptor_node:
+  ros__parameters:
+    payload_mode: "low_collateral_stub"
+    attritable_unit_cost_tier: "low"

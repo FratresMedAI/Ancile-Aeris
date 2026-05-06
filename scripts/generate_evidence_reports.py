@@ -26,11 +26,11 @@ def main() -> None:
         },
     )
     write_report(
-        "conservation_anti_poaching_report.json",
+        "mass_gathering_perimeter_ct_report.json",
         {
-            "scenario": "conservation_anti_poaching",
+            "scenario": "mass_gathering_perimeter_ct",
             "timestamp_utc": now,
-            "remote_terrain_validation": True,
+            "mission": "counter_uas_anti_terror_perimeter_security",
             "detect_track_identify_pipeline_operational": True,
             "non_monitor_blocked_without_operator": True,
             "status": "pass",

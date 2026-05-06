@@ -12,7 +12,7 @@ Ancile Aeris is a ROS 2 Kilted defensive shield platform built for simulation-sa
 **Layer 2: Fusion** — `ancile_aeris_fusion` publishes `/fused_tracks` with confidence, PID metadata, and track state.  
 **Layer 3: Trust** — DARKSPACE audit and safety gates record, explain, and block unsafe paths.  
 **Layer 4: Human Decision Support** — `ancile_aeris_operator_copilot` exposes a query service for operator-facing explanations.  
-**Layer 5: Advanced Coordination** — `scout_mothership` adds high-altitude ISR overlays, and `baby_interceptor` remains an optional simulation-only path behind double human authorization.
+**Layer 5: Advanced Coordination** — `scout_mothership` (package at `src/scout_mothership/`) adds mesh-networked high-altitude ISR overlays with `/mesh/mothership_swarm_status` heartbeat fusion, coordinated coverage metadata, and counter-terror arson/incendiary precursor simulation signals on fused tracks under strict PID gates. `baby_interceptor` (package at `src/baby_interceptor/`) remains an optional simulation-only path behind double human authorization.
 
 ## Safety & Trust Foundation
 

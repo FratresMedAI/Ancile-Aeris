@@ -24,7 +24,7 @@ def generate_launch_description() -> LaunchDescription:
         DeclareLaunchArgument(
             'payload',
             default_value='cuas',
-            description='Payload profile: cuas, conservation, or generic',
+            description='Payload profile: cuas, perimeter_ct_cuas, or generic',
         ),
         LogInfo(msg=['Launching Ancile-Aeris full system. sim_mode=', sim_mode, ' payload=', payload]),
         sensor_launch,
