@@ -18,6 +18,8 @@ class AncileAuditBridge:
         self.component = component
         self.key = os.getenv("AUDIT_HMAC_KEY", "change-me").encode("utf-8")
         self.last_hash = "GENESIS"
+        host = os.getenv("HOSTNAME", "unknown-host")
+        self.chain_id = f"{component}:{host}:{os.getpid()}"
         self.audit_pub = self.node.create_publisher(String, "/audit/events", 20)
         self.xai_pub = self.node.create_publisher(String, "/xai_explanation", 20)
 
@@ -30,6 +32,7 @@ class AncileAuditBridge:
         body = {
             "timestamp": now,
             "component": self.component,
+            "chain_id": self.chain_id,
             "event_type": event_type,
             "payload": payload,
             "previous_hash": self.last_hash,
