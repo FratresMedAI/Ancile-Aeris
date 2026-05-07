@@ -2,6 +2,8 @@
 
 **Property of Fratres X AI**
 
+Now includes full layered non-kinetic defeat stack (HPM, cognitive jamming, GNSS spoofing, control-link takeover, multi-sensor deception) with intelligent cognitive selection.
+
 Ancile Aeris is a simulation-first ROS 2 cognitive defensive shield platform for **counter-UAS, anti-terrorism perimeter security, mass-gathering protection, and critical infrastructure defense**. It is built around defensive-only operations, DARKSPACE auditability, explainable recommendations, and human-on-the-loop safety gates.
 
 ## Basic Demo

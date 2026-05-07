@@ -2,6 +2,8 @@
 
 **Property of Fratres X AI**
 
+Now includes full layered non-kinetic defeat stack (HPM, cognitive jamming, GNSS spoofing, control-link takeover, multi-sensor deception) with intelligent cognitive selection.
+
 ## Completed Items
 
 - [x] Full 21-Capability Cognitive Architecture documented
