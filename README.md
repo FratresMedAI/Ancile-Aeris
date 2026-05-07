@@ -33,9 +33,21 @@ ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py enable_baby_i
 Expected live interfaces:
 
 ```bash
-ros2 topic list | grep -E '^/fused_tracks|^/audit/events|^/scout_eyes|^/safety_gate_status'
+ros2 topic list | grep -E '^/fused_tracks|^/audit/events|^/scout_eyes|^/safety_gate_status|^/effector/|^/cognitive_ew_commands|^/proposed_actions|^/digital_twin_result'
 ros2 service list | grep -E '/ancile_aeris_operator_copilot/query'
 ```
+
+The basic demo also brings up the non-kinetic effector stack and a thin
+cognitive selection chain by default (toggle via `features.effectors.enabled`
+and `features.cognitive_demo_chain.enabled` in `payload_selector.yaml`):
+
+- `/effector/selected_plan` — layered non-kinetic plan with XAI rationale
+  (multi-sensor deception, cognitive jamming, GNSS/link spoofing, HPM-class
+  denial, authorized control-link takeover; monitor-only by default).
+- `/effector/status` — per-mode readiness telemetry.
+- `/proposed_actions` -> `/digital_twin_result` -> `/cognitive_ew_commands` —
+  cognitive selection chain that ingests the effector plan and surfaces the
+  human-vetted recommendation.
 
 Run two mesh mothership simulators (shared heartbeat topic, distinct IDs):
 

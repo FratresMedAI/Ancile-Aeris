@@ -23,6 +23,11 @@ Ancile Aeris is positioned as a modular integration layer aligned to the **DHS P
 2. **Fusion + Safety Gate:** `/fused_tracks` feeds PID-gated decision pathways with auditable context.
 3. **DARKSPACE Audit:** immutable `/audit/events` trail for oversight and after-action review.
 4. **Human Authorization:** optional interceptor path requires double human authorization when configured.
+5. **Layered Non-Kinetic Defeat Stack:** `ancile_aeris_effectors` simulates an escalating, human-gated effector catalog: multi-sensor deception, cognitive jamming, GNSS/link spoofing, HPM-class denial, and authorized cyber takeover of recovered control links. Selection runs through the cognitive layer (`agent_orchestrator` -> `digital_twin` -> `cognitive_ew`), surfaces XAI rationale on `/cognitive_ew_commands`, and remains monitor-only unless the safety gate is open.
+
+## Lethally Effective Layered Defeat (Simulation-Safe)
+
+Ancile Aeris models a *layered defeat* doctrine that prefers non-kinetic, low-collateral options first and only escalates when score and authorization warrant it. Every effector in the catalog publishes an explainable plan (`/effector/selected_plan`) and is forced to monitor-only when the safety gate is closed; takeover-class effects additionally require dual operator authorization. This delivers a credible, lethally effective defeat narrative for mass-gathering and critical-infrastructure C-UAS *without* embedding any unlawful autonomous engagement in the codebase.
 
 ## 2026 Security Relevance
 

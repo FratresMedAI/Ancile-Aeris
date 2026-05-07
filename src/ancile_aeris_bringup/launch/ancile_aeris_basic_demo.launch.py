@@ -59,6 +59,9 @@ def generate_launch_description() -> LaunchDescription:
     mesh_enabled = LaunchConfiguration("mesh_motherships_enabled")
     mesh_count = LaunchConfiguration("mesh_motherships_count")
     require_double_authorization = LaunchConfiguration("require_double_authorization")
+    enable_effectors = LaunchConfiguration("enable_effectors")
+    enable_effector_sim = LaunchConfiguration("enable_effector_sim")
+    enable_cognitive_demo_chain = LaunchConfiguration("enable_cognitive_demo_chain")
 
     scout_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([FindPackageShare("scout_mothership"), "/launch/scout_mothership.launch.py"]),
@@ -71,6 +74,13 @@ def generate_launch_description() -> LaunchDescription:
         PythonLaunchDescriptionSource([FindPackageShare("baby_interceptor"), "/launch/baby_interceptor.launch.py"]),
         condition=IfCondition(enable_baby_interceptor),
         launch_arguments={"require_double_authorization": require_double_authorization}.items(),
+    )
+    effectors_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [FindPackageShare("ancile_aeris_effectors"), "/launch/ancile_aeris_effectors.launch.py"]
+        ),
+        condition=IfCondition(enable_effectors),
+        launch_arguments={"enable_effector_sim": enable_effector_sim}.items(),
     )
 
     return LaunchDescription(
@@ -91,12 +101,28 @@ def generate_launch_description() -> LaunchDescription:
                 "mesh_motherships_count",
                 default_value=_payload_int("features.mesh_motherships.count", 2),
             ),
+            DeclareLaunchArgument(
+                "enable_effectors",
+                default_value=_payload_bool("features.effectors.enabled", True),
+            ),
+            DeclareLaunchArgument(
+                "enable_effector_sim",
+                default_value=_payload_bool("features.effectors.enable_sim", True),
+            ),
+            DeclareLaunchArgument(
+                "enable_cognitive_demo_chain",
+                default_value=_payload_bool("features.cognitive_demo_chain.enabled", True),
+            ),
             _include("ancile_aeris_sensors", "ancile_aeris_sensors.launch.py"),
             _include("ancile_aeris_fusion", "ancile_aeris_fusion.launch.py"),
             _include("ancile_aeris_darkspace_integration", "darkspace_integration.launch.py"),
             _include("ancile_aeris_safety_gate", "ancile_aeris_safety_gate.launch.py"),
             scout_launch,
             _include("ancile_aeris_operator_copilot", "ancile_aeris_operator_copilot.launch.py"),
+            effectors_launch,
+            _include_if("agent_orchestrator", "agent_orchestrator.launch.py", IfCondition(enable_cognitive_demo_chain)),
+            _include_if("digital_twin", "digital_twin.launch.py", IfCondition(enable_cognitive_demo_chain)),
+            _include_if("cognitive_ew", "cognitive_ew.launch.py", IfCondition(enable_cognitive_demo_chain)),
             interceptor_launch,
         ]
     )

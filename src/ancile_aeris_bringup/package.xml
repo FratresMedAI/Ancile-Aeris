@@ -24,6 +24,10 @@
   <exec_depend>ancile_aeris_swarm_intent</exec_depend>
   <exec_depend>scout_mothership</exec_depend>
   <exec_depend>baby_interceptor</exec_depend>
+  <exec_depend>ancile_aeris_effectors</exec_depend>
+  <exec_depend>agent_orchestrator</exec_depend>
+  <exec_depend>digital_twin</exec_depend>
+  <exec_depend>cognitive_ew</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

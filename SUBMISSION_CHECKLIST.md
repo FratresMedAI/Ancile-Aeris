@@ -11,6 +11,7 @@
 - [x] All capabilities toggleable and simulation-safe
 - [x] Human-on-the-Loop + XAI enforced everywhere
 - [x] Credibility references consistently included (Anduril Lattice, JIATF-401 Marketplace, Fortem DroneHunter F700, Epirus Leonidas, Replicator 2, DHS Program Executive Office for UAS/C-UAS)
+- [x] Layered non-kinetic effector stack (`ancile_aeris_effectors`) with simulation-safe HPM-class denial, cognitive jamming, GNSS/link spoofing, multi-sensor deception, and authorized control-link takeover; selection runs through the cognitive chain (`agent_orchestrator` -> `digital_twin` -> `cognitive_ew`) and publishes XAI rationale on `/cognitive_ew_commands`
 
 ## Status
 

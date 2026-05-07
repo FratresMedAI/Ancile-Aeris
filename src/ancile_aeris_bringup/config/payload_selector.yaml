@@ -17,6 +17,18 @@ features:
     enabled: false
     require_double_authorization: true
 
+  # Non-kinetic effector stack (HPM-style denial, cognitive jamming/spoofing,
+  # multi-sensor deception, authorized control-link takeover).
+  effectors:
+    enabled: true
+    enable_sim: true
+
+  # Thin cognitive chain (agent_orchestrator -> digital_twin -> cognitive_ew)
+  # used by ancile_aeris_basic_demo.launch.py to demonstrate effector-aware
+  # selection. Independent of the full bringup.launch.py feature flags below.
+  cognitive_demo_chain:
+    enabled: true
+
   # Buildable local packages that are outside the basic demo slice.
   enable_agent_orchestrator: false
   enable_adversarial_defense: false
