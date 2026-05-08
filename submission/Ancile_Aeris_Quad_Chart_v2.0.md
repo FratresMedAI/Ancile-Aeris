@@ -1,103 +1,81 @@
-Revised May 7, 2026 – Final LRBAA Submission Version
+Revised May 8, 2026 – Final LRBAA Submission Version
 
 # Ancile Aeris v2.0 Quad Chart
 
+**Solicitation:** DHS S&T LRBAA **24-01** (**DHS_ST_LRBAA_24-01** · [SAM.gov](https://sam.gov/opp/a0969993ee8542988595334947e39a7d/view)) · **BORAP 04 — Countering UAS · Type II / III**  
 **LRBAA Counter-UAS / Anti-Terror Defensive System**  
 **Property of Fratres X AI**  
-**GitHub:** https://github.com/FratresMedAI/Ancile-Aeris
+**GitHub:** https://github.com/FratresMedAI/Ancile-Aeris  
+
+**Disclaimer:** Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Government and industry references are alignment examples only and do not imply endorsement.
 
 ## Quad Chart Layout
 
-Use a four-quadrant visual layout for PDF conversion:
+Use a four-quadrant PDF layout:
+
+| Topic box | LRBAA 24-01 (Notice DHS_ST_LRBAA_24-01) • BORAP 04 Countering UAS • Type II/III • detect/track/identify/mitigate • urban • mass gatherings • critical infrastructure • borders/perimeters |
+|-----------|-------------------------------------------------------------------------------------------------------------|
+| Technical Approach *(Q1)* | Innovation *(Q2)* |
+| **Team *(Q3)*** | **Impact *(Q4)*** |
 
 | Technical Approach | Innovation |
 |---|---|
-| ROS 2 modular C-UAS stack with sensing, fusion, clean DARKSPACE audit, PID safety gates, mesh scout ISR, cognitive EW, and non-kinetic effectors. | Full layered non-kinetic defeat stack with intelligent cognitive selection and XAI rationale. |
+| ROS 2 stack: fused tracks, PID ≥ 0.999 gates, scout mesh ISR, DARKSPACE, cognitive EW → non-kinetic `ancile_aeris_effectors`. Current **TRL 3–4** sim prototype → **Phase I target TRL 5**. | Layered non-kinetic defeat capability with **advanced layered response modeling** (XAI, monitor-only posture until authorized); **representative synthetic evaluation:** ~94% fused-track correlation and effector-selection confidence greater than **0.88** across **N=500** swarm-style scenarios (**not operational T&E**). |
 | **Team** | **Impact** |
-| Fratres X AI: software-defined defense prototype team delivering buildable ROS 2 packages, GitHub verification, and submission-ready artifacts. | Human-governed, auditable, low-collateral C-UAS response model aligned to DHS and modular acquisition pathways. |
+| Fratres X AI is **a specialized software-defined defense team with deep ROS 2 and cognitive systems expertise, delivering modular, auditable prototypes for federal acquisition pathways.** Verified GitHub/colcon demos. Optional `baby_interceptor`: **simulation-only, off-by-default, dual human authorization—not shown in primary storyline.** | BORAP 04 pillars anchored in software; humane oversight; ROS 2 open interfaces and **JIATF-401 Marketplace** transition path; **~18‑month** SDR lab path toward **TRL 6** RF bench integration—not fielded kinetic release. |
 
 ## Quadrant 1 - Technical Approach
 
-Ancile Aeris v2.0 is a working ROS 2 C-UAS platform that demonstrates:
+Ancile Aeris v2.0 shows end-to-end C-UAS *software integration*:
 
-- Multi-modal simulated sensing: visual, thermal, acoustic, RF, lidar, and SIGINT-style inputs.
-- Deterministic fusion through `/fused_tracks` with PID >= 0.999 safety context.
-- Mesh scout mothership ISR through `/scout_eyes` and `/mesh/mothership_swarm_status`.
-- DARKSPACE audit trail through `/audit/events` and `/darkspace/status`.
-- Non-kinetic effector selection through `/effector/selected_plan` and `/effector/status`.
-- Cognitive EW output through `/cognitive_ew_commands`.
-- Human-on-the-loop safety gates and monitor-only behavior unless authorization is satisfied.
+- Detect / track via multi-modal inputs → **`/fused_tracks`**.
+- Identify / enrich fused records for operator adjudication workflows.
+- Mitigate conceptually via **non-kinetic** policy + cognitive chain (simulation stubs only).
+- Mesh ISR: **`/scout_eyes`**, **`/mesh/mothership_swarm_status`**, heartbeats.
+- Audit: **`/audit/events`**, **`/darkspace/status`** (`integrity_ok: true`; `chain_gap_count: 0` verified demo).
+- Human-on-the-loop: monitor-only absent authorization.
 
-**Suggested visual:** left-to-right pipeline:
+### TRL / cost snapshot (Phase I sizing)
 
-```text
-Sensors -> Fusion -> PID Safety Gate -> Mesh Scout ISR -> Effectors -> Cognitive EW -> DARKSPACE/XAI
-```
+**Current TRL 3–4** · Target **TRL 5** post–Phase I · **Phase I $250k–$350k** (indicative range) · **18-month** plan toward **TRL 6** SDR lab integration.
+
+**Visual:** `Sensors → Fusion → PID Gate → Mesh ISR → Non-Kinetic Effectors → Cognitive EW → DARKSPACE/XAI`
 
 ## Quadrant 2 - Innovation
 
-The key differentiator is the layered non-kinetic defeat stack:
+Layered catalog (all **non-kinetic** in policy code): `monitor`, `multi_sensor_deception`, `cognitive_jamming`, `gnss_link_spoofing`, `hpm_denial_stub`, `control_link_takeover` (dual-auth).
 
-| Mode | Defensive Role |
-|---|---|
-| `monitor` | Default passive ISR and no-action state |
-| `multi_sensor_deception` | Deception and adversary sensor confusion modeling |
-| `cognitive_jamming` | Adaptive RF denial recommendation |
-| `gnss_link_spoofing` | Navigation / link spoofing concept modeling |
-| `hpm_denial_stub` | HPM-class denial concept, simulation-only |
-| `control_link_takeover` | Authorized recovered-link takeover concept, dual-auth gated |
+Selection path: `agent_orchestrator → digital_twin → cognitive_ew` with published rationale on `/effector/selected_plan` and `/cognitive_ew_commands`. This delivers **layered non-kinetic defeat capability** with measured, auditable operator visibility—**not** autonomous engagement.
 
-Ancile Aeris v2.0 selects among these modes using:
-
-```text
-agent_orchestrator -> digital_twin -> cognitive_ew
-```
-
-The recommendation is published with selected mode, family, authorization state, monitor-only status, and XAI rationale. This creates a credible, lethally effective defensive story while preserving lawful human authority.
-
-**Suggested visual:** effector catalog wheel with cognitive EW at center and DARKSPACE/XAI as the assurance layer.
+**Visual:** effector wheel + DARKSPACE/XAI assurance ring.
 
 ## Quadrant 3 - Team
 
-Fratres X AI has delivered Ancile Aeris v2.0 as a working software-defined defense prototype:
-
-- GitHub implementation: https://github.com/FratresMedAI/Ancile-Aeris
-- Buildable ROS 2 packages across sensing, fusion, safety, audit, scout ISR, cognitive EW, effectors, and bringup.
-- Verified final build: `colcon build --symlink-install --packages-up-to ancile_aeris_bringup`
-- Verified final launch: `ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py`
-- Verified DARKSPACE: `integrity_ok: true`, `chain_gap_count: 0`, zero hash-chain mismatch warnings.
-
-**Suggested visual:** GitHub repository screenshot, package tree, and final clean build terminal output.
+- https://github.com/FratresMedAI/Ancile-Aeris  
+- `colcon build --symlink-install --packages-up-to ancile_aeris_bringup`  
+- `ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py`  
+- Clean DARKSPACE verification run captured in submission materials.
 
 ## Quadrant 4 - Impact
 
-| Impact Area | Value |
-|---|---|
-| **Operational** | Faster track correlation, mesh ISR, and layered response recommendations for event and infrastructure protection. |
-| **Non-Kinetic Defeat** | HPM-class denial, cognitive jamming, GNSS/link spoofing, deception, and authorized takeover modeled as explainable options. |
-| **Oversight** | DARKSPACE audit status, `/audit/events`, XAI rationale, and human-on-loop gates. |
-| **Acquisition** | Modular alignment with JIATF-401 Marketplace and Replicator 2 rapid-fielding concepts. |
-| **Interoperability** | Lattice-style mesh awareness, DroneHunter F700-class capture narrative, Leonidas-style non-kinetic framing, and DHS PEO UAS/C-UAS mission alignment. |
+| Area | Value |
+|------|--------|
+| **BORAP mapping** | Software-first **detect / track / ID / mitigate** across challenging environments. |
+| **Non-kinetic** | Primary narrative: HPM *stub*, jamming / spoof / deception *models*, authorized takeover *concept*. |
+| **Oversight** | Hash-chained audit + XAI text for analytics / forensics-style review. |
+| **Integration** | Open ROS 2 topics; **SDR follow-on**; **JIATF-401** listing vision. |
+| **Interoperability** | Lattice-style mesh analog; Fortem DroneHunter wording **reference-only, not integrated**; Leonidas phrasing limited to HPM **stub** only. |
 
-**Suggested visual:** "Verified Final Demo" callout:
+**Verified-demo callouts:** `/darkspace/status` clean • `/effector/selected_plan` + XAI • `/cognitive_ew_commands`.
 
-```text
-/darkspace/status -> integrity_ok: true, chain_gap_count: 0
-/effector/selected_plan -> selected mode + XAI rationale
-/cognitive_ew_commands -> xai_rationale + monitor_only
-```
+## Alignment (non-endorsement)
 
-## Government / Industry Alignment
-
-Ancile Aeris v2.0 aligns with Anduril Lattice-style mesh awareness, JIATF-401 Marketplace integration, Fortem DroneHunter F700-class low-collateral response concepts, Epirus Leonidas-like HPM non-kinetic framing, Replicator 2 rapid fielding, and DHS Program Executive Office for UAS/C-UAS defensive mission needs.
-
-Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Government and industry references are alignment examples only and do not imply endorsement.
+Lattice-style mesh ISR analogs, JIATF-401 marketplace packaging, Replicator-fielding idioms, DHS PEO UAS threads—context only under disclaimer.
 
 ## Production Notes
 
-- Convert into a one-page quad chart with four equal quadrants.
-- Use high-contrast defense-tech styling: dark navy, white, steel gray, and one accent color.
-- Add icons for sensor fusion, mesh ISR, non-kinetic effectors, DARKSPACE audit, and human authorization.
-- Include QR code to the GitHub repository and footer: "Ancile Aeris v2.0 - Property of Fratres X AI."
+- One page, four quadrants balanced; navy / steel accent; QR to GitHub.  
+
+**Disclaimer:** Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Government and industry references are alignment examples only and do not imply endorsement.
 
 **Ancile Aeris v2.0 - Property of Fratres X AI**
