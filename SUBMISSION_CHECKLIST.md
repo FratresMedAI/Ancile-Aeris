@@ -1,22 +1,45 @@
-# Ancile Aeris LRBAA Submission Checklist
+# Ancile Aeris LRBAA v2.1 Submission Checklist
 
-**Property of Fratres X AI**
+**Property of Fratres X AI** · **BORAP 04 — Countering Unmanned Aircraft Systems** (DHS S&T LRBAA **24-01**)
 
-Now includes full layered non-kinetic defeat stack (HPM, cognitive jamming, GNSS spoofing, control-link takeover, multi-sensor deception) with intelligent cognitive selection.
+**Disclaimer:** Simulation-only C-UAS defensive demonstration. No autonomous weapon release.
 
-## Completed Items
+Master index (paths and Word exports): **[`submission/LRBAA_Submission_Package_v2.1.md`](submission/LRBAA_Submission_Package_v2.1.md)**
 
-- [x] Full 21-Capability Cognitive Architecture documented
-- [x] Layered Defensive System (Scout Mothership + Baby Interceptors) defined
-- [x] DARKSPACE Immutable Audit + Safety Gates integrated
-- [x] BORAP 04 alignment documented
-- [x] All capabilities toggleable and simulation-safe
-- [x] Human-on-the-Loop + XAI enforced everywhere
-- [x] Credibility references consistently included (Anduril Lattice, JIATF-401 Marketplace, Fortem DroneHunter F700, Epirus Leonidas, Replicator 2, DHS Program Executive Office for UAS/C-UAS)
-- [x] Layered non-kinetic effector stack (`ancile_aeris_effectors`) with simulation-safe HPM-class denial, cognitive jamming, GNSS/link spoofing, multi-sensor deception, and authorized control-link takeover; selection runs through the cognitive chain (`agent_orchestrator` -> `digital_twin` -> `cognitive_ew`) and publishes XAI rationale on `/cognitive_ew_commands`
+## Narrative and quad (upload as required by the notice)
 
-## Status
+- [ ] **Concept Paper** — [`submission/Ancile_Aeris_Concept_Paper_v2.1.md`](submission/Ancile_Aeris_Concept_Paper_v2.1.md) · [`.docx`](submission/Ancile_Aeris_Concept_Paper_v2.1.docx) — convert to **PDF** in Word if the portal requires PDF.
+- [ ] **Quad Chart** (one page, four quadrants — layout in Word from) — [`submission/Ancile_Aeris_Quad_Chart_v2.1.md`](submission/Ancile_Aeris_Quad_Chart_v2.1.md) · [`.docx`](submission/Ancile_Aeris_Quad_Chart_v2.1.docx)
 
-Ready for LRBAA BORAP 04 submission package.
+## Video (typical “concept overview” attachment)
 
-**Ancile Aeris — Property of Fratres X AI**
+- [ ] **Silent 4:00 MP4** (burned-in subtitles) — `artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_4min_demo.mp4`
+- [ ] **With voiceover** (optional) — `artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_4min_demo_with_voiceover.mp4`
+- [ ] **Script / production notes** (reviewer reference) — [`submission/Ancile_Aeris_Video_Script_v2.1.md`](submission/Ancile_Aeris_Video_Script_v2.1.md) · [`.docx`](submission/Ancile_Aeris_Video_Script_v2.1.docx); [`submission/Video_Production_Package_v2.1.md`](submission/Video_Production_Package_v2.1.md) · [`.docx`](submission/Video_Production_Package_v2.1.docx)
+- [ ] **Full narration text** — [`submission/Ancile_Aeris_Voiceover_Narration_v2.1.md`](submission/Ancile_Aeris_Voiceover_Narration_v2.1.md) · [`.docx`](submission/Ancile_Aeris_Voiceover_Narration_v2.1.docx)
+
+## Code / reproducibility
+
+- [ ] **Repository URL** — https://github.com/FratresMedAI/Ancile-Aeris  
+- [ ] **Docker-only build** documented in [`README.md`](README.md); demo: `ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py` (inside container per README).
+
+## Regenerate Office exports from Markdown
+
+```powershell
+cd "path\to\Ancile-Aeris"
+python tools\export_submission_docx.py
+```
+
+Requires **Pandoc** ([install](https://pandoc.org/installing.html); on Windows, `%LocalAppData%\Pandoc\pandoc.exe` after winget install).
+
+## Technical completeness (software)
+
+- [x] Layered non-kinetic effector stack (`ancile_aeris_effectors`) with simulation-safe paths and XAI on `/effector/selected_plan` and `/cognitive_ew_commands`
+- [x] FOB swarm + modular micro-payload simulation topics (`/mesh/fob_status`, `/payload/micro_deployment`)
+- [x] DARKSPACE audit posture (`/darkspace/status` verified in demo narrative)
+- [x] Human-on-the-loop; **kamikaze ram** only as policy-gated last-resort **simulation**
+- [x] BORAP pillars mapped in [`docs/LRBAA_BORAP_04_MAPPING.md`](docs/LRBAA_BORAP_04_MAPPING.md)
+
+---
+
+**Ancile Aeris v2.1 — Property of Fratres X AI**

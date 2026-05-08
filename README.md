@@ -39,7 +39,7 @@ Layered **`ancile_aeris_effectors`** stack models **advanced layered response** 
 
 Fratres X AI is **a specialized software-defined defense team with deep ROS 2 and cognitive systems expertise, delivering modular, auditable prototypes for federal acquisition pathways.**
 
-**Prototype maturity (illustrative, not contractual):** current **Technology Readiness Level 3–4** integrated simulation; an indicative **Phase I** cost band of roughly **$250k–$350k** matches the foundational hardening described in [`submission/Ancile_Aeris_Concept_Paper_v2.0.md`](submission/Ancile_Aeris_Concept_Paper_v2.0.md) (**v2.1** FOB swarm + gated kinetic ram narrative); an **~18-month** laboratory **Software Defined Radio (SDR)** integration path toward **TRL 6** bench demos is a roadmap statement—not fielded weapons.
+**Prototype maturity (illustrative, not contractual):** current **Technology Readiness Level 3–4** integrated simulation; an indicative **Phase I** cost band of roughly **$250k–$350k** matches the foundational hardening described in [`submission/Ancile_Aeris_Concept_Paper_v2.1.md`](submission/Ancile_Aeris_Concept_Paper_v2.1.md); an **~18-month** laboratory **Software Defined Radio (SDR)** integration path toward **TRL 6** bench demos is a roadmap statement—not fielded weapons.
 
 In **representative internal synthetic evaluations** (**N≈500** parameterized swarm scenarios, **not OT&E**) the materials cite approximately **94% fused-track correlation** and **effector-selection confidence greater than 0.88** under stated assumptions. These are **benchmark context** for reviewers, not operational test results.
 
@@ -81,7 +81,7 @@ ros2 topic echo /mesh/mothership_swarm_status
 
 - Payload selector **`src/ancile_aeris_bringup/config/payload_selector.yaml`**.  
 - LRBAA packages **`src/scout_mothership/`** • **`src/ancile_aeris_micro_payloads/`** (five micro payload sim nodes + kamikaze ram) • optional **`src/baby_interceptor/`**. Expanded cognitive modules **`src/ancile_aeris_cognitive/`**.  
-- Formal narrative PDF sources live under **`submission/`** (**`Ancile_Aeris_*_v2.0*.md`** etc.).
+- Formal LRBAA narrative and quad chart (latest) live under **`submission/`** (**`*_v2.1.*`** — see [`submission/LRBAA_Submission_Package_v2.1.md`](submission/LRBAA_Submission_Package_v2.1.md)). Older `*_v2.0.*` filenames are retained for history.
 
 ## Cross-platform Docker (Windows bind-mount CRLF)
 
@@ -111,11 +111,14 @@ Twenty‑plus modular cognitive adjuncts—including digital twin EW rehearsal, 
 
 - `docs/COGNITIVE_ARCHITECTURE.md`  
 - `docs/LRBAA_BORAP_04_MAPPING.md`  
-- `submission/Ancile_Aeris_Concept_Paper_v2.0.md`  
-- `submission/Ancile_Aeris_Quad_Chart_v2.0.md`  
-- `submission/Ancile_Aeris_Video_Script_v2.0.md`  
-- `submission/Video_Production_Package.md`  
-- `SUBMISSION_CHECKLIST.md`
+- [`submission/LRBAA_Submission_Package_v2.1.md`](submission/LRBAA_Submission_Package_v2.1.md) — **master index for v2.1 LRBAA filing**  
+- `submission/Ancile_Aeris_Concept_Paper_v2.1.md`  
+- `submission/Ancile_Aeris_Quad_Chart_v2.1.md`  
+- `submission/Ancile_Aeris_Video_Script_v2.1.md`  
+- `submission/Video_Production_Package_v2.1.md`  
+- `submission/Ancile_Aeris_Voiceover_Narration_v2.1.md`  
+- `SUBMISSION_CHECKLIST.md`  
+- Regenerate Word exports: `python tools/export_submission_docx.py`
 
 ## Ownership
 
