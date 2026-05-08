@@ -3,7 +3,7 @@ Revised May 8, 2026 – Final LRBAA Submission Version
 # Ancile Aeris v2.1 Video Production Package
 
 **Solicitation line:** DHS S&T LRBAA 24-01 (**DHS_ST_LRBAA_24-01**) · BORAP 04 Countering Unmanned Aircraft Systems  
-**Runtime:** 4:00  
+**Runtime:** 4:00 for the local silent / Edge-TTS render; **3:38.98** for the primary reviewer video built around the recorded WAV.  
 **Audience:** DHS LRBAA reviewers; C-UAS acquisition stakeholders; lab integrators  
 **Tone:** restrained, credible, technically precise. No hype, no combat-trailer language.  
 **Property of Fratres X AI • GitHub:** https://github.com/FratresMedAI/Ancile-Aeris
@@ -89,6 +89,21 @@ python tools\synthesize_voiceover_v21.py --skip-video
 ```
 
 (`--skip-video` only writes the WAV.)
+
+## Primary recorded-voiceover render
+
+For the submission video built around the recorded narration, use the checked-in WAV as the timing source. The render script measures the WAV duration, creates recorded-voiceover keyframes with burned-in captions, and muxes the exact recorded audio into the MP4:
+
+```powershell
+cd "C:\Users\Besn Daddy\Desktop\Ancile Aeris\Ancile-Aeris"
+python tools\render_recorded_voiceover_v21_video.py --voiceover artifacts\video_v21\recorded_voiceover\NoteGPT_Speech_1778252509802.wav
+```
+
+Outputs:
+
+- Source WAV: `artifacts/video_v21/recorded_voiceover/NoteGPT_Speech_1778252509802.wav`
+- Key frames: `artifacts/video_v21/recorded_voiceover_keyframes/*.png`
+- **Primary recorded-voiceover MP4:** `artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4`
 
 ## Optional One-Click Free AI Polish
 

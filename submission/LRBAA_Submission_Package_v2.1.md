@@ -19,13 +19,17 @@ Regenerate Word from Markdown: `python tools/export_submission_docx.py`
 
 **PDF:** Open the `.docx` in Microsoft Word (or equivalent) and use **Save As → PDF** if the portal requires PDF. (Pandoc + PDF engines are optional; DOCX is the checked-in portable export.)
 
-## Video (4:00 demo)
+## Video
 
 | Asset | Location |
 |-------|----------|
 | Production notes & render recipe | [`Video_Production_Package_v2.1.md`](Video_Production_Package_v2.1.md) · [`.docx`](Video_Production_Package_v2.1.docx) |
 | On-screen / caption script | [`Ancile_Aeris_Video_Script_v2.1.md`](Ancile_Aeris_Video_Script_v2.1.md) · [`.docx`](Ancile_Aeris_Video_Script_v2.1.docx) |
 | Full voiceover narration (timed) | [`Ancile_Aeris_Voiceover_Narration_v2.1.md`](Ancile_Aeris_Voiceover_Narration_v2.1.md) · [`.docx`](Ancile_Aeris_Voiceover_Narration_v2.1.docx) |
+| **Primary reviewer video with recorded narration** | `artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4` |
+| Recorded source WAV used in primary video | `artifacts/video_v21/recorded_voiceover/NoteGPT_Speech_1778252509802.wav` |
+| Recorded-voiceover key frames | `artifacts/video_v21/recorded_voiceover_keyframes/*.png` |
+| Recorded-voiceover render CLI | `python tools/render_recorded_voiceover_v21_video.py --voiceover artifacts/video_v21/recorded_voiceover/NoteGPT_Speech_1778252509802.wav` |
 | Silent render (burned-in subtitles) | Repository: `artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_4min_demo.mp4` |
 | With AI voiceover (Edge TTS mux) | `artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_4min_demo_with_voiceover.mp4` |
 | Key frames (CapCut / editor) | `artifacts/video_v21/keyframes/*.png` |

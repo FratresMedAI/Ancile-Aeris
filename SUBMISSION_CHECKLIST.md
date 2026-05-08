@@ -13,8 +13,10 @@ Master index (paths and Word exports): **[`submission/LRBAA_Submission_Package_v
 
 ## Video (typical “concept overview” attachment)
 
-- [ ] **Silent 4:00 MP4** (burned-in subtitles) — `artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_4min_demo.mp4`
-- [ ] **With voiceover** (optional) — `artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_4min_demo_with_voiceover.mp4`
+- [ ] **Primary recorded-voiceover MP4** — `artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4` (built around the checked-in source WAV below).
+- [ ] **Recorded source WAV** — `artifacts/video_v21/recorded_voiceover/NoteGPT_Speech_1778252509802.wav`
+- [ ] **Silent 4:00 MP4** (backup, burned-in subtitles) — `artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_4min_demo.mp4`
+- [ ] **Edge-TTS voiceover MP4** (backup) — `artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_4min_demo_with_voiceover.mp4`
 - [ ] **Script / production notes** (reviewer reference) — [`submission/Ancile_Aeris_Video_Script_v2.1.md`](submission/Ancile_Aeris_Video_Script_v2.1.md) · [`.docx`](submission/Ancile_Aeris_Video_Script_v2.1.docx); [`submission/Video_Production_Package_v2.1.md`](submission/Video_Production_Package_v2.1.md) · [`.docx`](submission/Video_Production_Package_v2.1.docx)
 - [ ] **Full narration text** — [`submission/Ancile_Aeris_Voiceover_Narration_v2.1.md`](submission/Ancile_Aeris_Voiceover_Narration_v2.1.md) · [`.docx`](submission/Ancile_Aeris_Voiceover_Narration_v2.1.docx)
 
