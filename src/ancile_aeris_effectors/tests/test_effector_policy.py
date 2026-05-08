@@ -8,9 +8,6 @@ def _load_module():
     here = os.path.dirname(os.path.abspath(__file__))
     node_path = os.path.normpath(os.path.join(here, "..", "nodes", "effector_policy_node.py"))
 
-    # Stub the ROS2 modules so the policy logic can be imported without a
-    # full rclpy install (mirrors the lightweight approach used by
-    # cognitive_ew's tests).
     for name in ("rclpy", "rclpy.node", "rclpy.qos", "std_msgs", "std_msgs.msg"):
         sys.modules.setdefault(name, types.ModuleType(name))
     sys.modules["rclpy.node"].Node = type("Node", (), {})
@@ -52,12 +49,47 @@ def test_layered_escalation() -> None:
 
 
 def test_dual_auth_required_for_takeover() -> None:
-    no_dual = select_effector(score=0.95, safety_open=True, dual_auth=False)
-    with_dual = select_effector(score=0.95, safety_open=True, dual_auth=True)
-    if no_dual["mode"] == "control_link_takeover":
-        assert no_dual["authorized"] is False
+    no_dual = select_effector(score=0.93, safety_open=True, dual_auth=False)
+    with_dual = select_effector(score=0.93, safety_open=True, dual_auth=True)
+    assert no_dual["mode"] == "control_link_takeover"
+    assert no_dual["authorized"] is False
+    assert with_dual["mode"] == "control_link_takeover"
     assert with_dual["authorized"] is True
 
 
-def test_no_kinetic_in_catalog() -> None:
-    assert all(entry.get("kinetic", False) is False for entry in EFFECTOR_CATALOG)
+def test_single_kinetic_entry_present() -> None:
+    kinetic = [e for e in EFFECTOR_CATALOG if e.get("kinetic")]
+    assert len(kinetic) == 1
+    assert kinetic[0]["mode"] == "kamikaze_ram"
+
+
+def test_kamikaze_gated_by_family_filter() -> None:
+    no_kinetic = select_effector(
+        score=0.99,
+        safety_open=True,
+        dual_auth=True,
+        enabled_families=(
+            "passive",
+            "deception",
+            "rf_denial",
+            "nav_denial",
+            "directed_energy_sim",
+            "cyber_takeover",
+        ),
+    )
+    assert no_kinetic["mode"] != "kamikaze_ram"
+    with_kinetic = select_effector(
+        score=0.99,
+        safety_open=True,
+        dual_auth=True,
+        enabled_families=(
+            "passive",
+            "deception",
+            "rf_denial",
+            "nav_denial",
+            "directed_energy_sim",
+            "cyber_takeover",
+            "kinetic_ram",
+        ),
+    )
+    assert with_kinetic["mode"] == "kamikaze_ram"

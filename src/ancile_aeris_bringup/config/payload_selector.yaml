@@ -1,35 +1,55 @@
-# Ancile Aeris - Property of Fratres X AI
-# Simulation-safe payload selector for demo and roadmap capabilities.
+# Ancile Aeris v2.1 - Property of Fratres X AI
+# Simulation-safe payload selector: Mothership FOB Swarm + micro payloads.
+#
+# Profile mothership_fob_standard (tunable):
+#   - Forward Operating Base carriers: mesh_motherships.count in [2, 4] (scout motherships per area).
+#   - Per-FOB micro-drone bay: micro_capacity_per_fob typically 10–12; micro_payloads slots sum must be <= capacity.
 
-demo_profile: basic
+demo_profile: mothership_fob_standard
 
 features:
-  # Baseline demo path keeps copilot and scout mesh enabled.
   enable_copilot: true
   enable_scout_mothership: true
 
-  # Explicit nested controls consumed by ancile_aeris_basic_demo.launch.py.
+  # 2–4 mobile FOB carriers (scout motherships as forward operating bases).
   mesh_motherships:
     enabled: true
-    count: 2
+    count: 3
 
+  # Per-FOB micro-drone capacity (hot-swappable mix; sum must be <= micro_capacity_per_fob).
+  micro_capacity_per_fob: 12
+  micro_payloads:
+    sensor_pod: 4
+    acoustic_disruptor: 2
+    kevlar_web: 2
+    cognitive_ew_pod: 3
+    kamikaze_ram_slots: 1
+
+  # FOB coordinator + fleet views (simulation).
+  mothership_fob_swarm:
+    enabled: true
+    coordinator_publish_hz: 1.0
+
+  # Deprecated path (not launched from basic demo): legacy baby interceptor package.
   baby_interceptor:
     enabled: false
     require_double_authorization: true
 
-  # Non-kinetic effector stack (HPM-style denial, cognitive jamming/spoofing,
-  # multi-sensor deception, authorized control-link takeover).
+  # Kamikaze ram: single kinetic option — terminal kinetic-energy collision (simulation only).
+  kamikaze_ram:
+    enabled: false
+    require_double_authorization: true
+
+  # When true, effector policy may select kamikaze_ram at extreme confidence (last resort).
+  allow_kinetic_ram_in_effector_policy: false
+
+  # Non-kinetic ship effectors + cognitive demo chain.
   effectors:
     enabled: true
     enable_sim: true
-
-  # Thin cognitive chain (agent_orchestrator -> digital_twin -> cognitive_ew)
-  # used by ancile_aeris_basic_demo.launch.py to demonstrate effector-aware
-  # selection. Independent of the full bringup.launch.py feature flags below.
   cognitive_demo_chain:
     enabled: true
 
-  # Buildable local packages that are outside the basic demo slice.
   enable_agent_orchestrator: false
   enable_adversarial_defense: false
   enable_causal_xai: false

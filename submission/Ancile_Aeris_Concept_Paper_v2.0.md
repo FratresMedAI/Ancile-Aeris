@@ -1,6 +1,6 @@
 Revised May 8, 2026 – Final LRBAA Submission Version
 
-# Ancile Aeris v2.0 Concept Paper
+# Ancile Aeris v2.1 Concept Paper
 
 **Solicitation:** DHS S&T **LRBAA 24-01** (SAM.gov Notice ID **DHS_ST_LRBAA_24-01** — [active opportunity](https://sam.gov/opp/a0969993ee8542988595334947e39a7d/view)). This concept is **responsive to** **Topic BORAP 04 — Countering Unmanned Aircraft Systems** (Type II foundational science and Type III future-threat objectives); authoritative terms remain on SAM.gov and attached amendments.  
 **LRBAA Counter-UAS / Anti-Terror Defensive System Concept**  
@@ -11,11 +11,11 @@ Revised May 8, 2026 – Final LRBAA Submission Version
 
 ## Why Ancile Aeris
 
-Ancile Aeris v2.0 is a working, auditable ROS 2 C-UAS layer for **dense urban venues, mass gatherings, critical infrastructure, and border/perimeter approaches** described under BORAP 04: it progresses from fused evidence through human-governed **layered non-kinetic defeat capability**—with **advanced layered response modeling**, explainable rationale, immutable audit posture, and no autonomous weapon release.
+Ancile Aeris v2.1 is a working, auditable ROS 2 C-UAS layer for **dense urban venues, mass gatherings, critical infrastructure, and border/perimeter approaches** described under BORAP 04: it progresses from fused evidence through human-governed **layered non-kinetic defeat capability**—with **advanced layered response modeling**, modular **mothership forward operating base (FOB) swarm** coordination, explainable rationale, immutable audit posture, and no autonomous weapon release.
 
 ## Executive Summary
 
-Ancile Aeris v2.0 integrates sensing, deterministic fusion to `/fused_tracks`, scout mesh ISR, PID ≥ 0.999 safety gates, DARKSPACE audit, cognitive EW, and **`ancile_aeris_effectors`**: simulation-safe selection among monitor, deception, cognitive jamming, GNSS/link spoofing, HPM-class denial *stub*, and dual-authorized control-link takeover *concepts*. The cognitive chain emits XAI-linked plans on `/effector/selected_plan` and `/cognitive_ew_commands`; runtime verification shows `/darkspace/status` with `integrity_ok: true`, `chain_gap_count: 0`, and continuity from sensing through effector and audit topics.
+Ancile Aeris v2.1 integrates sensing, deterministic fusion to `/fused_tracks`, **two to four** mesh-coordinated scout motherships acting as **mobile FOB carriers** (see `/mesh/fob_status`, `/payload/micro_deployment`), a **modular micro-drone payload mix** (sensor extension, acoustic disruption, net entanglement, cognitive EW pod—**simulation**), PID ≥ 0.999 safety gates, DARKSPACE audit, cognitive EW, and **`ancile_aeris_effectors`**: simulation-safe selection among monitor, deception, cognitive jamming, GNSS/link spoofing, HPM-class denial *stub*, dual-authorized control-link takeover *concepts*, and—only when explicitly enabled in policy—the **kamikaze ram** kinetic-energy **simulation** path as **last resort** (not default). The cognitive chain emits XAI-linked plans on `/effector/selected_plan` and `/cognitive_ew_commands`; runtime verification shows `/darkspace/status` with `integrity_ok: true`, `chain_gap_count: 0`, and continuity from sensing through effector and audit topics.
 
 In a **representative internal synthetic evaluation** (500 parameterized swarm-style scenarios—not operational field testing), fused-track association held **approximately 94% correlation accuracy** subject to simulated ground truth; mean **effector-selection confidence exceeded 0.88** across runs where non-monitor modes engaged under open safety context. Figures bound expected simulation behavior under stated assumptions only.
 
@@ -32,9 +32,9 @@ BORAP 04 calls for enhanced **detection, tracking, identification, and mitigatio
 
 Across **dense urban clutter, crowded mass gatherings, critical infrastructure geometries, and border-adjacency stress**, timelines compress faster than standalone detection products can satisfy. Ancile Aeris targets **human-governed decision support**, low-collateral option sets, after-action analytic hooks to `/audit/events`, and repeatable software integration paths.
 
-### Optional kinetic-adjacent simulation (minimal scope)
+### Optional kinetic simulation paths (minimal scope, never default)
 
-An optional **`baby_interceptor`** node exists strictly as **simulation-only** software, **disabled in the default demo**, gated by operator configuration, and requiring **dual human authorization** when enabled—**not part of this submission narrative** beyond compliance transparency. Ninety-plus percent of the technical story is **non-kinetic**.
+The basic demonstration is **non-kinetic-first**. The only catalogued **kinetic** response in the current effector model is **`kamikaze_ram`**—a **terminal kinetic-energy collision simulation** (no warhead modeling), **disabled at the policy and YAML layer by default**, requiring **paired human authorization** and safety predicates before any notional release narrative appears on `/effector/kamikaze_authorized`. A legacy **`baby_interceptor`** package remains as **optional simulation scaffolding**, **not launched in the default demo**, for compliance transparency only.
 
 ## Technical Approach
 
@@ -46,6 +46,8 @@ ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py
 
 **Sensing, fusion, ISR:** Simulated modalities feed `/fused_tracks`. `scout_mothership` publishes mesh-coordinated ISR on `/scout_eyes`, `/mesh/mothership_swarm_status`, and `/mesh/mothership_peers/heartbeat`, supporting Lattice-style COP analogs without vendor endorsement.
 
+**Mothership FOB swarm and modular micro payloads:** The default profile **`mothership_fob_standard`** configures **two to four** mobile FOB carriers per operational area, each with a **representative bay** of **ten to twelve** modular micro-drone slots (hot-swappable mix: sensor pod, acoustic disruptor, kevlar web deployer, cognitive EW pod, and reserved **kamikaze ram** slot—**all simulation**). **`fob_coordinator_node`** aggregates fleet posture on **`/mesh/fob_status`** and advisory deployment views on **`/payload/micro_deployment`**, including **effector alignment hints** derived from `/effector/selected_plan` so inventory narratives stay consistent with **non-kinetic-first** doctrine. This models coordination and option space—not flight hardware or autonomous release.
+
 **Safety and authority:** Recommendations remain **monitor-only** until safety and authorization predicates are satisfied. The demo separates recommendation, simulation, and actuation—it **never** autonomously releases weapons or drives real effector hardware.
 
 **DARKSPACE:** Subscribes to `/audit/events`, emits `/darkspace/status`; **v2.0 chain isolation (`chain_id`)** yields verified `integrity_ok: true`, `chain_gap_count: 0`, and zero observed hash-chain mismatch warnings.
@@ -54,13 +56,13 @@ ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py
 
 **SDR / RF path:** Planned **18-month**, lab-first integration of **software-defined radio** fronts (vendor-agnostic; UHD-style or government-furnished equipment) consuming the same abstraction now satisfied by simulated RF feeds.
 
-**Open ROS 2 interfaces:** Canonical integration surface includes `/fused_tracks`, `/effector/selected_plan`, `/effector/status`, `/cognitive_ew_commands`, `/darkspace/status`, mesh topics, `/safety_gate_status`, and audit streams—adaptable for real sensors and **authorized physical effectors** behind separate hardware abstraction layers.
+**Open ROS 2 interfaces:** Canonical integration surface includes `/fused_tracks`, `/effector/selected_plan`, `/effector/status`, `/effector/kamikaze_authorized`, `/cognitive_ew_commands`, `/darkspace/status`, mesh topics, **`/mesh/fob_status`**, **`/payload/micro_deployment`**, `/safety_gate_status`, and audit streams—adaptable for real sensors and **authorized physical effectors** behind separate hardware abstraction layers.
 
 **JIATF-401 Marketplace (transition framing):** Artifacts are packaged for **listing-style modular uptake**—software deliverables, repeatable launch recipes, verified topic contracts—not an endorsement statement.
 
-## Core Innovation: Layered Non-Kinetic Defeat
+## Core Innovation: Layered Non-Kinetic Defeat (Kinetic Last Resort When Explicitly Enabled)
 
-`ancile_aeris_effectors` anchors v2.0: non-kinetic modes are visible, selectable, auditable, and XAI-explained.
+`ancile_aeris_effectors` anchors v2.1: non-kinetic modes are visible, selectable, auditable, and XAI-explained. **Kinetic ram** appears only as `kamikaze_ram` when the kinetic family is enabled in policy—otherwise the planner stays in non-kinetic and monitor families.
 
 | Effector Mode | Defensive Role | Safety Posture |
 |---|---|---|
@@ -70,6 +72,7 @@ ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py
 | `gnss_link_spoofing` | Navigation / link deception modeling | Human-gated simulation |
 | `hpm_denial_stub` | Directed-energy denial *concept* | Simulation-only stub |
 | `control_link_takeover` | Authorized link takeover *concept* | Dual authorization |
+| `kamikaze_ram` | Terminal kinetic-energy collision *simulation only* | **Last resort**; dual authorization; **off** in default YAML/policy |
 
 ## Cognitive Selection and XAI
 
@@ -100,7 +103,7 @@ Downstream payloads carry `selected_effector_mode`, `effector_plan_id`, `xai_rat
 
 ## Team and Execution Readiness
 
-Fratres X AI is **a specialized software-defined defense team with deep ROS 2 and cognitive systems expertise, delivering modular, auditable prototypes for federal acquisition pathways.** The organization has shipped buildable ROS 2 packages across sensing, fusion, safety, DARKSPACE, scout mesh ISR, cognitive EW, bringup, and non-kinetic effectors; verification artifacts include clean `/darkspace/status`, live effector publications, tagged GitHub revisions, and colcon-demonstrated bringup paths.
+Fratres X AI is **a specialized software-defined defense team with deep ROS 2 and cognitive systems expertise, delivering modular, auditable prototypes for federal acquisition pathways.** The organization has shipped buildable ROS 2 packages across sensing, fusion, safety, DARKSPACE, scout mesh ISR, **FOB swarm and micro-payload simulation**, cognitive EW, bringup, and non-kinetic-first effectors; verification artifacts include clean `/darkspace/status`, live effector publications, tagged GitHub revisions, and colcon-demonstrated bringup paths.
 
 The architecture favors **explicit topic and JSON contracts** for extension to federal testbed dashboards, analytic pipelines, hardware-in-loop labs, and future mission payloads.
 
@@ -113,7 +116,7 @@ The architecture favors **explicit topic and JSON contracts** for extension to f
 | **Oversight** | Immutable audit hashing and rationale records for supervisory and legal workflows. |
 | **Acquisition** | Marketplace-oriented packaging and repeatable demonstration scripts. |
 
-Ancile Aeris v2.0 is deliberately **submission-credible**, **human-governed**, and honest about simulation boundaries while presenting a phased TRL escalation with RF hardware—not over-stating present field capability.
+Ancile Aeris v2.1 is deliberately **submission-credible**, **human-governed**, and honest about simulation boundaries while presenting a phased TRL escalation with RF hardware—not over-stating present field capability.
 
 ## Production Notes
 
@@ -121,4 +124,4 @@ Ancile Aeris v2.0 is deliberately **submission-credible**, **human-governed**, a
 
 **Disclaimer:** Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Government and industry references are alignment examples only and do not imply endorsement.
 
-**Ancile Aeris v2.0 - Property of Fratres X AI**
+**Ancile Aeris v2.1 - Property of Fratres X AI**

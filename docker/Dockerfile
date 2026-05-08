@@ -17,7 +17,9 @@ RUN python3 -m venv /opt/ancile_venv \
 WORKDIR /opt/ancile_aeris_ws
 COPY . /opt/ancile_aeris_ws
 
-RUN rm -rf build install log && source /opt/ros/kilted/setup.bash && colcon build --symlink-install
+RUN chmod +x /opt/ancile_aeris_ws/clean-build.sh \
+    && rm -rf /opt/ancile_aeris_ws/build /opt/ancile_aeris_ws/install /opt/ancile_aeris_ws/log \
+    && cd /opt/ancile_aeris_ws && ./clean-build.sh
 
-CMD ["bash", "-lc", "source /opt/ros/kilted/setup.bash && source /opt/ancile_aeris_ws/install/setup.bash && ros2 launch ancile_aeris_bringup bringup.launch.py"]
+CMD ["bash", "-lc", "source /opt/ros/kilted/setup.bash && source /opt/ancile_aeris_ws/install/setup.bash && ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py"]
 

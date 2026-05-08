@@ -9,10 +9,10 @@ services:
       - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
       - ANCILE_PAYLOAD=${ANCILE_PAYLOAD:-cuas}
       - ANCILE_SIM_MODE=${ANCILE_SIM_MODE:-true}
-      - ANCILE_LAUNCH_FILE=${ANCILE_LAUNCH_FILE:-bringup.launch.py}
+      - ANCILE_LAUNCH_FILE=${ANCILE_LAUNCH_FILE:-ancile_aeris_basic_demo.launch.py}
     volumes:
       - ../:/opt/ancile_aeris_ws
-    command: bash -lc "cd /opt/ancile_aeris_ws && find src -name '*.py' -exec sed -i 's/\r$//' {} + && rm -rf build install log && source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && ros2 launch ancile_aeris_bringup $${ANCILE_LAUNCH_FILE}"
+    command: bash -lc "cd /opt/ancile_aeris_ws && find src -name '*.py' -exec sed -i 's/\r$//' {} + && chmod +x clean-build.sh 2>/dev/null || true && ./clean-build.sh && source install/setup.bash && ros2 launch ancile_aeris_bringup $${ANCILE_LAUNCH_FILE}"
 
   ancile-aeris-jetson:
     profiles: ["jetson"]
@@ -28,8 +28,8 @@ services:
       - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
       - ANCILE_PAYLOAD=${ANCILE_PAYLOAD:-cuas}
       - ANCILE_SIM_MODE=${ANCILE_SIM_MODE:-true}
-      - ANCILE_LAUNCH_FILE=${ANCILE_LAUNCH_FILE:-bringup.launch.py}
+      - ANCILE_LAUNCH_FILE=${ANCILE_LAUNCH_FILE:-ancile_aeris_basic_demo.launch.py}
     volumes:
       - ../:/opt/ancile_aeris_ws
-    command: bash -lc "cd /opt/ancile_aeris_ws && find src -name '*.py' -exec sed -i 's/\r$//' {} + && rm -rf build install log && source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && ros2 launch ancile_aeris_bringup $${ANCILE_LAUNCH_FILE}"
+    command: bash -lc "cd /opt/ancile_aeris_ws && find src -name '*.py' -exec sed -i 's/\r$//' {} + && chmod +x clean-build.sh 2>/dev/null || true && ./clean-build.sh && source install/setup.bash && ros2 launch ancile_aeris_bringup $${ANCILE_LAUNCH_FILE}"
 

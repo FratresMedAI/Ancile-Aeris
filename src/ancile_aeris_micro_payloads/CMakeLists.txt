@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(ancile_aeris_sensor_resilience)
+project(ancile_aeris_micro_payloads)
 
 # Force clean cache on path mismatch (Docker bind-mount vs stale CMAKE_HOME_DIRECTORY)
 if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt")
@@ -14,22 +14,34 @@ if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt")
 endif()
 
 find_package(ament_cmake REQUIRED)
-find_package(ament_cmake_pytest REQUIRED)
 
 install(PROGRAMS
-  nodes/sensor_resilience_node.py
+  nodes/sensor_pod_node.py
   DESTINATION lib/${PROJECT_NAME}
-  RENAME ancile_aeris_sensor_resilience_node
+  RENAME sensor_pod_node
+)
+install(PROGRAMS
+  nodes/acoustic_disruptor_node.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME acoustic_disruptor_node
+)
+install(PROGRAMS
+  nodes/kevlar_web_deployer_node.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME kevlar_web_deployer_node
+)
+install(PROGRAMS
+  nodes/cognitive_ew_pod_node.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME cognitive_ew_pod_node
+)
+install(PROGRAMS
+  nodes/kamikaze_ram_node.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME kamikaze_ram_node
 )
 
-install(DIRECTORY
-  launch
-  config
-  DESTINATION share/${PROJECT_NAME}
-)
-
-if(BUILD_TESTING)
-  ament_add_pytest_test(test_ancile_aeris_sensor_resilience tests/test_ancile_aeris_sensor_resilience.py)
-endif()
+install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
+install(FILES resource/ancile_aeris_micro_payloads DESTINATION share/ament_index/resource_index/packages)
 
 ament_package()

@@ -72,6 +72,15 @@ EFFECTOR_CATALOG: Tuple[Dict[str, Any], ...] = (
         "human_gated": True,
         "requires_dual_auth": True,
     },
+    {
+        "mode": "kamikaze_ram",
+        "family": "kinetic_ram",
+        "min_score": 0.95,
+        "rationale": "Last-resort simulated terminal ram: kinetic energy via direct impact only (no warhead); requires safety gate, dual human authorization, and simulate-only deploy registration.",
+        "kinetic": True,
+        "human_gated": True,
+        "requires_dual_auth": True,
+    },
 )
 
 
@@ -86,6 +95,7 @@ def select_effector(
         "nav_denial",
         "directed_energy_sim",
         "cyber_takeover",
+        "kinetic_ram",
     ),
 ) -> Dict[str, Any]:
     """Select the highest-tier effector entry whose score threshold is met.
@@ -128,8 +138,10 @@ class EffectorPolicyNode(Node):
                 "nav_denial",
                 "directed_energy_sim",
                 "cyber_takeover",
+                "kinetic_ram",
             ],
         )
+        self.declare_parameter("allow_kinetic_ram", False)
         self.declare_parameter("require_dual_authorization", True)
 
         self.safety_open = False
@@ -150,6 +162,7 @@ class EffectorPolicyNode(Node):
         )
 
         self.plan_pub = self.create_publisher(String, "/effector/selected_plan", reliable_qos)
+        self.kamikaze_auth_pub = self.create_publisher(String, "/effector/kamikaze_authorized", reliable_qos)
         self.audit_pub = self.create_publisher(String, "/audit/events", reliable_qos)
 
         publish_hz = max(0.2, float(self.get_parameter("publish_hz").value))
@@ -189,8 +202,12 @@ class EffectorPolicyNode(Node):
     def _enabled_families(self) -> Tuple[str, ...]:
         param = self.get_parameter("enabled_families").value
         if isinstance(param, (list, tuple)):
-            return tuple(str(x) for x in param)
-        return ("passive",)
+            families = [str(x) for x in param]
+        else:
+            families = ["passive"]
+        if not bool(self.get_parameter("allow_kinetic_ram").value):
+            families = [f for f in families if f != "kinetic_ram"]
+        return tuple(families)
 
     def _tick(self) -> None:
         if not self.latest_track:
@@ -205,6 +222,7 @@ class EffectorPolicyNode(Node):
             dual_auth=dual,
             enabled_families=self._enabled_families(),
         )
+        kinetic_loop = bool(chosen.get("kinetic", False))
 
         now = self.get_clock().now().to_msg()
         plan = {
@@ -215,8 +233,8 @@ class EffectorPolicyNode(Node):
             "selected": chosen,
             "catalog_considered": [e["mode"] for e in EFFECTOR_CATALOG],
             "policy": {
-                "doctrine": "layered_non_kinetic_first_then_authorized_takeover",
-                "kinetic_in_loop": False,
+                "doctrine": "layered_non_kinetic_first_then_authorized_takeover_then_kinetic_ram_last_resort",
+                "kinetic_in_loop": kinetic_loop,
                 "human_authorization_required": True,
             },
             "xai": {
@@ -228,6 +246,17 @@ class EffectorPolicyNode(Node):
         }
         self._last_plan = plan
         self.plan_pub.publish(String(data=json.dumps(plan)))
+        k_auth = {
+            "authorized": bool(
+                chosen.get("mode") == "kamikaze_ram"
+                and chosen.get("authorized")
+                and not chosen.get("monitor_only")
+            ),
+            "track_id": track_id,
+            "plan_id": plan["plan_id"],
+            "reason": "kamikaze_gates_ok" if chosen.get("mode") == "kamikaze_ram" else "not_kamikaze_or_monitor",
+        }
+        self.kamikaze_auth_pub.publish(String(data=json.dumps(k_auth)))
         self.audit_pub.publish(
             String(
                 data=json.dumps(

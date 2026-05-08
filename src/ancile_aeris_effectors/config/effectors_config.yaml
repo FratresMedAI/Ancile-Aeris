@@ -1,10 +1,11 @@
 # Ancile Aeris - Property of Fratres X AI
-# Simulation-safe non-kinetic effector selection policy.
+# Simulation-safe non-kinetic-first effector selection; kamikaze_ram last resort when allowed.
 
 /**:
   ros__parameters:
     publish_hz: 2.0
     require_dual_authorization: true
+    allow_kinetic_ram: false
     enabled_families:
       - passive
       - deception
@@ -12,6 +13,7 @@
       - nav_denial
       - directed_energy_sim
       - cyber_takeover
+      - kinetic_ram
 
 /effector_sim_node:
   ros__parameters:
