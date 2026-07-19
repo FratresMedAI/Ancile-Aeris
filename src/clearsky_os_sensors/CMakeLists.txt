@@ -14,6 +14,10 @@ if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
+find_package(ament_cmake_pytest REQUIRED)
+
+ament_python_install_package(${PROJECT_NAME})
 
 install(PROGRAMS
   nodes/visual_node.py
@@ -50,5 +54,9 @@ install(DIRECTORY
   config
   DESTINATION share/${PROJECT_NAME}
 )
+
+if(BUILD_TESTING)
+  ament_add_pytest_test(test_sensor_classifiers tests/test_sensor_classifiers.py)
+endif()
 
 ament_package()

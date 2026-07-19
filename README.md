@@ -100,7 +100,10 @@ ClearSky OS is an **active research / prototype workspace**, not a fielded produ
 | Visual perception | **YOLO path** when `CLEARSKY_SIM_MODE=false` + weights; labeled synthetic tracks in sim mode |
 | Fusion | **Constant-velocity EKF** with Mahalanobis association (`cv_ekf`) |
 | Digital twin | **Analytic** point-mass risk → `/digital_twin/veto` |
-| Acoustic / RF / thermal | Synthetic stubs (Phase 2) |
+| Acoustic / RF | Band-energy / spectral heuristics; optional ONNX when weights present |
+| Thermal | Labeled synthetic stub |
+| Scout mothership | Enrichment of fused tracks (coverage/mesh) — does not invent PID tracks |
+| Effector envelopes | Analytic Friis / success probability on `/effector/status` + plan XAI |
 | Effector / swarm inventory pubs | Simulation status publishers — not hardware actuation |
 
 ```bash
@@ -108,8 +111,15 @@ ClearSky OS is an **active research / prototype workspace**, not a fielded produ
 CLEARSKY_SIM_MODE=false CLEARSKY_VISUAL_SOURCE=/path/to/video.mp4 \
   docker compose -f docker/docker-compose.yml up --build
 
-# Offline fusion metrics
+# Export YOLO → ONNX (Jetson: --format engine on the target)
+python scripts/model_export.py --weights models/visual/yolo11n.pt
+
+# Jetson profile (NVIDIA runtime + ML image)
+docker compose -f docker/docker-compose.yml --profile jetson up --build
+
+# Offline fusion / acoustic-RF metrics
 python scripts/eval_fusion_offline.py
+python scripts/eval_acoustic_rf_offline.py
 ```
 
 If you need production sensing, fusion, or autonomy work, talk to us at [fratres-x.com](https://fratres-x.com).

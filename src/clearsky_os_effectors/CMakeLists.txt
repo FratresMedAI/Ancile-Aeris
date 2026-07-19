@@ -14,7 +14,10 @@ if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 find_package(ament_cmake_pytest REQUIRED)
+
+ament_python_install_package(${PROJECT_NAME})
 
 install(PROGRAMS
   nodes/effector_policy_node.py
@@ -32,6 +35,7 @@ install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   ament_add_pytest_test(test_effector_policy tests/test_effector_policy.py)
+  ament_add_pytest_test(test_effector_envelopes tests/test_effector_envelopes.py)
 endif()
 
 ament_package()

@@ -18,7 +18,7 @@ services:
     profiles: ["jetson"]
     build:
       context: ..
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/Dockerfile.jetson
     container_name: clearsky_os_jetson
     runtime: nvidia
     network_mode: host
@@ -27,9 +27,11 @@ services:
       - NVIDIA_DRIVER_CAPABILITIES=compute,utility,video
       - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
       - CLEARSKY_PAYLOAD=${CLEARSKY_PAYLOAD:-cuas}
-      - CLEARSKY_SIM_MODE=${CLEARSKY_SIM_MODE:-true}
+      # Prefer real inference on Jetson when weights are mounted
+      - CLEARSKY_SIM_MODE=${CLEARSKY_SIM_MODE:-false}
       - CLEARSKY_LAUNCH_FILE=${CLEARSKY_LAUNCH_FILE:-clearsky_os_basic_demo.launch.py}
+      - CLEARSKY_VISUAL_SOURCE=${CLEARSKY_VISUAL_SOURCE:-}
     volumes:
       - ../:/opt/clearsky_os_ws
+      - ../models:/opt/clearsky_os_ws/models
     command: bash -lc "cd /opt/clearsky_os_ws && find src -name '*.py' -exec sed -i 's/\r$//' {} + && chmod +x clean-build.sh 2>/dev/null || true && ./clean-build.sh && source install/setup.bash && ros2 launch clearsky_os_bringup $${CLEARSKY_LAUNCH_FILE}"
-

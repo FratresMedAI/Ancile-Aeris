@@ -1,0 +1,3 @@
+# Extra Jetson / CUDA inference deps (used by docker/Dockerfile.jetson)
+# onnxruntime-gpu provides CUDA EP when the host has a compatible driver.
+onnxruntime-gpu>=1.17.0

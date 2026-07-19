@@ -14,6 +14,9 @@ for tagged releases.
 - Analytic digital twin physics with `/digital_twin/veto` ownership
 - YOLO visual inference path (`CLEARSKY_SIM_MODE=false`) with honest synthetic sim mode
 - `requirements-ml.txt`, `scripts/download_visual_weights.py`, `scripts/eval_fusion_offline.py`
+- Acoustic band-energy + RF spectral classifiers (optional ONNX); `scripts/eval_acoustic_rf_offline.py`
+- Analytic effector envelopes (Friis / success probability) on `/effector/status` and plan XAI
+- Real `scripts/model_export.py` (ONNX / TensorRT) and `docker/Dockerfile.jetson`
 
 ### Removed
 
@@ -21,6 +24,9 @@ for tagged releases.
 - Government-name-drop narrative from docs and payload READMEs
 
 ### Changed
+
+- Scout mothership enriches fused tracks only; no longer invents PID-passing `/fused_tracks`
+- Jetson compose profile builds ML image and mounts `models/`
 
 - README and docs repositioned for [Fratres X AI](https://fratres-x.com) — physics-first research stack, honest maturity
 - Sensor stubs no longer publish fake 0.999 “model” confidence

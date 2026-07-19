@@ -10,13 +10,21 @@ gate is open AND an authorized engagement gate is granted by the operator.
 from __future__ import annotations
 
 import json
+import sys
 import time
+from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import HistoryPolicy, QoSProfile, ReliabilityPolicy
 from std_msgs.msg import String
+
+_PKG = Path(__file__).resolve().parents[1]
+if str(_PKG) not in sys.path:
+    sys.path.insert(0, str(_PKG))
+
+from clearsky_os_effectors.envelopes import success_probability, track_range_m  # noqa: E402
 
 
 EFFECTOR_SOURCE = "clearsky_os_effectors"
@@ -223,6 +231,8 @@ class EffectorPolicyNode(Node):
             enabled_families=self._enabled_families(),
         )
         kinetic_loop = bool(chosen.get("kinetic", False))
+        range_m = track_range_m(self.latest_track)
+        envelope = success_probability(str(chosen["mode"]), range_m, readiness=1.0)
 
         now = self.get_clock().now().to_msg()
         plan = {
@@ -237,11 +247,16 @@ class EffectorPolicyNode(Node):
                 "kinetic_in_loop": kinetic_loop,
                 "human_authorization_required": True,
             },
+            "envelope": envelope,
             "xai": {
                 "rationale": chosen["rationale"],
                 "score_threshold": chosen["min_score"],
                 "score_observed": score,
                 "monitor_only": chosen["monitor_only"],
+                "range_m": envelope["range_m"],
+                "path_loss_db": envelope["path_loss_db"],
+                "success_probability": envelope["success_probability"],
+                "envelope_model": "friis_logistic_v1",
             },
         }
         self._last_plan = plan

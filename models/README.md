@@ -1,9 +1,12 @@
 # Models
 
-Weight files are **not** committed. Download them locally:
+Weight files are **not** committed. Download / export them locally:
 
 ```bash
 python scripts/download_visual_weights.py
+python scripts/model_export.py --weights models/visual/yolo11n.pt --format onnx
+# On Jetson / CUDA host (device-specific):
+# python scripts/model_export.py --weights models/visual/yolo11n.pt --format engine
 ```
 
 Default layout:
@@ -12,9 +15,12 @@ Default layout:
 models/
   visual/
     yolo11n.pt          # Ultralytics YOLO11n (auto-downloaded)
-  acoustic/             # Phase 2
-  rf/                   # Phase 2
+    yolo11n.onnx        # from model_export.py
+  acoustic/
+    crnn_melspec.onnx   # optional; band-energy heuristic used if absent
+  rf/
+    drone_rf_cnn.onnx   # optional; spectral heuristic used if absent
 ```
 
-Set `CLEARSKY_SIM_MODE=false` and point `visual_node` at these weights to run real inference.
-See `requirements-ml.txt` for Python deps.
+Set `CLEARSKY_SIM_MODE=false` and mount `models/` (Jetson compose does this) to run real / ONNX inference.
+See `requirements-ml.txt` and `requirements-ml-jetson.txt`.
