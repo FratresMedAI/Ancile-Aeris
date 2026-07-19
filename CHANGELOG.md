@@ -17,6 +17,9 @@ for tagged releases.
 - Acoustic band-energy + RF spectral classifiers (optional ONNX); `scripts/eval_acoustic_rf_offline.py`
 - Analytic effector envelopes (Friis / success probability) on `/effector/status` and plan XAI
 - Real `scripts/model_export.py` (ONNX / TensorRT) and `docker/Dockerfile.jetson`
+- Phase 3: `clearsky_os_sim` Gazebo-compatible truth bridge + SDF world
+- Twin `gazebo_rollout` backend; multimodal fusion adapters; learned association shadow topic
+- `scripts/eval_fusion_learned_offline.py`
 
 ### Removed
 
@@ -27,6 +30,7 @@ for tagged releases.
 
 - Scout mothership enriches fused tracks only; no longer invents PID-passing `/fused_tracks`
 - Jetson compose profile builds ML image and mounts `models/`
+- Fusion/twin launches load YAML params; fusion node name aligned with config
 
 - README and docs repositioned for [Fratres X AI](https://fratres-x.com) — physics-first research stack, honest maturity
 - Sensor stubs no longer publish fake 0.999 “model” confidence

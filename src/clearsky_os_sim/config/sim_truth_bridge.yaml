@@ -1,0 +1,8 @@
+/sim_truth_bridge_node:
+  ros__parameters:
+    publish_hz: 10.0
+    override_sensors: false
+    x0: 180.0
+    y0: 40.0
+    vx: -12.0
+    vy: 2.0

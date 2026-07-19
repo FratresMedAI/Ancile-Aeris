@@ -1,20 +1,18 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>clearsky_os_fusion</name>
+  <name>clearsky_os_sim</name>
   <version>0.1.0</version>
-  <description>ClearSky OS multimodal track fusion node.</description>
+  <description>Gazebo-compatible CUAS scenario truth bridge for ClearSky OS Phase 3.</description>
   <maintainer email="maintainers@fratres-x.ai">ClearSky-OS Team</maintainer>
   <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <buildtool_depend>ament_cmake_python</buildtool_depend>
-  <buildtool_depend>ament_cmake_pytest</buildtool_depend>
   <depend>rclpy</depend>
   <depend>std_msgs</depend>
-  <exec_depend>clearsky_os_integration</exec_depend>
   <depend>launch</depend>
   <depend>launch_ros</depend>
-  <exec_depend>ament_index_python</exec_depend>
+  <depend>ament_index_python</depend>
   <test_depend>ament_cmake_pytest</test_depend>
   <test_depend>python3-pytest</test_depend>
 

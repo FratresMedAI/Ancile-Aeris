@@ -167,7 +167,24 @@ def generate_launch_description() -> LaunchDescription:
                 "enable_cognitive_demo_chain",
                 default_value=_payload_bool("features.cognitive_demo_chain.enabled", True),
             ),
+            DeclareLaunchArgument(
+                "enable_sim_truth",
+                default_value=_payload_bool("features.enable_sim_truth", True),
+            ),
+            DeclareLaunchArgument(
+                "sim_override_sensors",
+                default_value=_payload_bool("features.sim_override_sensors", False),
+            ),
             _include("clearsky_os_sensors", "clearsky_os_sensors.launch.py"),
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    [FindPackageShare("clearsky_os_sim"), "/launch/clearsky_os_sim.launch.py"]
+                ),
+                condition=IfCondition(LaunchConfiguration("enable_sim_truth")),
+                launch_arguments={
+                    "override_sensors": LaunchConfiguration("sim_override_sensors"),
+                }.items(),
+            ),
             _include("clearsky_os_fusion", "clearsky_os_fusion.launch.py"),
             _include("clearsky_os_darkspace_integration", "darkspace_integration.launch.py"),
             _include("clearsky_os_safety_gate", "clearsky_os_safety_gate.launch.py"),

@@ -19,6 +19,7 @@ FEATURE_DEFAULTS = {
     "enable_agent_orchestrator": "true",
     "enable_swarm_orchestrator": "true",
     "enable_digital_twin": "true",
+    "enable_sim_truth": "true",
     "enable_causal_xai": "true",
     "enable_verification": "true",
     "enable_copilot": "true",
@@ -73,6 +74,7 @@ def generate_launch_description() -> LaunchDescription:
     enable_agent_orchestrator = LaunchConfiguration("enable_agent_orchestrator")
     enable_swarm_orchestrator = LaunchConfiguration("enable_swarm_orchestrator")
     enable_digital_twin = LaunchConfiguration("enable_digital_twin")
+    enable_sim_truth = LaunchConfiguration("enable_sim_truth")
     enable_causal_xai = LaunchConfiguration("enable_causal_xai")
     enable_verification = LaunchConfiguration("enable_verification")
     enable_copilot = LaunchConfiguration("enable_copilot")
@@ -94,6 +96,7 @@ def generate_launch_description() -> LaunchDescription:
         _feature_arg("enable_agent_orchestrator", feature_defaults),
         _feature_arg("enable_swarm_orchestrator", feature_defaults),
         _feature_arg("enable_digital_twin", feature_defaults),
+        _feature_arg("enable_sim_truth", feature_defaults),
         _feature_arg("enable_causal_xai", feature_defaults),
         _feature_arg("enable_verification", feature_defaults),
         _feature_arg("enable_copilot", feature_defaults),
@@ -107,6 +110,7 @@ def generate_launch_description() -> LaunchDescription:
         _feature_arg("enable_clearsky_os_baby_interceptor", feature_defaults),
 
         _include("clearsky_os_sensors", "clearsky_os_sensors.launch.py"),
+        _include("clearsky_os_sim", "clearsky_os_sim.launch.py", IfCondition(enable_sim_truth)),
         _include("clearsky_os_fusion", "clearsky_os_fusion.launch.py"),
         _include("clearsky_os_safety_gate", "clearsky_os_safety_gate.launch.py"),
         _include("clearsky_os_sensor_resilience", "clearsky_os_sensor_resilience.launch.py"),

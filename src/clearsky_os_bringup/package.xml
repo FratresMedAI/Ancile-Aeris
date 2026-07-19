@@ -20,6 +20,7 @@
   <exec_depend>clearsky_os_operator_copilot</exec_depend>
   <exec_depend>clearsky_os_safety_gate</exec_depend>
   <exec_depend>clearsky_os_sensors</exec_depend>
+  <exec_depend>clearsky_os_sim</exec_depend>
   <exec_depend>clearsky_os_sensor_resilience</exec_depend>
   <exec_depend>clearsky_os_swarm_intent</exec_depend>
   <exec_depend>clearsky_os_scout_mothership</exec_depend>

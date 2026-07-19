@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
+"""Multimodal CV-EKF fusion with learned association in shadow mode."""
+
+from __future__ import annotations
+
 import json
+import math
 from collections import deque
 from dataclasses import asdict, dataclass
 
 import rclpy
-from clearsky_os_fusion.cv_ekf import ConstantVelocityEKF, Measurement, associate_nearest
+from clearsky_os_fusion.cv_ekf import ConstantVelocityEKF, associate_nearest
+from clearsky_os_fusion.learned_fusion import run_shadow_step
+from clearsky_os_fusion.measurement_adapters import collect_all_measurements
 from clearsky_os_integration.helpers import ClearSkyAuditBridge
 from rclpy.node import Node
 from rclpy.qos import HistoryPolicy, QoSProfile, ReliabilityPolicy
@@ -33,12 +40,17 @@ class FusionNode(Node):
         self.declare_parameter("lidar_topic", "/sensor/lidar/points")
         self.declare_parameter("sigint_topic", "/sensor/sigint/elint")
         self.declare_parameter("fused_topic", "/fused_tracks")
+        self.declare_parameter("learned_topic", "/fusion/learned_tracks")
         self.declare_parameter("publish_hz", 20.0)
         self.declare_parameter("min_confidence", 0.35)
         self.declare_parameter("pid_gate", 0.75)
         self.declare_parameter("fusion_model", "cv_ekf")
         self.declare_parameter("association_gate", 3.0)
         self.declare_parameter("dt", 0.05)
+        self.declare_parameter("image_scale_m", 1.0)
+        self.declare_parameter("enable_learned_shadow", True)
+        self.declare_parameter("learned_min_score", 0.35)
+        self.declare_parameter("default_bearing_range_m", 150.0)
 
         sensor_qos = QoSProfile(
             reliability=ReliabilityPolicy.BEST_EFFORT,
@@ -60,6 +72,7 @@ class FusionNode(Node):
         self.audit_bridge = ClearSkyAuditBridge(self, "fusion_node")
         dt = float(self.get_parameter("dt").value)
         self.ekf = ConstantVelocityEKF(dt=dt)
+        self.shadow_ekf = ConstantVelocityEKF(dt=dt)
         self.track_idx = 0
         self._stable_track_id = "fused-00000"
 
@@ -71,10 +84,14 @@ class FusionNode(Node):
         self.create_subscription(String, self.get_parameter("sigint_topic").value, self._on_sigint, sensor_qos)
 
         self.fused_pub = self.create_publisher(String, self.get_parameter("fused_topic").value, c2_qos)
+        self.learned_pub = self.create_publisher(String, self.get_parameter("learned_topic").value, c2_qos)
         publish_hz = self.get_parameter("publish_hz").get_parameter_value().double_value
         self.timer = self.create_timer(max(0.02, 1.0 / publish_hz), self._tick)
 
-        self.get_logger().info("fusion_node initialized (cv_ekf)")
+        self.get_logger().info(
+            "fusion_node initialized (cv_ekf + multimodal adapters; learned shadow="
+            f"{bool(self.get_parameter('enable_learned_shadow').value)})"
+        )
 
     def _on_visual(self, msg: String) -> None:
         try:
@@ -112,29 +129,21 @@ class FusionNode(Node):
         except json.JSONDecodeError:
             self.get_logger().warning("invalid sigint payload")
 
-    def _collect_position_measurements(self) -> list[Measurement]:
-        measurements: list[Measurement] = []
-        if self.visual_obs and self.visual_obs[-1].get("tracks"):
-            for trk in self.visual_obs[-1]["tracks"]:
-                measurements.append(
-                    Measurement(
-                        x=float(trk.get("x", 0.0)),
-                        y=float(trk.get("y", 0.0)),
-                        confidence=float(trk.get("confidence", 0.0)),
-                        track_id=str(trk.get("track_id", "")),
-                    )
-                )
-        if self.thermal_obs and self.thermal_obs[-1].get("tracks"):
-            for trk in self.thermal_obs[-1]["tracks"]:
-                measurements.append(
-                    Measurement(
-                        x=float(trk.get("x", 0.0)),
-                        y=float(trk.get("y", 0.0)),
-                        confidence=float(trk.get("confidence", 0.0)) * 0.9,
-                        track_id=str(trk.get("track_id", "")),
-                    )
-                )
-        return measurements
+    def _ekf_range_hint(self) -> float:
+        if self.ekf.initialized:
+            return max(5.0, math.hypot(self.ekf.x[0], self.ekf.x[1]))
+        return float(self.get_parameter("default_bearing_range_m").value)
+
+    def _collect_measurements(self):
+        return collect_all_measurements(
+            visual_payload=self.visual_obs[-1] if self.visual_obs else None,
+            thermal_payload=self.thermal_obs[-1] if self.thermal_obs else None,
+            acoustic_payload=self.acoustic_obs[-1] if self.acoustic_obs else None,
+            rf_payload=self.rf_obs[-1] if self.rf_obs else None,
+            lidar_payload=self.lidar_obs[-1] if self.lidar_obs else None,
+            ekf_range_m=self._ekf_range_hint(),
+            image_scale_m=float(self.get_parameter("image_scale_m").value),
+        )
 
     def _modality_support_score(self) -> float:
         score = 0.0
@@ -159,7 +168,7 @@ class FusionNode(Node):
             weights += 0.03
         if weights <= 0.0:
             return 0.0
-        return score / weights * weights  # keep absolute weighted sum in [0,1]-ish
+        return score / weights * weights
 
     def _modalities_present(self) -> list[str]:
         present: list[str] = []
@@ -181,7 +190,7 @@ class FusionNode(Node):
         dt = float(self.get_parameter("dt").value)
         self.ekf.predict(dt)
 
-        measurements = self._collect_position_measurements()
+        measurements = self._collect_measurements()
         gate = float(self.get_parameter("association_gate").value)
         chosen = associate_nearest(self.ekf, measurements, gate=gate)
         meas_conf = 0.0
@@ -199,7 +208,6 @@ class FusionNode(Node):
             return
 
         modalities = self._modalities_present()
-        # Honest Phase-1 gate: visual (or thermal) is enough; stubs no longer force 4-way 0.999
         required = {"visual"}
         pid_gate = float(self.get_parameter("pid_gate").value)
         pid_passed = required.issubset(set(modalities)) and conf >= pid_gate
@@ -225,6 +233,8 @@ class FusionNode(Node):
                 "model": str(self.get_parameter("fusion_model").value),
                 "nis": state["nis"],
                 "sources": modalities,
+                "measurement_count": len(measurements),
+                "authoritative": True,
             },
             "pid": {
                 "gate": pid_gate,
@@ -234,9 +244,39 @@ class FusionNode(Node):
                 "passed": pid_passed,
             },
         }
-        msg = String()
-        msg.data = json.dumps(payload)
-        self.fused_pub.publish(msg)
+        self.fused_pub.publish(String(data=json.dumps(payload)))
+
+        if bool(self.get_parameter("enable_learned_shadow").value):
+            shadow = run_shadow_step(
+                self.shadow_ekf,
+                measurements,
+                dt,
+                min_score=float(self.get_parameter("learned_min_score").value),
+            )
+            if self.shadow_ekf.initialized:
+                learned_payload = {
+                    "header": {"stamp": {"sec": now.sec, "nanosec": now.nanosec}, "frame_id": "map"},
+                    "tracks": [
+                        {
+                            "track_id": f"learned-{self.track_idx:05d}",
+                            "x": shadow["x"],
+                            "y": shadow["y"],
+                            "vx": shadow["vx"],
+                            "vy": shadow["vy"],
+                            "confidence": shadow["confidence"],
+                            "class_label": "learned_shadow",
+                        }
+                    ],
+                    "fusion": {
+                        "method": "learned_association_shadow",
+                        "model": "logistic_ranker_v1",
+                        "learned_score": shadow["learned_score"],
+                        "authoritative": False,
+                        "sources": modalities,
+                    },
+                }
+                self.learned_pub.publish(String(data=json.dumps(learned_payload)))
+
         self.audit_bridge.emit(
             "fusion_track_update",
             {
@@ -245,10 +285,12 @@ class FusionNode(Node):
                 "pid_passed": pid_passed,
                 "present_modalities": modalities,
                 "nis": state["nis"],
+                "measurement_count": len(measurements),
             },
             xai_text=(
                 f"CV-EKF confidence {conf:.3f}; NIS {state['nis']:.2f}; "
-                f"PID gate {'passed' if pid_passed else 'blocked'}."
+                f"PID gate {'passed' if pid_passed else 'blocked'}; "
+                f"{len(measurements)} multimodal measurements."
             ),
         )
 

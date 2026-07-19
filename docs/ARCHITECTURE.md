@@ -21,6 +21,7 @@ flowchart LR
 ## Node responsibilities
 
 - `clearsky_os_sensors`: visual YOLO (or labeled synthetic); acoustic/RF heuristics (+ optional ONNX); thermal stub
+- `clearsky_os_sim`: Gazebo-compatible CUAS world + `/sim/ground_truth` kinematics bridge
 - `clearsky_os_fusion`: constant-velocity EKF + Mahalanobis association → `/fused_tracks`
 - `clearsky_os_safety_gate`: policy gate state on `/safety_gate_status`
 - `digital_twin`: analytic kinematics/risk → `/digital_twin_result` and `/digital_twin/veto`

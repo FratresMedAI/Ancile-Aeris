@@ -1,0 +1,10 @@
+{
+  "samples": 40,
+  "ekf_rmse_x": 1.1474799713608475,
+  "ekf_rmse_y": 1.0502500948717561,
+  "learned_shadow_rmse_x": 1.176264654972483,
+  "learned_shadow_rmse_y": 0.9694015712209493,
+  "authoritative": "constant_velocity_ekf",
+  "shadow": "logistic_ranker_v1",
+  "note": "Shadow is diagnostic only; /fused_tracks remains EKF-authoritative."
+}

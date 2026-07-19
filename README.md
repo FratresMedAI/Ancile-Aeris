@@ -99,9 +99,11 @@ ClearSky OS is an **active research / prototype workspace**, not a fielded produ
 | Safety / effector policy gates | Real software logic |
 | Visual perception | **YOLO path** when `CLEARSKY_SIM_MODE=false` + weights; labeled synthetic tracks in sim mode |
 | Fusion | **Constant-velocity EKF** with Mahalanobis association (`cv_ekf`) |
-| Digital twin | **Analytic** point-mass risk → `/digital_twin/veto` |
+| Digital twin | Analytic now-cast + **Gazebo-compatible rollout** backend → `/digital_twin/veto` |
+| Sim / Gazebo | `clearsky_os_sim` truth bridge + `worlds/clearsky_cuas.sdf` (CI uses kinematics) |
 | Acoustic / RF | Band-energy / spectral heuristics; optional ONNX when weights present |
 | Thermal | Labeled synthetic stub |
+| Fusion | CV-EKF authoritative + multimodal adapters; learned association on `/fusion/learned_tracks` (shadow) |
 | Scout mothership | Enrichment of fused tracks (coverage/mesh) — does not invent PID tracks |
 | Effector envelopes | Analytic Friis / success probability on `/effector/status` + plan XAI |
 | Effector / swarm inventory pubs | Simulation status publishers — not hardware actuation |
@@ -117,9 +119,13 @@ python scripts/model_export.py --weights models/visual/yolo11n.pt
 # Jetson profile (NVIDIA runtime + ML image)
 docker compose -f docker/docker-compose.yml --profile jetson up --build
 
-# Offline fusion / acoustic-RF metrics
+# Offline fusion / acoustic-RF / learned-shadow metrics
 python scripts/eval_fusion_offline.py
 python scripts/eval_acoustic_rf_offline.py
+python scripts/eval_fusion_learned_offline.py
+
+# Metric sim sensors (optional): override live sensor topics from truth bridge
+# sim_override_sensors:=true  (or features.sim_override_sensors in payload_selector.yaml)
 ```
 
 If you need production sensing, fusion, or autonomy work, talk to us at [fratres-x.com](https://fratres-x.com).

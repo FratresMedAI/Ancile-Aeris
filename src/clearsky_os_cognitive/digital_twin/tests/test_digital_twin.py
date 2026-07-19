@@ -1,4 +1,5 @@
 from digital_twin.physics import evaluate_proposal
+from digital_twin.rollout import evaluate_rollout
 
 
 def test_evaluate_proposal_bounds() -> None:
@@ -47,3 +48,28 @@ def test_far_slow_track_low_risk() -> None:
     )
     assert result.risk < 0.65
     assert result.veto is False
+
+
+def test_rollout_raises_risk_for_inbound() -> None:
+    now = evaluate_proposal(
+        track_x=120.0,
+        track_y=0.0,
+        track_vx=-30.0,
+        track_vy=0.0,
+        threat_score=0.8,
+        mitigation_gain=0.3,
+        asset_radius_m=25.0,
+        risk_veto_threshold=0.65,
+        safety_open=False,
+    )
+    rolled = evaluate_rollout(
+        track_x=120.0,
+        track_y=0.0,
+        track_vx=-30.0,
+        track_vy=0.0,
+        threat_score=0.8,
+        mitigation_gain=0.3,
+        safety_open=False,
+    )
+    assert rolled.risk >= now.risk
+    assert "gazebo_rollout" in rolled.rationale

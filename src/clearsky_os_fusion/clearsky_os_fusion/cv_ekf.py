@@ -52,6 +52,7 @@ class Measurement:
     y: float
     confidence: float = 1.0
     track_id: str = ""
+    modality: str = ""
 
 
 class ConstantVelocityEKF:
@@ -181,7 +182,13 @@ def associate_nearest(
     if not measurements:
         return None
     if not ekf.initialized:
-        return max(measurements, key=lambda m: m.confidence)
+        # Reject far outliers before first update (high-conf clutter must not seize track)
+        ranges = [math.hypot(m.x, m.y) for m in measurements]
+        med = sorted(ranges)[len(ranges) // 2]
+        limit = max(med * 2.5, 50.0)
+        pool = [m for m in measurements if math.hypot(m.x, m.y) <= limit] or measurements
+        priority = {"visual": 3, "lidar": 3, "thermal": 2, "acoustic": 1, "rf": 1, "": 0}
+        return max(pool, key=lambda m: (priority.get(m.modality, 0), m.confidence))
 
     best: Measurement | None = None
     best_d = float("inf")
