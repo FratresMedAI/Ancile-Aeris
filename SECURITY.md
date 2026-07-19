@@ -27,7 +27,7 @@ We aim to acknowledge reports within **5 business days**.
 
 ## Scope notes
 
-ClearSky OS is a **simulation-only** defensive C-UAS research stack.
+ClearSky OS is a counter-UAS research / prototyping workspace from [Fratres X AI](https://fratres-x.com).
 
 In scope:
 

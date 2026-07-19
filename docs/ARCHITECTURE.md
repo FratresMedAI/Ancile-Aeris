@@ -1,6 +1,6 @@
 # ClearSky OS Architecture
 
-Module topology for the simulation-first ROS 2 workspace.
+Module topology for the ClearSky OS ROS 2 workspace ([fratres-x.com](https://fratres-x.com)).
 
 ```mermaid
 flowchart LR

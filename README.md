@@ -5,8 +5,8 @@
 <h1 align="center">ClearSky OS</h1>
 
 <p align="center">
-  <strong>Simulation-first ROS 2 Counter-UAS research stack</strong><br />
-  Auditable detect → track → identify → mitigate modeling with human-on-the-loop safety gates
+  <strong>ROS 2 counter-UAS research stack from <a href="https://fratres-x.com">Fratres X AI</a></strong><br />
+  Physics-first sensing, fusion, and autonomy scaffolding — reviewable, gated, and honest about maturity
 </p>
 
 <p align="center">
@@ -14,62 +14,60 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" alt="License" /></a>
   <a href="https://docs.ros.org/en/kilted/"><img src="https://img.shields.io/badge/ROS%202-Kilted-22314E.svg" alt="ROS 2 Kilted" /></a>
   <a href="docker/"><img src="https://img.shields.io/badge/runtime-Docker-2496ED.svg" alt="Docker" /></a>
-  <img src="https://img.shields.io/badge/maturity-TRL%203%E2%80%934%20sim-informational.svg" alt="TRL" />
+  <a href="https://fratres-x.com"><img src="https://img.shields.io/badge/Fratres%20X-fratres--x.com-0B1F2A.svg" alt="Fratres X" /></a>
 </p>
 
 <p align="center">
   <a href="#quick-start">Quick start</a> ·
   <a href="#architecture">Architecture</a> ·
-  <a href="#demo">Demo</a> ·
+  <a href="#maturity">Maturity</a> ·
   <a href="docs/ARCHITECTURE.md">Docs</a> ·
-  <a href="CONTRIBUTING.md">Contributing</a>
+  <a href="https://fratres-x.com">fratres-x.com</a>
 </p>
 
 ---
 
-> **Safety posture:** Simulation-only defensive demonstration. **No autonomous weapon release.** Kinetic last-resort paths exist only as simulation stubs and are **policy-off by default**. Government and industry references are alignment examples only and do not imply endorsement.
+**ClearSky OS** is the open ROS 2 workspace behind Fratres X AI’s counter-UAS research thread: multimodal sensing → fusion → safety gates → operator-facing decision support, with an immutable audit spine.
 
-**ClearSky OS** is an open research prototype from [Fratres X AI](https://github.com/Fratres-X-AI): a modular ROS 2 workspace that models layered Counter-UAS (C-UAS) defense for dense urban, mass-gathering, and critical-infrastructure contexts—with immutable audit trails, explainability hooks, and strict human authority.
+Built the Fratres X way — [physics first, conservative claims, systems built for scrutiny](https://fratres-x.com). No AI magic. No inflated readiness.
 
-Built as a software-first response to **DHS S&T LRBAA 24-01 / BORAP 04** (Countering Unmanned Aircraft Systems). Formal submission materials live under [`submission/`](submission/).
+> **Safety:** No autonomous weapon release. Kinetic / last-resort simulation paths stay **policy-off by default**. Human-on-the-loop is required for mitigation recommendations.
 
 ## Why this repo
 
-| Signal | What you get |
+| Focus | What you get |
 |--------|----------------|
-| **Safety-encoded architecture** | PID gates, human veto, IFF, digital-twin rehearsal before effector planning |
-| **Audit spine** | DARKSPACE-style immutable hashing for oversight and analytic replay |
-| **Operator-first UX** | Copilot query path + XAI-bearing cognitive recommendations |
-| **Reproducible runtime** | Docker-only supported path on ROS 2 Kilted; CI builds and tests every push |
-| **Honest maturity** | Clear stub vs demo boundaries; non-kinetic-first effector policy |
+| **Integration skeleton** | Docker-first ROS 2 Kilted workspace with CI on every push |
+| **Reviewable control path** | Detect → track → fuse → gate → plan, with inspectable topics |
+| **Safety-encoded posture** | Confidence gates, human veto, IFF lockout, kinetic defaults off |
+| **Audit spine** | Hash-chained event trail for after-action replay |
+| **Honest boundaries** | Stub vs production adapters called out in docs — replace, don’t pretend |
 
 ## Quick start
 
-**Supported method: Docker only.** Do not run `colcon build` natively on Windows—mixed Linux/Windows caches break the workspace.
+**Supported method: Docker only.**
 
 ```bash
-# From repository root
 CLEARSKY_LAUNCH_FILE=clearsky_os_basic_demo.launch.py \
   docker compose -f docker/docker-compose.yml up --build
 ```
 
-Clean rebuild inside the running container:
+Inside the container:
 
 ```bash
 cd /opt/clearsky_os_ws
 source /opt/ros/kilted/setup.bash
 ./clean-build.sh
-# then
 ros2 launch clearsky_os_bringup clearsky_os_basic_demo.launch.py
 ```
 
-Smoke-check topics after launch:
+Smoke-check:
 
 ```bash
-ros2 topic list | grep -E '^/fused_tracks|^/audit/events|^/safety_gate_status|^/mesh/fob_status|^/effector/'
+ros2 topic list | grep -E '^/fused_tracks|^/audit/events|^/safety_gate_status|^/effector/'
 ```
 
-Full test workflow: [`docs/TESTING.md`](docs/TESTING.md).
+See [`docs/TESTING.md`](docs/TESTING.md).
 
 ## Architecture
 
@@ -89,46 +87,33 @@ flowchart LR
   cognitive --> xai[/xai_explanation/]
 ```
 
-**v2.1 basic demo chain:** sensors → fusion → DARKSPACE audit → safety gate → mothership FOB swarm + modular micro-payload simulation → operator copilot → non-kinetic-first effectors.
+Default demo chain: sensors → fusion → audit → safety gate → scout / micro-payload sim → operator copilot → non-kinetic-first effector planning.
 
-Default profile (`mothership_fob_standard`): 2–4 FOB carriers with modular micro slots (sensor, acoustic, web, cognitive EW, optional kinetic sim slot—**off by default**).
+## Maturity
 
-## Demo
+ClearSky OS is an **active research / prototype workspace**, not a fielded product.
 
-<p align="center">
-  <img src="artifacts/video_v21/concept_renders/01_mothership_fob_swarm.png" alt="ClearSky OS mothership FOB swarm concept" width="720" />
-</p>
+| Layer today | Intent |
+|-------------|--------|
+| Topic contracts, bringup, Docker, CI | Stable scaffolding |
+| Safety / effector policy gates | Real software logic to extend |
+| Sensor / fusion / twin modules | Placeholder adapters — swap for physics models, trained detectors, and validated estimators |
+| Effector / swarm inventory pubs | Simulation status publishers — not hardware actuation |
 
-**Live stack:** launch the basic demo (Quick start above), then inspect `/fused_tracks`, `/audit/events`, `/safety_gate_status`, and `/effector/*`.
-
-**Reviewer video:** [`artifacts/video_v21/ClearSky_OS_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4`](artifacts/video_v21/ClearSky_OS_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4)
-
-**Narrative package:** [`submission/LRBAA_Submission_Package_v2.1.md`](submission/LRBAA_Submission_Package_v2.1.md)
-
-If media files are missing after clone, run `git checkout -- artifacts/video_v21` (or `git lfs pull` if LFS is enabled).
+If you need production sensing, fusion, or autonomy work, talk to us at [fratres-x.com](https://fratres-x.com).
 
 ## Repository map
 
 ```text
-├── src/                 # ROS 2 packages (bringup, sensors, fusion, safety, cognitive, effectors…)
-├── docker/              # Supported runtime (Dockerfile + compose)
-├── config/              # Shared YAML (ROE, security stubs, sensors, payload selector)
-├── launch/              # Top-level launch files
-├── docs/                # Architecture, testing, BORAP mapping
-├── submission/          # LRBAA / BORAP narrative package
-├── artifacts/           # Demo video + keyframes
-├── k8s/                 # Example edge manifests
-├── scripts/             # Scenario helpers
-└── tools/               # Doc/video render utilities
+├── src/        # ROS 2 packages
+├── docker/     # Supported runtime
+├── config/     # Shared YAML
+├── launch/     # Top-level launches
+├── docs/       # Architecture + testing
+├── k8s/        # Example edge manifests
+├── scripts/    # Scenario / HIL helpers
+└── assets/     # Branding
 ```
-
-## Core philosophy
-
-- Max-defensive safety gates (**PID ≥ 0.999** + multi-modal evidence)
-- Strict **human-on-the-loop** — never latent kill automation
-- DARKSPACE immutable hashing for oversight / replay
-- XAI overlays on selectable modeling outcomes
-- **Layered posture:** ground sensing → FOB mothership swarm → modular micro payloads (sim) → **non-kinetic first**
 
 ## Documentation
 
@@ -137,25 +122,15 @@ If media files are missing after clone, run `git checkout -- artifacts/video_v21
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Module topology & data flow |
 | [`docs/COGNITIVE_ARCHITECTURE.md`](docs/COGNITIVE_ARCHITECTURE.md) | Cognitive adjunct roadmap |
 | [`docs/TESTING.md`](docs/TESTING.md) | Build, test, smoke validation |
-| [`docs/LRBAA_BORAP_04_MAPPING.md`](docs/LRBAA_BORAP_04_MAPPING.md) | Solicitation mapping |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Dev setup & PR expectations |
 | [`SECURITY.md`](SECURITY.md) | Vulnerability reporting |
-| [`CHANGELOG.md`](CHANGELOG.md) | Release history |
-
-## Cross-platform Docker notes
-
-Windows bind mounts can poison shebangs (`Exec format error`). Compose strips `\r`; launch files prepend `python3` for CRLF resilience on Python entrypoints.
 
 ## Contributing
 
-Issues and PRs are welcome—especially tests that import production modules, safety-gate regressions, and documentation clarity. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
+PRs that harden physics adapters, fusion tests against production modules, and safety-gate regressions are especially welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-Copyright © 2026 Fratres X AI.
+Copyright © 2026 [Fratres X AI](https://fratres-x.com).
 
-Licensed under the [Apache License, Version 2.0](LICENSE). See [NOTICE](NOTICE) for attribution and the simulation disclaimer.
-
-## Disclaimer
-
-Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Prototype maturity is illustrative (approx. TRL 3–4 integrated simulation). Benchmark figures cited in submission materials are **internal synthetic evaluations**, not operational test results.
+Licensed under the [Apache License, Version 2.0](LICENSE). See [NOTICE](NOTICE).

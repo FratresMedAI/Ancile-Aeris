@@ -25,17 +25,6 @@ def main() -> None:
             "status": "pass",
         },
     )
-    write_report(
-        "mass_gathering_perimeter_ct_report.json",
-        {
-            "scenario": "mass_gathering_perimeter_ct",
-            "timestamp_utc": now,
-            "mission": "counter_uas_anti_terror_perimeter_security",
-            "detect_track_identify_pipeline_operational": True,
-            "non_monitor_blocked_without_operator": True,
-            "status": "pass",
-        },
-    )
 
 
 if __name__ == "__main__":

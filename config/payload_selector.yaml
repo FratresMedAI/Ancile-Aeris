@@ -1,5 +1,4 @@
 # ClearSky OS Payload Selector v2.0
-# Property of Fratres X AI
 default_payload: cuas
 capabilities:
   video_analytics: true

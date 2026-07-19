@@ -8,36 +8,36 @@ for tagged releases.
 
 ## [Unreleased]
 
-### Added
+### Removed
 
-- Root `LICENSE` (Apache-2.0) and `NOTICE`
-- `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`
-- GitHub issue and pull request templates
-- Portfolio-oriented README with architecture overview and badges
+- LRBAA / BORAP / DHS solicitation materials, reviewer videos, and submission tooling
+- Government-name-drop narrative from docs and payload READMEs
 
 ### Changed
 
-- **Rebranded from Ancile Aeris to ClearSky OS** — ROS packages `ancile_aeris_*` → `clearsky_os_*`, Docker/k8s names, env vars `ANCILE_*` → `CLEARSKY_*`, docs and submission materials
-- Canonical repository URL set to `https://github.com/Fratres-X-AI/ClearSky-OS`
-- Documentation paths made host-agnostic for Docker workflows
+- README and docs repositioned for [Fratres X AI](https://fratres-x.com) — physics-first research stack, honest maturity
+- Canonical site link: https://fratres-x.com
+- Canonical repository: https://github.com/Fratres-X-AI/ClearSky-OS
+
+### Added
+
+- Apache-2.0 `LICENSE` / `NOTICE`, community docs, GitHub templates
+- ClearSky OS rebrand from Ancile Aeris package namespaces
 
 ## [2.1.0] - 2026-05
 
 ### Added
 
-- v2.1 basic demo: sensors → fusion → DARKSPACE audit → safety gate → mothership FOB swarm → micro-payload simulation → operator copilot → non-kinetic-first effectors
-- Recorded voiceover demo media under `artifacts/video_v21/`
-- LRBAA / BORAP 04 submission package materials under `submission/`
+- Basic demo chain: sensors → fusion → audit → safety gate → scout / micro-payload sim → operator copilot → non-kinetic-first effectors
 
 ### Notes
 
-- Simulation-only defensive demonstration; kinetic `kamikaze_ram` remains policy-off by default
+- Kinetic `kamikaze_ram` remains policy-off by default
 
 ## [2.0.0] - 2026-05
 
 ### Added
 
-- Tag `v2.0-lrbaa` baseline for DHS S&T LRBAA 24-01 / BORAP 04 filing materials
 - Docker-first ROS 2 Kilted workspace and CI build/test workflow
 
 [Unreleased]: https://github.com/Fratres-X-AI/ClearSky-OS/compare/v2.0-lrbaa...HEAD

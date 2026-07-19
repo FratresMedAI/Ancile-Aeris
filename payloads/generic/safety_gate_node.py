@@ -13,8 +13,8 @@ class SafetyGateNode:
         self.pid_target = pid_target
 
     def evaluate(self, context: Dict[str, Any]) -> Tuple[bool, Dict[str, Any]]:
-        # BORAP 04 environmental constraints are applied uniformly. In dense urban,
-        # mass-gathering, critical-infrastructure, mobile-platform, and remote-terrain
+        # Environmental constraints are applied uniformly across operating
+        # contexts (urban, open terrain, mobile platform, and remote)
         # conditions we keep conservative monitor-safe defaults unless safety checks pass.
         fused_conf = float(context.get("fused_confidence", 0.0))
         collision_risk = float(context.get("collision_risk", 0.0))

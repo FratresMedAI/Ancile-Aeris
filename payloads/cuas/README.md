@@ -1,10 +1,8 @@
-## C-UAS Payload
+## C-UAS payload
 
-**ClearSky OS — Property of Fratres X AI**
+Counter-UAS sensing, fusion, and command-support node copies for ClearSky OS.
 
-This payload contains ClearSky OS defensive **counter-UAS** sensing, fusion, and command-support nodes aligned with U.S. Department of Homeland Security Program Executive Office for UAS/C-UAS priorities and analogous federal integrator interoperability (e.g., Anduril Lattice-style mesh ISR concepts, kinetic catch solutions such as Fortem DroneHunter F700-class systems, directional RF countermeasures analogous to Epirus Leonidas envelopes, accelerated fielding doctrines echoing Replicator 2, and interoperable sourcing patterns reflected in initiatives like the JIATF-401 Marketplace).
-
-Contained node copies:
+Modules:
 
 - `visual_node.py`
 - `acoustic_node.py`
@@ -12,3 +10,5 @@ Contained node copies:
 - `fusion_node.py`
 - `trajectory_node.py`
 - `c2_decision_node.py`
+
+These are payload-local copies for profile selection — prefer the packages under `src/` as the source of truth.

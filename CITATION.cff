@@ -4,20 +4,20 @@ message: If you use this software, please cite it using these metadata.
 type: software
 authors:
   - name: Fratres X AI
-    website: https://github.com/Fratres-X-AI
+    website: https://fratres-x.com
 repository-code: https://github.com/Fratres-X-AI/ClearSky-OS
-url: https://github.com/Fratres-X-AI/ClearSky-OS
+url: https://fratres-x.com
 abstract: >-
-  Simulation-first ROS 2 Counter-UAS research stack providing auditable
-  detect-track-identify-mitigate modeling with human-on-the-loop safety gates,
-  DARKSPACE-style audit trails, and non-kinetic-first effector planning.
+  ROS 2 counter-UAS research stack from Fratres X AI: multimodal sensing,
+  fusion, human-on-the-loop safety gates, and audit-first decision support
+  scaffolding for physics-grounded prototyping.
 keywords:
   - ROS 2
   - Counter-UAS
+  - sensor fusion
+  - autonomy
   - simulation
-  - cognitive systems
-  - explainable AI
-  - defense research
+  - physics-first
 license: Apache-2.0
 version: 2.1.0
-date-released: "2026-05-01"
+date-released: "2026-07-19"

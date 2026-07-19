@@ -1,14 +1,13 @@
 ClearSky OS
 Copyright 2026 Fratres X AI
+https://fratres-x.com
 
 This product includes software developed by Fratres X AI.
 
 Licensed under the Apache License, Version 2.0.
 See the LICENSE file for the full license text.
 
-Simulation disclaimer
---------------------
-ClearSky OS is a simulation-first Counter-UAS (C-UAS) research and
-demonstration prototype. It does not authorize, enable, or perform
-autonomous weapon release. Government and industry references are
-alignment examples only and do not imply endorsement.
+ClearSky OS is a research and prototyping workspace for counter-UAS
+sensing, fusion, and autonomy. It does not authorize, enable, or
+perform autonomous weapon release. Kinetic simulation paths remain
+policy-off by default.

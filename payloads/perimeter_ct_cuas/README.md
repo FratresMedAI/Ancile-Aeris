@@ -1,15 +1,8 @@
-## Perimeter C-UAS / Anti-Terror Payload (ClearSky OS)
+## Perimeter C-UAS payload
 
-**ClearSky OS — Property of Fratres X AI**
+Perimeter-focused counter-UAS node logic for ClearSky OS simulations.
 
-This payload contains ClearSky OS perimeter security node logic for **counter-UAS and anti-terrorism** workflows over mass gatherings, critical infrastructure corridors, and high-value facilities.
-
-Mission mapping:
-
-- Primary: counter-UAS, improvised UAS-threat detection, perimeter hardening simulations.
-- Secondary: ISR fusion support aligned with sovereign defensive C2 exercises (simulation stubs).
-
-Supporting modules:
+Modules:
 
 - `perimeter_ct_cuas_fusion_node.py`
 - `perimeter_ct_cuas_detection_node.py`

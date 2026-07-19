@@ -1,6 +1,6 @@
 # Contributing to ClearSky OS
 
-Thanks for your interest in improving ClearSky OS. This repository is a **simulation-first** ROS 2 Counter-UAS research prototype. Contributions that strengthen safety, auditability, test coverage, and documentation are especially welcome.
+Thanks for your interest in improving ClearSky OS. This repository is the ClearSky OS ROS 2 counter-UAS research workspace from [Fratres X AI](https://fratres-x.com). Contributions that strengthen safety, auditability, test coverage, and documentation are especially welcome.
 
 ## Before you start
 
@@ -45,7 +45,7 @@ Native Windows `colcon build` is **not** supported.
 - Introduce autonomous weapon-release pathways
 - Enable kinetic modes by default
 - Commit secrets, credentials, or large unrelated binaries
-- Rewrite submission narrative docs unless the change is factual (URLs, versions)
+- Add acquisition-marketing narrative to the technical docs
 
 ## Pull request checklist
 
