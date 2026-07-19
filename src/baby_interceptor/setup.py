@@ -12,7 +12,7 @@ setup(
     install_requires=["setuptools"],
     zip_safe=True,
     maintainer="Ancile Aeris Team",
-    maintainer_email="maintainer@example.com",
+    maintainer_email="maintainers@fratres-x.ai",
     description="Simulation-only optional baby interceptor for Ancile Aeris counter-UAS stack.",
     license="Apache-2.0",
 )

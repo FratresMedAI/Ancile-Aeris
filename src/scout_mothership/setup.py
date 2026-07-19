@@ -12,7 +12,7 @@ setup(
     install_requires=["setuptools"],
     zip_safe=True,
     maintainer="Ancile Aeris Team",
-    maintainer_email="maintainer@example.com",
+    maintainer_email="maintainers@fratres-x.ai",
     description="Mesh-capable high-altitude scout mothership ISR simulation for Ancile Aeris.",
     license="Apache-2.0",
 )

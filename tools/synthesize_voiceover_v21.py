@@ -228,7 +228,7 @@ SEGMENTS: list[tuple[float, float, str, str | None]] = [
         "",
         (
             "Ancile Aeris version two dot one remains simulation honest, authority preserving, immutable on the audit spine, "
-            "and intentionally modest in claims. All rights reserved Fratres X A I."
+            "and intentionally modest in claims. Licensed Apache two point zero by Fratres X A I."
         ),
     ),
 ]

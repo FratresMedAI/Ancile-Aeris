@@ -3,7 +3,7 @@
   <name>agent_orchestrator</name>
   <version>0.1.0</version>
   <description>Master multi-agent C2 orchestration stub for Ancile Aeris.</description>
-  <maintainer email="maintainer@example.com">Ancile-Aeris Team</maintainer>
+  <maintainer email="maintainers@fratres-x.ai">Ancile-Aeris Team</maintainer>
   <license>Apache-2.0</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
   <depend>rclpy</depend>

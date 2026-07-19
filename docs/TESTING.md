@@ -1,4 +1,6 @@
-# Ancile-Aeris Testing`r`n`r`n**Property of Fratres X AI**
+# Ancile Aeris Testing
+
+Host-agnostic build, test, and smoke validation for the Docker-supported workspace.
 
 ## Build Validation
 
@@ -11,7 +13,7 @@ docker compose -f docker/docker-compose.yml build ancile-aeris
 ## Package Tests
 
 ```bash
-docker run --rm -v "c:/Users/Besn Daddy/Desktop/Ancile Aeris/Ancile-Aeris:/opt/ancile_aeris_ws" -w /opt/ancile_aeris_ws ancile-aeris bash -lc "rm -rf build install log && source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && colcon test && colcon test-result --verbose"
+docker run --rm -v "${PWD}:/opt/ancile_aeris_ws" -w /opt/ancile_aeris_ws ancile-aeris bash -lc "rm -rf build install log && source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && colcon test && colcon test-result --verbose"
 ```
 
 ## Launch Smoke Test
@@ -36,7 +38,7 @@ Expected indicators:
 Run mixed friendly/hostile defensive scenario validation:
 
 ```bash
-docker run --rm -v "c:/Users/Besn Daddy/Desktop/Ancile Aeris/Ancile-Aeris:/opt/ancile_aeris_ws" -w /opt/ancile_aeris_ws ancile-aeris bash -lc "python3 scripts/soldier_safety_scenario.py"
+docker run --rm -v "${PWD}:/opt/ancile_aeris_ws" -w /opt/ancile_aeris_ws ancile-aeris bash -lc "python3 scripts/soldier_safety_scenario.py"
 ```
 
 Pass criteria:
@@ -48,7 +50,7 @@ Pass criteria:
 
 ## Performance Baseline Targets
 
-- Detectionâ†’Fusionâ†’C2 pipeline latency: target `<150 ms` (sim baseline)
+- Detection → Fusion → C2 pipeline latency: target `<150 ms` (sim baseline)
 - Visual pipeline effective throughput (simulated): target `>=30 FPS` on Jetson-class target
 - Dashboard update cadence: `>=5 Hz`
 

@@ -3,7 +3,7 @@
   <name>ancile_aeris_safety_gate</name>
   <version>0.1.0</version>
   <description>Ancile Aeris safety gate publisher with human authorization controls.</description>
-  <maintainer email="maintainer@example.com">Ancile-Aeris Team</maintainer>
+  <maintainer email="maintainers@fratres-x.ai">Ancile-Aeris Team</maintainer>
   <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>

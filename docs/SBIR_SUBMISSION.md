@@ -1,4 +1,6 @@
-# Ancile Aeris Submission Package Outline`r`n`r`n**Property of Fratres X AI**
+# Ancile Aeris Submission Package Outline
+
+Outline for federal acquisition / LRBAA narrative packaging. Canonical repo: https://github.com/Fratres-X-AI/Ancile-Aeris
 
 ## 1. Problem Statement
 - Escalating low-cost autonomous and semi-autonomous UAS threats.

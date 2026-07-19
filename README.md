@@ -1,127 +1,161 @@
-# Ancile Aeris
+<p align="center">
+  <img src="assets/ancile-aeris-logo.png" alt="Ancile Aeris" width="280" />
+</p>
 
-**Property of Fratres X AI**
+<h1 align="center">Ancile Aeris</h1>
 
-## Build Instructions – ONLY SUPPORTED METHOD
+<p align="center">
+  <strong>Simulation-first ROS 2 Counter-UAS research stack</strong><br />
+  Auditable detect → track → identify → mitigate modeling with human-on-the-loop safety gates
+</p>
 
-**Ancile Aeris is ONLY supported inside the official Docker container** (see the [`docker/`](docker/) folder). Do **not** run `colcon build` natively on Windows: mixed Linux (`/opt/ancile_aeris_ws`) and Windows bind-mount caches produce broken `CMakeCache.txt`, missing `gmake`, and `WinError 1920` on symlinked `local_setup.bash`.
+<p align="center">
+  <a href="https://github.com/Fratres-X-AI/Ancile-Aeris/actions/workflows/ci.yml"><img src="https://github.com/Fratres-X-AI/Ancile-Aeris/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" alt="License" /></a>
+  <a href="https://docs.ros.org/en/kilted/"><img src="https://img.shields.io/badge/ROS%202-Kilted-22314E.svg" alt="ROS 2 Kilted" /></a>
+  <a href="docker/"><img src="https://img.shields.io/badge/runtime-Docker-2496ED.svg" alt="Docker" /></a>
+  <img src="https://img.shields.io/badge/maturity-TRL%203%E2%80%934%20sim-informational.svg" alt="TRL" />
+</p>
 
-From the repository root on the **host**, start the stack (builds inside Linux):
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#architecture">Architecture</a> ·
+  <a href="#demo">Demo</a> ·
+  <a href="docs/ARCHITECTURE.md">Docs</a> ·
+  <a href="CONTRIBUTING.md">Contributing</a>
+</p>
+
+---
+
+> **Safety posture:** Simulation-only defensive demonstration. **No autonomous weapon release.** Kinetic last-resort paths exist only as simulation stubs and are **policy-off by default**. Government and industry references are alignment examples only and do not imply endorsement.
+
+**Ancile Aeris** is an open research prototype from [Fratres X AI](https://github.com/Fratres-X-AI): a modular ROS 2 workspace that models layered Counter-UAS (C-UAS) defense for dense urban, mass-gathering, and critical-infrastructure contexts—with immutable audit trails, explainability hooks, and strict human authority.
+
+Built as a software-first response to **DHS S&T LRBAA 24-01 / BORAP 04** (Countering Unmanned Aircraft Systems). Formal submission materials live under [`submission/`](submission/).
+
+## Why this repo
+
+| Signal | What you get |
+|--------|----------------|
+| **Safety-encoded architecture** | PID gates, human veto, IFF, digital-twin rehearsal before effector planning |
+| **Audit spine** | DARKSPACE-style immutable hashing for oversight and analytic replay |
+| **Operator-first UX** | Copilot query path + XAI-bearing cognitive recommendations |
+| **Reproducible runtime** | Docker-only supported path on ROS 2 Kilted; CI builds and tests every push |
+| **Honest maturity** | Clear stub vs demo boundaries; non-kinetic-first effector policy |
+
+## Quick start
+
+**Supported method: Docker only.** Do not run `colcon build` natively on Windows—mixed Linux/Windows caches break the workspace.
 
 ```bash
-ANCILE_LAUNCH_FILE=ancile_aeris_basic_demo.launch.py docker compose -f docker/docker-compose.yml up --build
+# From repository root
+ANCILE_LAUNCH_FILE=ancile_aeris_basic_demo.launch.py \
+  docker compose -f docker/docker-compose.yml up --build
 ```
 
-**Inside the running container**, use this **four-command** clean build sequence whenever you need a fresh tree:
+Clean rebuild inside the running container:
 
 ```bash
 cd /opt/ancile_aeris_ws
 source /opt/ros/kilted/setup.bash
-rm -rf build/ install/ log/
-colcon build --symlink-install --packages-up-to ancile_aeris_bringup
-```
-
-Or run the same steps with the helper script (`chmod +x clean-build.sh` is applied in the Docker image build; on Linux hosts you may `chmod +x` once at the repo root). The script sources `/opt/ros/kilted/setup.bash` before `colcon` so non-interactive shells have the right `PATH`.
-
-```bash
 ./clean-build.sh
-```
-
-After a successful run, the workspace is already sourced inside the script; in a new shell use `source install/setup.bash`, then e.g. `ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py`.
-
----
-
-**Solicitation context:** Responsive to **DHS S&T LRBAA 24-01** (SAM.gov Notice ID **DHS_ST_LRBAA_24-01** · [official notice](https://sam.gov/opp/a0969993ee8542988595334947e39a7d/view)), **BORAP 04 — Countering Unmanned Aircraft Systems** (Type II foundational modeling + Type III emerging-threat extensibility). Software-first simulation today; phased RF laboratory path described in Concept Paper—not field weaponization.
-
-**Disclaimer:** Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Government and industry references are alignment examples only and do not imply endorsement.
-
-Layered **`ancile_aeris_effectors`** stack models **advanced layered response** pathways—deception, cognitive jamming **recommendations**, GNSS/link deception concepts, HPM-class denial **stub**, dual-authorized takeover **concept**—all **simulation stubs** honoring **layered non-kinetic defeat capability** semantics in policy code.
-
-Fratres X AI is **a specialized software-defined defense team with deep ROS 2 and cognitive systems expertise, delivering modular, auditable prototypes for federal acquisition pathways.**
-
-**Prototype maturity (illustrative, not contractual):** current **Technology Readiness Level 3–4** integrated simulation; an indicative **Phase I** cost band of roughly **$250k–$350k** matches the foundational hardening described in [`submission/Ancile_Aeris_Concept_Paper_v2.1.md`](submission/Ancile_Aeris_Concept_Paper_v2.1.md); an **~18-month** laboratory **Software Defined Radio (SDR)** integration path toward **TRL 6** bench demos is a roadmap statement—not fielded weapons.
-
-In **representative internal synthetic evaluations** (**N≈500** parameterized swarm scenarios, **not OT&E**) the materials cite approximately **94% fused-track correlation** and **effector-selection confidence greater than 0.88** under stated assumptions. These are **benchmark context** for reviewers, not operational test results.
-
-## Basic Demo (v2.1)
-
-The default **basic demonstration** is the BORAP slice: sensors • fusion • DARKSPACE audit • safety gate • **mothership forward operating base (FOB) swarm** with **modular micro-drone payload simulation** • operator copilot • **non-kinetic-first effectors** (`kamikaze_ram` exists only as **simulation**, **off in default policy**, **last resort**).
-
-```bash
+# then
 ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py
 ```
 
-Representative subscriber proof:
+Smoke-check topics after launch:
 
 ```bash
-ros2 topic list | grep -E '^/fused_tracks|^/audit/events|^/scout_eyes|^/safety_gate_status|^/mesh/fob_status|^/payload/micro_deployment|^/effector/|^/cognitive_ew_commands|^/kamikaze_status|^/proposed_actions|^/digital_twin_result'
-ros2 service list | grep -E '/ancile_aeris_operator_copilot/query'
+ros2 topic list | grep -E '^/fused_tracks|^/audit/events|^/safety_gate_status|^/mesh/fob_status|^/effector/'
 ```
 
-The default profile is **`mothership_fob_standard`** in **`src/ancile_aeris_bringup/config/payload_selector.yaml`**: **2–4** FOB carriers (scout motherships) and **10–12** modular micro slots per FOB (sensor pod, acoustic disruptor, kevlar web, cognitive EW pod, kamikaze ram slot). **`features.effectors.enabled`** and **`features.cognitive_demo_chain.enabled`** turn on the planner and cognitive traverse.
+Full test workflow: [`docs/TESTING.md`](docs/TESTING.md).
 
-- **`/mesh/fob_status`** — JSON fleet + per-FOB micro inventory (simulation).  
-- **`/payload/micro_deployment`** — advisory deployment views; includes **`effector_alignment`** hints from `/effector/selected_plan`.  
-- **`/effector/selected_plan`** — JSON plan (**non-kinetic-first** unless kinetic family enabled in policy).  
-- **`/effector/kamikaze_authorized`** — kinetic ram authorization telemetry when policy allows **`kamikaze_ram`** (default: not authorized).  
-- **`/proposed_actions`→`/digital_twin_result`→`/cognitive_ew_commands`** — XAI-bearing cognitive EW echo.
+## Architecture
 
-**Optional legacy** **`baby_interceptor`** (not included in the default launch graph; simulation-only if built/run separately).
-
-Twin mothership shim example (manual spot-check beyond FOB swarm):
-
-```bash
-ros2 run scout_mothership scout_mothership_node --ros-args -p mothership_id:=mhs-001 -p enable_mesh_publish:=true
-ros2 run scout_mothership scout_mothership_node --ros-args -p mothership_id:=mhs-002 -p enable_mesh_publish:=true
-ros2 topic pub /mesh/mothership_peers/heartbeat std_msgs/msg/String '{"data":"{\"mothership_id\":\"mhs-002\"}"}' -1
-ros2 topic echo /mesh/mothership_swarm_status
+```mermaid
+flowchart LR
+  payloadSelector[payload_selector.yaml] --> bringup[ancile_aeris_bringup]
+  bringup --> sensors[sensors]
+  bringup --> fusion[fusion]
+  bringup --> safetyGate[safety_gate]
+  bringup --> cognitive[cognitive]
+  sensors --> fusion
+  fusion --> fusedTracks[/fused_tracks/]
+  fusedTracks --> cognitive
+  safetyGate --> safetyStatus[/safety_gate_status/]
+  safetyStatus --> cognitive
+  cognitive --> audit[/audit/events/]
+  cognitive --> xai[/xai_explanation/]
 ```
 
-## Repository layout notes
+**v2.1 basic demo chain:** sensors → fusion → DARKSPACE audit → safety gate → mothership FOB swarm + modular micro-payload simulation → operator copilot → non-kinetic-first effectors.
 
-- Payload selector **`src/ancile_aeris_bringup/config/payload_selector.yaml`**.  
-- LRBAA packages **`src/scout_mothership/`** • **`src/ancile_aeris_micro_payloads/`** (five micro payload sim nodes + kamikaze ram) • optional **`src/baby_interceptor/`**. Expanded cognitive modules **`src/ancile_aeris_cognitive/`**.  
-- Formal LRBAA narrative and quad chart (latest) live under **`submission/`** (**`*_v2.1.*`** — see [`submission/LRBAA_Submission_Package_v2.1.md`](submission/LRBAA_Submission_Package_v2.1.md)). Older `*_v2.0.*` filenames are retained for history.
+Default profile (`mothership_fob_standard`): 2–4 FOB carriers with modular micro slots (sensor, acoustic, web, cognitive EW, optional kinetic sim slot—**off by default**).
 
-## Cross-platform Docker (Windows bind-mount CRLF)
+## Demo
 
-Bind mounts can poison shebangs (**`Exec format error`**). Compose strips `\r`; launch files prepend **`python3`** for resilience against CRLF quirks on Python entrypoints.
+<p align="center">
+  <img src="artifacts/video_v21/concept_renders/01_mothership_fob_swarm.png" alt="Ancile Aeris mothership FOB swarm concept" width="720" />
+</p>
 
-## Mission
+**Live stack:** launch the basic demo (Quick start above), then inspect `/fused_tracks`, `/audit/events`, `/safety_gate_status`, and `/effector/*`.
 
-Provide auditable ROS 2 **detect → track → identify → mitigate modeling** emphasizing **dense urban congestion**, **mass gatherings**, **critical infrastructure**, plus **Secure Borders and Approaches** mission framings under BORAP narrative—paired with interoperability **context references** (**Anduril Lattice**‑style overlays, **JIATF‑401 Marketplace** sourcing idiom, **Replicator 2 velocity** doctrine analogue, lightweight **Leonidas‑class HPM wording** confined to modeled stub—not hardware, **Fortem DroneHunter naming** purely **optional third‑party illustrative capture geometry** absent any integration endorsement).
+**Reviewer video:** [`artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4`](artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4)
 
-### Integration hooks roadmap
+**Narrative package:** [`submission/LRBAA_Submission_Package_v2.1.md`](submission/LRBAA_Submission_Package_v2.1.md)
 
-Public ROS buses (`/fused_tracks`, `/effector/*`, `/darkspace/status`, `/cognitive_ew_commands`, mesh topics, **`/mesh/fob_status`**, **`/payload/micro_deployment`**) support future **government-furnished sensors**, **approved non-kinetic effector adapters**, and **SDR laboratory** integration as described in the Concept Paper.
+If media files are missing after clone, run `git checkout -- artifacts/video_v21` (or `git lfs pull` if LFS is enabled).
 
-## Core Philosophy
+## Repository map
 
-- Max-defensive safety gates (**PID ≥ 0.999** plus multi-modal evidence)  
-- Strict human‑on‑the‑loop; **never** latent kill automation  
-- DARKSPACE immutable hashing for oversight / analytic replay  
-- XAI overlays on selectable modeling outcomes  
-- **Layered posture:** ground sensing → **FOB mothership swarm** → **modular micro payloads (sim)** → **non‑kinetic** ship modes first; optional **`kamikaze_ram`** sim is **last resort** and **policy-off** by default (**legacy `baby_interceptor`** off-demo)
+```text
+├── src/                 # ROS 2 packages (bringup, sensors, fusion, safety, cognitive, effectors…)
+├── docker/              # Supported runtime (Dockerfile + compose)
+├── config/              # Shared YAML (ROE, security stubs, sensors, payload selector)
+├── launch/              # Top-level launch files
+├── docs/                # Architecture, testing, BORAP mapping
+├── submission/          # LRBAA / BORAP narrative package
+├── artifacts/           # Demo video + keyframes
+├── k8s/                 # Example edge manifests
+├── scripts/             # Scenario helpers
+└── tools/               # Doc/video render utilities
+```
 
-## Cognitive architecture snapshot
+## Core philosophy
 
-Twenty‑plus modular cognitive adjuncts—including digital twin EW rehearsal, causal XAI, adversarial hardening—for roadmap expansion; **FOB swarm and micro payload simulation** primary in v2.1; kinetic narratives **never** marketed as default.
+- Max-defensive safety gates (**PID ≥ 0.999** + multi-modal evidence)
+- Strict **human-on-the-loop** — never latent kill automation
+- DARKSPACE immutable hashing for oversight / replay
+- XAI overlays on selectable modeling outcomes
+- **Layered posture:** ground sensing → FOB mothership swarm → modular micro payloads (sim) → **non-kinetic first**
 
 ## Documentation
 
-- `docs/COGNITIVE_ARCHITECTURE.md`  
-- `docs/LRBAA_BORAP_04_MAPPING.md`  
-- [`submission/LRBAA_Submission_Package_v2.1.md`](submission/LRBAA_Submission_Package_v2.1.md) — **master index for v2.1 LRBAA filing**  
-- `submission/Ancile_Aeris_Concept_Paper_v2.1.md`  
-- `submission/Ancile_Aeris_Quad_Chart_v2.1.md`  
-- `submission/Ancile_Aeris_Video_Script_v2.1.md`  
-- `submission/Video_Production_Package_v2.1.md`  
-- `submission/Ancile_Aeris_Voiceover_Narration_v2.1.md`  
-- `SUBMISSION_CHECKLIST.md`  
-- Regenerate Word exports: `python tools/export_submission_docx.py`
+| Doc | Purpose |
+|-----|---------|
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Module topology & data flow |
+| [`docs/COGNITIVE_ARCHITECTURE.md`](docs/COGNITIVE_ARCHITECTURE.md) | Cognitive adjunct roadmap |
+| [`docs/TESTING.md`](docs/TESTING.md) | Build, test, smoke validation |
+| [`docs/LRBAA_BORAP_04_MAPPING.md`](docs/LRBAA_BORAP_04_MAPPING.md) | Solicitation mapping |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Dev setup & PR expectations |
+| [`SECURITY.md`](SECURITY.md) | Vulnerability reporting |
+| [`CHANGELOG.md`](CHANGELOG.md) | Release history |
 
-## Ownership
+## Cross-platform Docker notes
 
-Ancile Aeris is the exclusive property of Fratres X AI. All rights reserved.
+Windows bind mounts can poison shebangs (`Exec format error`). Compose strips `\r`; launch files prepend `python3` for CRLF resilience on Python entrypoints.
 
-**Disclaimer:** Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Government and industry references are alignment examples only and do not imply endorsement.
+## Contributing
+
+Issues and PRs are welcome—especially tests that import production modules, safety-gate regressions, and documentation clarity. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## License
+
+Copyright © 2026 Fratres X AI.
+
+Licensed under the [Apache License, Version 2.0](LICENSE). See [NOTICE](NOTICE) for attribution and the simulation disclaimer.
+
+## Disclaimer
+
+Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Prototype maturity is illustrative (approx. TRL 3–4 integrated simulation). Benchmark figures cited in submission materials are **internal synthetic evaluations**, not operational test results.

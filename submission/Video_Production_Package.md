@@ -6,7 +6,7 @@ Revised May 8, 2026 – Final LRBAA Submission Version
 **Runtime:** 4:00  
 **Audience:** DHS LRBAA reviewers; C‑UAS acquisition stakeholders; lab integrators  
 **Tone:** restrained, credible, technically precise—no kinetic-forward hero framing  
-**Property of Fratres X AI • GitHub:** https://github.com/FratresMedAI/Ancile-Aeris  
+**Property of Fratres X AI • GitHub:** https://github.com/Fratres-X-AI/Ancile-Aeris  
 
 **Disclaimer:** Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Government and industry references are alignment examples only and do not imply endorsement.
 
@@ -92,7 +92,7 @@ Ancile Aeris v2.1 • BORAP 04
 Layered non-kinetic-first modeling | FOB swarm simulation | Audited ROS 2 stack
 
 Property of Fratres X AI
-https://github.com/FratresMedAI/Ancile-Aeris
+https://github.com/Fratres-X-AI/Ancile-Aeris
 
 Simulation-only C-UAS defensive demonstration. No autonomous weapon release.
 Government and industry references are alignment examples only and do not imply endorsement.

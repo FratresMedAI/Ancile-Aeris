@@ -22,7 +22,7 @@ Master index (paths and Word exports): **[`submission/LRBAA_Submission_Package_v
 
 ## Code / reproducibility
 
-- [ ] **Repository URL** — https://github.com/FratresMedAI/Ancile-Aeris  
+- [ ] **Repository URL** — https://github.com/Fratres-X-AI/Ancile-Aeris  
 - [ ] **Docker-only build** documented in [`README.md`](README.md); demo: `ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py` (inside container per README).
 
 ## Regenerate Office exports from Markdown

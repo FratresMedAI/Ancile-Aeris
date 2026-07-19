@@ -5,7 +5,7 @@ Revised May 8, 2026 – Final LRBAA Submission Version
 **Solicitation:** DHS S&T LRBAA **24-01** (Notice ID **DHS_ST_LRBAA_24-01**) · **BORAP 04 — Countering Unmanned Aircraft Systems** (Type II / Type III). SAM.gov: https://sam.gov/opp/a0969993ee8542988595334947e39a7d/view  
 **LRBAA Counter-UAS / Anti-Terror Defensive System**  
 **Property of Fratres X AI**  
-**GitHub:** https://github.com/FratresMedAI/Ancile-Aeris  
+**GitHub:** https://github.com/Fratres-X-AI/Ancile-Aeris  
 **Target Runtime:** 4:00  
 **Tone:** calm, measured, evidence-led, credible to federal reviewers  
 

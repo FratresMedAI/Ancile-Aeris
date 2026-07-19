@@ -1,0 +1,7 @@
+# Default owners for Ancile Aeris
+*       @FratresMedAI
+
+/.github/                       @FratresMedAI
+/docker/                        @FratresMedAI
+/src/ancile_aeris_safety_gate/  @FratresMedAI
+/src/ancile_aeris_effectors/    @FratresMedAI

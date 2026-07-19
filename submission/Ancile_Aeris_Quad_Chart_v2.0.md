@@ -5,7 +5,7 @@ Revised May 8, 2026 – Final LRBAA Submission Version
 **Solicitation:** DHS S&T LRBAA **24-01** (**DHS_ST_LRBAA_24-01** · [SAM.gov](https://sam.gov/opp/a0969993ee8542988595334947e39a7d/view)) · **BORAP 04 — Countering UAS · Type II / III**  
 **LRBAA Counter-UAS / Anti-Terror Defensive System**  
 **Property of Fratres X AI**  
-**GitHub:** https://github.com/FratresMedAI/Ancile-Aeris  
+**GitHub:** https://github.com/Fratres-X-AI/Ancile-Aeris  
 
 **Disclaimer:** Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Government and industry references are alignment examples only and do not imply endorsement.
 
@@ -52,7 +52,7 @@ Selection path: `agent_orchestrator → digital_twin → cognitive_ew` with publ
 
 ## Quadrant 3 - Team
 
-- https://github.com/FratresMedAI/Ancile-Aeris  
+- https://github.com/Fratres-X-AI/Ancile-Aeris  
 - `colcon build --symlink-install --packages-up-to ancile_aeris_bringup`  
 - `ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py`  
 - Clean DARKSPACE verification run captured in submission materials.

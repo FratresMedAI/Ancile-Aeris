@@ -5,7 +5,7 @@ Revised May 8, 2026 — Aligned with `Ancile_Aeris_Concept_Paper_v2.0.md` (LRBAA
 **Solicitation:** DHS S&T **LRBAA 24-01** (SAM.gov Notice ID **DHS_ST_LRBAA_24-01** — [active opportunity](https://sam.gov/opp/a0969993ee8542988595334947e39a7d/view)). This concept is **responsive to** **Topic BORAP 04 — Countering Unmanned Aircraft Systems** (Type II foundational science and Type III future-threat objectives); authoritative terms remain on SAM.gov and attached amendments.  
 **LRBAA Counter-UAS / Anti-Terror Defensive System Concept**  
 **Property of Fratres X AI**  
-**GitHub:** https://github.com/FratresMedAI/Ancile-Aeris  
+**GitHub:** https://github.com/Fratres-X-AI/Ancile-Aeris  
 
 **Disclaimer:** Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Government and industry references are alignment examples only and do not imply endorsement.
 

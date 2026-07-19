@@ -103,7 +103,7 @@ def slide_opening() -> Image.Image:
         "Simulation-only demonstration\nHuman-governed\nAuditable ROS 2 topics\nNo autonomous engagement",
         base.GREEN,
     )
-    d.text((70, 780), "Property of Fratres X AI | github.com/FratresMedAI/Ancile-Aeris", font=base.BODY, fill=base.WHITE)
+    d.text((70, 780), "Property of Fratres X AI | github.com/Fratres-X-AI/Ancile-Aeris", font=base.BODY, fill=base.WHITE)
     return img
 
 

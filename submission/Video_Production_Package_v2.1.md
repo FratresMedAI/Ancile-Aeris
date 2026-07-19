@@ -6,7 +6,7 @@ Revised May 8, 2026 – Final LRBAA Submission Version
 **Runtime:** 4:00 for the local silent / Edge-TTS render; **3:38.98** for the primary reviewer video built around the recorded WAV.  
 **Audience:** DHS LRBAA reviewers; C-UAS acquisition stakeholders; lab integrators  
 **Tone:** restrained, credible, technically precise. No hype, no combat-trailer language.  
-**Property of Fratres X AI • GitHub:** https://github.com/FratresMedAI/Ancile-Aeris
+**Property of Fratres X AI • GitHub:** https://github.com/Fratres-X-AI/Ancile-Aeris
 
 **Disclaimer:** Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Government and industry references are alignment examples only and do not imply endorsement.
 

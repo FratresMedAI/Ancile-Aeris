@@ -1,10 +1,15 @@
-# Ancile Aeris Docs`r`n`r`n**Property of Fratres X AI**
+# Ancile Aeris Docs
 
-This folder contains architecture, test, and deployment notes for Ancile Aeris.
+Architecture, testing, and deployment notes for Ancile Aeris.
 
-- `ARCHITECTURE.md`: module topology and data-flow diagram
-- `TESTING.md`: build, test, and performance baseline workflow
-- `../README.md`: quick start + SBIR/xTech submission notes
+| Doc | Contents |
+|-----|----------|
+| [`ARCHITECTURE.md`](ARCHITECTURE.md) | Module topology and data-flow diagram |
+| [`COGNITIVE_ARCHITECTURE.md`](COGNITIVE_ARCHITECTURE.md) | Cognitive adjunct roadmap |
+| [`TESTING.md`](TESTING.md) | Build, test, and smoke validation |
+| [`LRBAA_BORAP_04_MAPPING.md`](LRBAA_BORAP_04_MAPPING.md) | DHS LRBAA / BORAP 04 mapping |
+| [`SBIR_SUBMISSION.md`](SBIR_SUBMISSION.md) | Submission package outline |
 
-Top-level quick start is in `../README.md`.
+Quick start lives in the root [`README.md`](../README.md).
 
+**Repository:** https://github.com/Fratres-X-AI/Ancile-Aeris

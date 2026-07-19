@@ -1,6 +1,6 @@
 # Ancile Aeris Cognitive Architecture v2.0
 
-**Property of Fratres X AI**
+Cognitive adjunct roadmap for the Ancile Aeris ROS 2 workspace.
 
 ## Overview
 

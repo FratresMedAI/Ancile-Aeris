@@ -1,0 +1,46 @@
+name: Bug report
+description: Report a defect in build, launch, or runtime behavior
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Ancile Aeris. Please confirm this is a **simulation / software** issue, not a request for real-world weaponization guidance.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What went wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Exact commands (prefer Docker path)
+      placeholder: |
+        docker compose -f docker/docker-compose.yml up --build
+        ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include logs / stack traces when possible
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "Host OS, Docker version, ROS distro (Kilted)"
+    validations:
+      required: true

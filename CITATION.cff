@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+title: Ancile Aeris
+message: If you use this software, please cite it using these metadata.
+type: software
+authors:
+  - name: Fratres X AI
+    website: https://github.com/Fratres-X-AI
+repository-code: https://github.com/Fratres-X-AI/Ancile-Aeris
+url: https://github.com/Fratres-X-AI/Ancile-Aeris
+abstract: >-
+  Simulation-first ROS 2 Counter-UAS research stack providing auditable
+  detect-track-identify-mitigate modeling with human-on-the-loop safety gates,
+  DARKSPACE-style audit trails, and non-kinetic-first effector planning.
+keywords:
+  - ROS 2
+  - Counter-UAS
+  - simulation
+  - cognitive systems
+  - explainable AI
+  - defense research
+license: Apache-2.0
+version: 2.1.0
+date-released: "2026-05-01"

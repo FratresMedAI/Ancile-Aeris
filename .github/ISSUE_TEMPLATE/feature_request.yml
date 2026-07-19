@@ -1,0 +1,44 @@
+name: Feature request
+description: Propose a capability, test, or documentation improvement
+title: "[feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / opportunity
+      description: What gap does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Keep scope reviewable; prefer simulation-safe designs
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Primary area
+      options:
+        - Perception / sensors
+        - Fusion
+        - Safety gate / policy
+        - Cognitive stack
+        - Effectors (simulation)
+        - Operator / UX
+        - Docker / CI / DX
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety acknowledgment
+      options:
+        - label: This proposal does not introduce autonomous weapon release
+          required: true
+        - label: Kinetic / last-resort paths remain off by default unless explicitly justified
+          required: true

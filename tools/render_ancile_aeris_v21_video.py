@@ -106,7 +106,7 @@ def slide_01() -> Image.Image:
     d.text((68, 235), "Mothership FOB Swarm + Modular Micro-Payload Simulation", font=H1, fill=GOLD)
     text_box(d, (70, 360, 900, 680), "Submission Context", "DHS S&T LRBAA 24-01\nBORAP 04: Countering UAS\nDetect -> Track -> Identify -> Mitigate", BLUE)
     text_box(d, (980, 360, 1780, 680), "Safety Posture", "Non-kinetic first\nDARKSPACE audited\nHuman authority preserved\nSimulation only", GREEN)
-    d.text((70, 760), "Property of Fratres X AI | github.com/FratresMedAI/Ancile-Aeris", font=BODY, fill=WHITE)
+    d.text((70, 760), "Property of Fratres X AI | github.com/Fratres-X-AI/Ancile-Aeris", font=BODY, fill=WHITE)
     return img
 
 
@@ -285,7 +285,7 @@ def slide_12() -> Image.Image:
     d = ImageDraw.Draw(img, "RGBA")
     d.text((90, 280), "Simulation-honest. Human-governed. Auditable.", font=H1, fill=GOLD)
     d.text((90, 390), "Mothership FOB Swarm | Modular Micro-Payloads | Non-Kinetic First", font=H2, fill=WHITE)
-    d.text((90, 485), "github.com/FratresMedAI/Ancile-Aeris", font=H2, fill=BLUE)
+    d.text((90, 485), "github.com/Fratres-X-AI/Ancile-Aeris", font=H2, fill=BLUE)
     text_box(d, (90, 650, 1830, 835), "Disclaimer", "Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Government and industry references are alignment examples only and do not imply endorsement.", GOLD)
     return img
 

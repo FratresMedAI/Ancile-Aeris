@@ -2,7 +2,7 @@ Revised May 8, 2026 — Ancile Aeris **v2.1** (LRBAA **24-01** · BORAP **04**)
 
 # LRBAA submission package index (v2.1)
 
-**Property of Fratres X AI** · https://github.com/FratresMedAI/Ancile-Aeris
+**Property of Fratres X AI** · https://github.com/Fratres-X-AI/Ancile-Aeris
 
 Use this list when assembling uploads to SAM.gov / reviewer portals. Authoritative solicitation text remains on **SAM.gov** ([Notice DHS_ST_LRBAA_24-01](https://sam.gov/opp/a0969993ee8542988595334947e39a7d/view)).
 

@@ -1,6 +1,6 @@
 # Ancile Aeris – BORAP 04 Alignment
 
-**Property of Fratres X AI**
+Mapping notes for DHS S&T LRBAA 24-01 / BORAP 04.
 
 Ancile Aeris directly addresses the BORAP 04 objective: enhanced technologies for detection, tracking, identification, and mitigation of unmanned aircraft systems under varied terrains and environmental conditions.
 
@@ -15,4 +15,4 @@ Defensive interoperability narratives are framed against **Anduril Lattice**, **
 
 **Ancile Aeris** is purpose-built for the 2026 operational environment (FIFA World Cup, America250, critical infrastructure protection).
 
-**Property of Fratres X AI**
+Mapping notes for DHS S&T LRBAA 24-01 / BORAP 04.

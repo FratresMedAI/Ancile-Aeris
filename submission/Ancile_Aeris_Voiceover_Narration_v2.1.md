@@ -15,6 +15,6 @@ Read calmly; neutral US technical accent. Pace ~ moderate. These blocks align wi
 | 148–168 | Darkspace summarizes audit continuity across published events: integrity O K and chain gap count metrics support supervisory review alongside other ROS topics. |
 | 168–188 | The effector planner publishes the selected plan document with explanatory rationale and explicit monitor-only flags so evaluators see human-governed layering at the wire protocol. |
 | 188–210 | Open ROS interfaces underpin a disciplined transition: representative feeds today, laboratory SDR bring-up, and marketplace-style packaging for repeatable government evaluation. |
-| 210–240 | Ancile Aeris version two dot one remains simulation honest, authority preserving, immutable on the audit spine, and intentionally modest in claims. All rights reserved Fratres X AI. |
+| 210–240 | Ancile Aeris version two dot one remains simulation honest, authority preserving, immutable on the audit spine, and intentionally modest in claims. Licensed Apache 2.0 by Fratres X AI. |
 
 **Disclaimer:** Simulation-only C-UAS defensive demonstration. No autonomous weapon release. Government and industry references are alignment examples only and do not imply endorsement.
