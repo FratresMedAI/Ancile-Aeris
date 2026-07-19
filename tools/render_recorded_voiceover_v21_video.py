@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-r"""Render an Ancile Aeris v2.1 video paced to a recorded voiceover WAV.
+r"""Render an ClearSky OS v2.1 video paced to a recorded voiceover WAV.
 
 Default voiceover:
   C:\Users\Besn Daddy\Downloads\NoteGPT_Speech_1778252509802.wav
@@ -18,7 +18,7 @@ from pathlib import Path
 import imageio_ffmpeg
 from PIL import Image, ImageDraw
 
-import render_ancile_aeris_v21_video as base
+import render_clearsky_os_v21_video as base
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,7 +27,7 @@ KEY_DIR = OUT_DIR / "recorded_voiceover_keyframes"
 CONCEPT_DIR = OUT_DIR / "concept_renders"
 REPO_VOICEOVER = OUT_DIR / "recorded_voiceover" / "NoteGPT_Speech_1778252509802.wav"
 DEFAULT_VOICEOVER = REPO_VOICEOVER if REPO_VOICEOVER.exists() else Path(r"C:\Users\Besn Daddy\Downloads\NoteGPT_Speech_1778252509802.wav")
-OUTPUT = OUT_DIR / "Ancile_Aeris_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4"
+OUTPUT = OUT_DIR / "ClearSky_OS_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4"
 
 FPS = 24
 
@@ -37,7 +37,7 @@ def audio_duration(path: Path) -> float:
         return wav.getnframes() / float(wav.getframerate())
 
 
-def concept_bg(image_name: str, title: str, kicker: str = "Ancile Aeris v2.1 | LRBAA BORAP 04 | Simulation Only") -> Image.Image:
+def concept_bg(image_name: str, title: str, kicker: str = "ClearSky OS v2.1 | LRBAA BORAP 04 | Simulation Only") -> Image.Image:
     """Use cinematic concept art as the base while keeping submission guardrails visible."""
     path = CONCEPT_DIR / image_name
     if not path.is_file():
@@ -86,7 +86,7 @@ def caption(frame: Image.Image, text: str) -> None:
 
 
 def slide_opening() -> Image.Image:
-    img = concept_bg("01_mothership_fob_swarm.png", "Ancile Aeris v2.1")
+    img = concept_bg("01_mothership_fob_swarm.png", "ClearSky OS v2.1")
     d = ImageDraw.Draw(img, "RGBA")
     d.text((70, 165), "Complete ROS 2 Counter-UAS Software Demonstration", font=base.H1, fill=base.GOLD, stroke_width=2, stroke_fill=(0, 0, 0))
     base.text_box(
@@ -103,7 +103,7 @@ def slide_opening() -> Image.Image:
         "Simulation-only demonstration\nHuman-governed\nAuditable ROS 2 topics\nNo autonomous engagement",
         base.GREEN,
     )
-    d.text((70, 780), "Property of Fratres X AI | github.com/Fratres-X-AI/Ancile-Aeris", font=base.BODY, fill=base.WHITE)
+    d.text((70, 780), "Property of Fratres X AI | github.com/Fratres-X-AI/ClearSky-OS", font=base.BODY, fill=base.WHITE)
     return img
 
 
@@ -284,7 +284,7 @@ def slide_interoperability() -> Image.Image:
 
 
 def slide_close() -> Image.Image:
-    img = concept_bg("01_mothership_fob_swarm.png", "Ancile Aeris v2.1")
+    img = concept_bg("01_mothership_fob_swarm.png", "ClearSky OS v2.1")
     d = ImageDraw.Draw(img, "RGBA")
     d.text((90, 270), "Simulation-honest. Human-governed. Fully auditable.", font=base.H1, fill=base.GOLD, stroke_width=2, stroke_fill=(0, 0, 0))
     d.text((90, 380), "Ready for LRBAA reviewer inspection.", font=base.H2, fill=base.WHITE, stroke_width=2, stroke_fill=(0, 0, 0))
@@ -319,7 +319,7 @@ SLIDES = [
 
 
 SEGMENT_TEXT = [
-    "Ancile Aeris v2.1 is a complete ROS 2 counter-UAS software demonstration for DHS S&T LRBAA 24-01 and BORAP 04.",
+    "ClearSky OS v2.1 is a complete ROS 2 counter-UAS software demonstration for DHS S&T LRBAA 24-01 and BORAP 04.",
     "Detect, track, identify, and mitigate workflows are shown for urban venues, mass gatherings, critical infrastructure, and border-adjacent contexts. Simulation only.",
     "The current build introduces a mothership Forward Operating Base swarm: 1 to 4 scout motherships inside one operational area.",
     "Each mothership carries a representative 10-to-12-slot modular micro-drone bay: sensor, acoustic, kevlar web, cognitive EW, and reserved kamikaze ram.",
@@ -333,7 +333,7 @@ SEGMENT_TEXT = [
     "/cognitive_ew_commands carries comparable XAI fields to keep operator review and auditability visible.",
     "The transition path starts with open ROS 2 interfaces, moves toward SDR lab integration, and supports marketplace-style modular packaging.",
     "Interoperability references are context only: Lattice-style overlays, JIATF-401 Marketplace, Replicator 2, Leonidas-class HPM wording as stub, and optional DroneHunter naming.",
-    "Ancile Aeris v2.1 is simulation honest, human governed, fully auditable, and ready for LRBAA reviewer inspection. Thank you for your time and service.",
+    "ClearSky OS v2.1 is simulation honest, human governed, fully auditable, and ready for LRBAA reviewer inspection. Thank you for your time and service.",
 ]
 
 

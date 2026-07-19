@@ -1,7 +1,0 @@
-/ancile_aeris_sensor_resilience_node:
-  ros__parameters:
-    visual_topic: /sensor/visual/tracks
-    rf_topic: /sensor/rf/detections
-    acoustic_topic: /sensor/acoustic/detections
-    alerts_topic: /sensor/resilience_alerts
-    publish_hz: 2.0

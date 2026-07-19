@@ -1,0 +1,4 @@
+/clearsky_os_safety_gate_node:
+  ros__parameters:
+    pid_target: 0.999
+    publish_hz: 10.0

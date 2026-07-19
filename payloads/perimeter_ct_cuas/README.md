@@ -1,8 +1,8 @@
-## Perimeter C-UAS / Anti-Terror Payload (Ancile Aeris)
+## Perimeter C-UAS / Anti-Terror Payload (ClearSky OS)
 
-**Ancile Aeris — Property of Fratres X AI**
+**ClearSky OS — Property of Fratres X AI**
 
-This payload contains Ancile Aeris perimeter security node logic for **counter-UAS and anti-terrorism** workflows over mass gatherings, critical infrastructure corridors, and high-value facilities.
+This payload contains ClearSky OS perimeter security node logic for **counter-UAS and anti-terrorism** workflows over mass gatherings, critical infrastructure corridors, and high-value facilities.
 
 Mission mapping:
 

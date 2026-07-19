@@ -1,4 +1,0 @@
-ancile_aeris_operator_copilot:
-  ros__parameters:
-    backend: template
-    dashboard_state_file: /tmp/ancile_aeris_dashboard_state.json

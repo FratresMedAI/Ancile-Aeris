@@ -1,6 +1,6 @@
 ## Generic Safety, XAI, and Audit Payload
 
-**Ancile Aeris — Property of Fratres X AI**
+**ClearSky OS — Property of Fratres X AI**
 
 This payload contains shared safety governance, explainability, and immutable auditing components intended for all **counter-UAS and anti-terror defensive** mission profiles.
 
@@ -14,6 +14,6 @@ Contained node copies:
 - `safety_gate_node.py`
 - `audit_logger.py`
 - `xai_node.py`
-- `ancile_rule_guard.py`
+- `clearsky_rule_guard.py`
 
-`ancile_rule_guard.py` is an Ancile stateless safeguard adapter. It adds offline rule-based detection for prompt injection, unsafe tool traces, credential exfiltration patterns, and encoded override attempts.
+`clearsky_rule_guard.py` is a ClearSky OS stateless safeguard adapter. It adds offline rule-based detection for prompt injection, unsafe tool traces, credential exfiltration patterns, and encoded override attempts.

@@ -1,4 +1,4 @@
-# Ancile Aeris Testing
+# ClearSky OS Testing
 
 Host-agnostic build, test, and smoke validation for the Docker-supported workspace.
 
@@ -7,25 +7,25 @@ Host-agnostic build, test, and smoke validation for the Docker-supported workspa
 Run inside Docker container context:
 
 ```bash
-docker compose -f docker/docker-compose.yml build ancile-aeris
+docker compose -f docker/docker-compose.yml build clearsky-os
 ```
 
 ## Package Tests
 
 ```bash
-docker run --rm -v "${PWD}:/opt/ancile_aeris_ws" -w /opt/ancile_aeris_ws ancile-aeris bash -lc "rm -rf build install log && source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && colcon test && colcon test-result --verbose"
+docker run --rm -v "${PWD}:/opt/clearsky_os_ws" -w /opt/clearsky_os_ws clearsky-os bash -lc "rm -rf build install log && source /opt/ros/kilted/setup.bash && colcon build --symlink-install && source install/setup.bash && colcon test && colcon test-result --verbose"
 ```
 
 ## Launch Smoke Test
 
 ```bash
-docker compose -f docker/docker-compose.yml up ancile-aeris
+docker compose -f docker/docker-compose.yml up clearsky-os
 ```
 
 Video-enhanced C-UAS profile:
 
 ```bash
-ANCILE_PAYLOAD=cuas ANCILE_SIM_MODE=true docker compose -f docker/docker-compose.yml up ancile-aeris
+CLEARSKY_PAYLOAD=cuas CLEARSKY_SIM_MODE=true docker compose -f docker/docker-compose.yml up clearsky-os
 ```
 
 Expected indicators:
@@ -38,7 +38,7 @@ Expected indicators:
 Run mixed friendly/hostile defensive scenario validation:
 
 ```bash
-docker run --rm -v "${PWD}:/opt/ancile_aeris_ws" -w /opt/ancile_aeris_ws ancile-aeris bash -lc "python3 scripts/soldier_safety_scenario.py"
+docker run --rm -v "${PWD}:/opt/clearsky_os_ws" -w /opt/clearsky_os_ws clearsky-os bash -lc "python3 scripts/soldier_safety_scenario.py"
 ```
 
 Pass criteria:

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clearsky-os-core
+  namespace: clearsky-os
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clearsky-os-core
+  template:
+    metadata:
+      labels:
+        app: clearsky-os-core
+    spec:
+      containers:
+        - name: clearsky-os-core
+          image: docker-clearsky-os-x86:latest
+          imagePullPolicy: IfNotPresent
+          command: ["bash", "-lc", "source /opt/ros/kilted/setup.bash && source /opt/clearsky_os_ws/install/setup.bash && ros2 launch clearsky_os_bringup bringup.launch.py"]

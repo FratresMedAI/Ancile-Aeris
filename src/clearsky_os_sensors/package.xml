@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>clearsky_os_sensors</name>
+  <version>0.1.0</version>
+  <description>ClearSky OS multimodal sensor publisher stubs.</description>
+  <maintainer email="maintainers@fratres-x.ai">ClearSky-OS Team</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>launch</depend>
+  <depend>launch_ros</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

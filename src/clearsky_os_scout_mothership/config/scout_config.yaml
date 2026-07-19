@@ -1,0 +1,17 @@
+# ClearSky OS - Property of Fratres X AI
+# Scout mothership ISR + mesh coordination (C-UAS defensive simulation)
+
+/**:
+  ros__parameters:
+    publish_hz: 1.0
+    confidence: 0.92
+    mothership_id: "mhs-001"
+    mesh_enabled: true
+    mesh_peer_count: 2
+    enable_mesh_publish: true
+    mesh_neighbor_count_hint: 2
+
+/clearsky_os_scout_mothership_node:
+  ros__parameters:
+    max_interceptors_onboard: 3
+    isr_mode: "persistent_stub_mesh"

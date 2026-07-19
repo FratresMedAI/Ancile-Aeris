@@ -1,0 +1,3 @@
+clearsky_os_sensors:
+  ros__parameters:
+    sim_mode: true

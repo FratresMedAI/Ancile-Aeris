@@ -14,7 +14,7 @@
 
 - [ ] `colcon build` succeeds in ROS 2 Kilted (Docker / CI)
 - [ ] Relevant `colcon test` targets pass
-- [ ] Manual smoke (if applicable): `ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py`
+- [ ] Manual smoke (if applicable): `ros2 launch clearsky_os_bringup clearsky_os_basic_demo.launch.py`
 
 ## Safety / policy impact
 

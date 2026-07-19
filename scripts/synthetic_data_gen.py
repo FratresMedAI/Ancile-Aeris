@@ -2,7 +2,7 @@
 
 
 def main() -> None:
-    print("Synthetic data generation stub for Ancile Aeris")
+    print("Synthetic data generation stub for ClearSky OS")
 
 
 if __name__ == "__main__":

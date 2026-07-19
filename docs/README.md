@@ -1,6 +1,6 @@
-# Ancile Aeris Docs
+# ClearSky OS Docs
 
-Architecture, testing, and deployment notes for Ancile Aeris.
+Architecture, testing, and deployment notes for ClearSky OS.
 
 | Doc | Contents |
 |-----|----------|
@@ -12,4 +12,4 @@ Architecture, testing, and deployment notes for Ancile Aeris.
 
 Quick start lives in the root [`README.md`](../README.md).
 
-**Repository:** https://github.com/Fratres-X-AI/Ancile-Aeris
+**Repository:** https://github.com/Fratres-X-AI/ClearSky-OS

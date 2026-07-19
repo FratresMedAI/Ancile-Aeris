@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>clearsky_os_integration</name>
+  <version>0.1.0</version>
+  <description>ClearSky OS immutable audit and XAI helper utilities for cognitive nodes.</description>
+  <maintainer email="maintainers@fratres-x.ai">ClearSky-OS Team</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

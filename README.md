@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/ancile-aeris-logo.png" alt="Ancile Aeris" width="280" />
+  <img src="assets/clearsky-os-logo.png" alt="ClearSky OS" width="280" />
 </p>
 
-<h1 align="center">Ancile Aeris</h1>
+<h1 align="center">ClearSky OS</h1>
 
 <p align="center">
   <strong>Simulation-first ROS 2 Counter-UAS research stack</strong><br />
@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Fratres-X-AI/Ancile-Aeris/actions/workflows/ci.yml"><img src="https://github.com/Fratres-X-AI/Ancile-Aeris/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://github.com/Fratres-X-AI/ClearSky-OS/actions/workflows/ci.yml"><img src="https://github.com/Fratres-X-AI/ClearSky-OS/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" alt="License" /></a>
   <a href="https://docs.ros.org/en/kilted/"><img src="https://img.shields.io/badge/ROS%202-Kilted-22314E.svg" alt="ROS 2 Kilted" /></a>
   <a href="docker/"><img src="https://img.shields.io/badge/runtime-Docker-2496ED.svg" alt="Docker" /></a>
@@ -29,7 +29,7 @@
 
 > **Safety posture:** Simulation-only defensive demonstration. **No autonomous weapon release.** Kinetic last-resort paths exist only as simulation stubs and are **policy-off by default**. Government and industry references are alignment examples only and do not imply endorsement.
 
-**Ancile Aeris** is an open research prototype from [Fratres X AI](https://github.com/Fratres-X-AI): a modular ROS 2 workspace that models layered Counter-UAS (C-UAS) defense for dense urban, mass-gathering, and critical-infrastructure contexts—with immutable audit trails, explainability hooks, and strict human authority.
+**ClearSky OS** is an open research prototype from [Fratres X AI](https://github.com/Fratres-X-AI): a modular ROS 2 workspace that models layered Counter-UAS (C-UAS) defense for dense urban, mass-gathering, and critical-infrastructure contexts—with immutable audit trails, explainability hooks, and strict human authority.
 
 Built as a software-first response to **DHS S&T LRBAA 24-01 / BORAP 04** (Countering Unmanned Aircraft Systems). Formal submission materials live under [`submission/`](submission/).
 
@@ -49,18 +49,18 @@ Built as a software-first response to **DHS S&T LRBAA 24-01 / BORAP 04** (Counte
 
 ```bash
 # From repository root
-ANCILE_LAUNCH_FILE=ancile_aeris_basic_demo.launch.py \
+CLEARSKY_LAUNCH_FILE=clearsky_os_basic_demo.launch.py \
   docker compose -f docker/docker-compose.yml up --build
 ```
 
 Clean rebuild inside the running container:
 
 ```bash
-cd /opt/ancile_aeris_ws
+cd /opt/clearsky_os_ws
 source /opt/ros/kilted/setup.bash
 ./clean-build.sh
 # then
-ros2 launch ancile_aeris_bringup ancile_aeris_basic_demo.launch.py
+ros2 launch clearsky_os_bringup clearsky_os_basic_demo.launch.py
 ```
 
 Smoke-check topics after launch:
@@ -75,7 +75,7 @@ Full test workflow: [`docs/TESTING.md`](docs/TESTING.md).
 
 ```mermaid
 flowchart LR
-  payloadSelector[payload_selector.yaml] --> bringup[ancile_aeris_bringup]
+  payloadSelector[payload_selector.yaml] --> bringup[clearsky_os_bringup]
   bringup --> sensors[sensors]
   bringup --> fusion[fusion]
   bringup --> safetyGate[safety_gate]
@@ -96,12 +96,12 @@ Default profile (`mothership_fob_standard`): 2–4 FOB carriers with modular mic
 ## Demo
 
 <p align="center">
-  <img src="artifacts/video_v21/concept_renders/01_mothership_fob_swarm.png" alt="Ancile Aeris mothership FOB swarm concept" width="720" />
+  <img src="artifacts/video_v21/concept_renders/01_mothership_fob_swarm.png" alt="ClearSky OS mothership FOB swarm concept" width="720" />
 </p>
 
 **Live stack:** launch the basic demo (Quick start above), then inspect `/fused_tracks`, `/audit/events`, `/safety_gate_status`, and `/effector/*`.
 
-**Reviewer video:** [`artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4`](artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4)
+**Reviewer video:** [`artifacts/video_v21/ClearSky_OS_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4`](artifacts/video_v21/ClearSky_OS_v2.1_LRBAA_BORAP_04_recorded_voiceover_demo.mp4)
 
 **Narrative package:** [`submission/LRBAA_Submission_Package_v2.1.md`](submission/LRBAA_Submission_Package_v2.1.md)
 

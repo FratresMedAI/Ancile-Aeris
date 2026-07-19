@@ -69,7 +69,7 @@ def main() -> None:
         "latency_target_met": latency_ms < 100.0,
     }
 
-    out = Path("/tmp/ancile_aeris_soldier_safety_report.json")
+    out = Path("/tmp/clearsky_os_soldier_safety_report.json")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(json.dumps(report))

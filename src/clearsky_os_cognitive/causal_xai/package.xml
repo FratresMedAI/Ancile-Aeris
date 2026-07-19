@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>causal_xai</name>
+  <version>0.1.0</version>
+  <description>Causal and counterfactual explainability stubs for defensive actions.</description>
+  <maintainer email="maintainers@fratres-x.ai">ClearSky-OS Team</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclpy</depend><depend>std_msgs</depend><depend>clearsky_os_interfaces</depend>
+  <exec_depend>clearsky_os_integration</exec_depend>
+  <depend>launch</depend><depend>launch_ros</depend>
+  <test_depend>ament_cmake_pytest</test_depend><test_depend>python3-pytest</test_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

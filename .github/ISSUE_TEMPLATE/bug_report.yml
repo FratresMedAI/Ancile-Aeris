@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping improve Ancile Aeris. Please confirm this is a **simulation / software** issue, not a request for real-world weaponization guidance.
+        Thanks for helping improve ClearSky OS. Please confirm this is a **simulation / software** issue, not a request for real-world weaponization guidance.
   - type: textarea
     id: summary
     attributes:

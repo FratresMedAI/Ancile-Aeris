@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate narration audio for Ancile Aeris v2.1 submission video.
+"""Generate narration audio for ClearSky OS v2.1 submission video.
 
 Uses Edge TTS (free; requires network once per run).
 Requires: pip install edge-tts
@@ -7,7 +7,7 @@ Requires: FFmpeg on PATH OR imageio-ffmpeg (bundled FFmpeg from render script de
 
 Writes:
   artifacts/video_v21/voiceover/narration_v21.wav
-  artifacts/video_v21/Ancile_Aeris_v2.1_LRBAA_BORAP_04_4min_demo_with_voiceover.mp4
+  artifacts/video_v21/ClearSky_OS_v2.1_LRBAA_BORAP_04_4min_demo_with_voiceover.mp4
 
 Usage:
   python tools/synthesize_voiceover_v21.py
@@ -34,8 +34,8 @@ except ImportError as exc:
 ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "artifacts" / "video_v21"
 VO_DIR = OUT_DIR / "voiceover"
-VIDEO_SILENT = OUT_DIR / "Ancile_Aeris_v2.1_LRBAA_BORAP_04_4min_demo.mp4"
-VIDEO_VOICE = OUT_DIR / "Ancile_Aeris_v2.1_LRBAA_BORAP_04_4min_demo_with_voiceover.mp4"
+VIDEO_SILENT = OUT_DIR / "ClearSky_OS_v2.1_LRBAA_BORAP_04_4min_demo.mp4"
+VIDEO_VOICE = OUT_DIR / "ClearSky_OS_v2.1_LRBAA_BORAP_04_4min_demo_with_voiceover.mp4"
 FULL_WAV = VO_DIR / "narration_v21.wav"
 
 
@@ -104,7 +104,7 @@ def tts_normalize(text: str) -> str:
     text = text.replace("/payload/micro_deployment", "payload slash micro deployment")
     text = text.replace("/effector/selected_plan", "effector selected plan topic")
     text = text.replace("/cognitive_ew_commands", "cognitive E W commands")
-    text = text.replace("ancile_aeris_basic_demo.launch.py", "ancile aeris basic demo launch file")
+    text = text.replace("clearsky_os_basic_demo.launch.py", "clearsky os basic demo launch file")
     text = text.replace("LRBAA", "Ell Are Bee Ay Ay")
     text = text.replace("BORAP", "Bow Rap")
     text = text.replace("UAS", "U A S")
@@ -126,7 +126,7 @@ SEGMENTS: list[tuple[float, float, str, str | None]] = [
         15,
         "",
         (
-            "Ancile Aeris version two dot one is Ross Two counter U A S integration software framed for "
+            "ClearSky OS version two dot one is Ross Two counter U A S integration software framed for "
             "D H S Science and Technology L R B A A twenty four oh one and topic B O R A P zero four: "
             "Countering Unmanned Aircraft Systems. Everything shown here is demonstrated in simulation only."
         ),
@@ -156,7 +156,7 @@ SEGMENTS: list[tuple[float, float, str, str | None]] = [
         "",
         (
             "Reviewers reconstruct the authoritative demo using the Linux container workflow: "
-            "clean build dot sh, source the workspace, then launch ancile aeris basic demo. No Windows native build is required."
+            "clean build dot sh, source the workspace, then launch clearsky os basic demo. No Windows native build is required."
         ),
     ),
     (
@@ -227,7 +227,7 @@ SEGMENTS: list[tuple[float, float, str, str | None]] = [
         240,
         "",
         (
-            "Ancile Aeris version two dot one remains simulation honest, authority preserving, immutable on the audit spine, "
+            "ClearSky OS version two dot one remains simulation honest, authority preserving, immutable on the audit spine, "
             "and intentionally modest in claims. Licensed Apache two point zero by Fratres X A I."
         ),
     ),
@@ -396,7 +396,7 @@ def main() -> None:
 
     if not VIDEO_SILENT.exists():
         raise SystemExit(
-            f"Missing silent video: {VIDEO_SILENT}\nRun: python tools/render_ancile_aeris_v21_video.py first."
+            f"Missing silent video: {VIDEO_SILENT}\nRun: python tools/render_clearsky_os_v21_video.py first."
         )
 
     VO_DIR.mkdir(parents=True, exist_ok=True)

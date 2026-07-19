@@ -32,11 +32,11 @@ def pandoc() -> str:
 
 
 PAIRS: list[tuple[str, str]] = [
-    ("submission/Ancile_Aeris_Concept_Paper_v2.1.md", "submission/Ancile_Aeris_Concept_Paper_v2.1.docx"),
-    ("submission/Ancile_Aeris_Quad_Chart_v2.1.md", "submission/Ancile_Aeris_Quad_Chart_v2.1.docx"),
-    ("submission/Ancile_Aeris_Video_Script_v2.1.md", "submission/Ancile_Aeris_Video_Script_v2.1.docx"),
+    ("submission/ClearSky_OS_Concept_Paper_v2.1.md", "submission/ClearSky_OS_Concept_Paper_v2.1.docx"),
+    ("submission/ClearSky_OS_Quad_Chart_v2.1.md", "submission/ClearSky_OS_Quad_Chart_v2.1.docx"),
+    ("submission/ClearSky_OS_Video_Script_v2.1.md", "submission/ClearSky_OS_Video_Script_v2.1.docx"),
     ("submission/Video_Production_Package_v2.1.md", "submission/Video_Production_Package_v2.1.docx"),
-    ("submission/Ancile_Aeris_Voiceover_Narration_v2.1.md", "submission/Ancile_Aeris_Voiceover_Narration_v2.1.docx"),
+    ("submission/ClearSky_OS_Voiceover_Narration_v2.1.md", "submission/ClearSky_OS_Voiceover_Narration_v2.1.docx"),
     ("submission/LRBAA_Submission_Package_v2.1.md", "submission/LRBAA_Submission_Package_v2.1.docx"),
 ]
 

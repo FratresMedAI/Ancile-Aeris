@@ -1,0 +1,13 @@
+# ClearSky OS — Property of Fratres X AI
+# Optional simulation interceptor configuration.
+
+/**:
+  ros__parameters:
+    require_simulate_only_deploy_cmd: false
+    require_double_authorization: true
+
+/clearsky_os_baby_interceptor_node:
+  ros__parameters:
+    payload_mode: "low_collateral_stub"
+    attritable_unit_cost_tier: "low"
+

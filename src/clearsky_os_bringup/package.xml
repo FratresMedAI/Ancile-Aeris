@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>clearsky_os_bringup</name>
+  <version>0.1.0</version>
+  <description>ClearSky OS unified launch orchestration package.</description>
+  <maintainer email="maintainers@fratres-x.ai">ClearSky-OS Team</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+
+  <exec_depend>clearsky_os_darkspace_integration</exec_depend>
+  <exec_depend>clearsky_os_fusion</exec_depend>
+  <exec_depend>clearsky_os_integration</exec_depend>
+  <exec_depend>clearsky_os_interfaces</exec_depend>
+  <exec_depend>clearsky_os_operator_copilot</exec_depend>
+  <exec_depend>clearsky_os_safety_gate</exec_depend>
+  <exec_depend>clearsky_os_sensors</exec_depend>
+  <exec_depend>clearsky_os_sensor_resilience</exec_depend>
+  <exec_depend>clearsky_os_swarm_intent</exec_depend>
+  <exec_depend>clearsky_os_scout_mothership</exec_depend>
+  <exec_depend>clearsky_os_micro_payloads</exec_depend>
+  <exec_depend>clearsky_os_baby_interceptor</exec_depend>
+  <exec_depend>clearsky_os_effectors</exec_depend>
+  <exec_depend>agent_orchestrator</exec_depend>
+  <exec_depend>digital_twin</exec_depend>
+  <exec_depend>cognitive_ew</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

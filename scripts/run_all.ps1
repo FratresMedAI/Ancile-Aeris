@@ -7,7 +7,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-Write-Host "Starting Ancile-Aeris with payload=$Payload sim_mode=$SimMode"
-$env:ANCILE_PAYLOAD = $Payload
-$env:ANCILE_SIM_MODE = $SimMode
-docker compose -f docker/docker-compose.yml up --build ancile-aeris
+Write-Host "Starting ClearSky-OS with payload=$Payload sim_mode=$SimMode"
+$env:CLEARSKY_PAYLOAD = $Payload
+$env:CLEARSKY_SIM_MODE = $SimMode
+docker compose -f docker/docker-compose.yml up --build clearsky-os

@@ -1,6 +1,6 @@
 sapient:
   compliance_mode: mock
-  idl_namespace: ancile_aeris::idl
+  idl_namespace: clearsky_os::idl
   endpoints:
     fused_tracks: /fused_tracks
     threats: /threats

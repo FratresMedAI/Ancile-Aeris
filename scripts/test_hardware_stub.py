@@ -2,7 +2,7 @@
 
 
 def main() -> None:
-    print("Hardware interface diagnostic stub for Ancile Aeris")
+    print("Hardware interface diagnostic stub for ClearSky OS")
 
 
 if __name__ == "__main__":

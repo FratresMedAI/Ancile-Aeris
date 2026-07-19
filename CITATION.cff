@@ -1,12 +1,12 @@
 cff-version: 1.2.0
-title: Ancile Aeris
+title: ClearSky OS
 message: If you use this software, please cite it using these metadata.
 type: software
 authors:
   - name: Fratres X AI
     website: https://github.com/Fratres-X-AI
-repository-code: https://github.com/Fratres-X-AI/Ancile-Aeris
-url: https://github.com/Fratres-X-AI/Ancile-Aeris
+repository-code: https://github.com/Fratres-X-AI/ClearSky-OS
+url: https://github.com/Fratres-X-AI/ClearSky-OS
 abstract: >-
   Simulation-first ROS 2 Counter-UAS research stack providing auditable
   detect-track-identify-mitigate modeling with human-on-the-loop safety gates,

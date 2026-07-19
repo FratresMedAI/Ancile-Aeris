@@ -19,13 +19,13 @@ def generate_launch_description() -> LaunchDescription:
         DeclareLaunchArgument(
             'sim_mode',
             default_value='true',
-            description='Run Ancile-Aeris in simulation mode'
+            description='Run ClearSky-OS in simulation mode'
         ),
         DeclareLaunchArgument(
             'payload',
             default_value='cuas',
             description='Payload profile: cuas, perimeter_ct_cuas, or generic',
         ),
-        LogInfo(msg=['Launching Ancile-Aeris full system. sim_mode=', sim_mode, ' payload=', payload]),
+        LogInfo(msg=['Launching ClearSky-OS full system. sim_mode=', sim_mode, ' payload=', payload]),
         sensor_launch,
     ])

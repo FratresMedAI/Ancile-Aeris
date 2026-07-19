@@ -1,4 +1,4 @@
-name: Ancile-Aeris CI
+name: ClearSky-OS CI
 
 on:
   push:
@@ -21,13 +21,13 @@ jobs:
           apt-get install -y python3-colcon-common-extensions
       - name: Capability coverage summary
         run: |
-          echo "Ancile-Aeris CI capability groups:"
+          echo "ClearSky-OS CI capability groups:"
           echo "- Perception: video_analytics, neuromorphic_sim, hyperspectral_stub"
           echo "- Cognition: adversarial_defense, agent_orchestrator, cognitive_ew, swarm_orchestrator"
           echo "- Decision: digital_twin, causal_xai, verification"
           echo "- Action/Resilience: copilot, federated_learning, continual_learning"
           echo "- Advanced coordination: defensive_swarm_coordinator, zero_knowledge_sharing, resilient_pnt, generative_red_team"
-          echo "- Audit/XAI helper Python package: ancile_aeris_integration (installed alongside cognitive nodes)"
+          echo "- Audit/XAI helper Python package: clearsky_os_integration (installed alongside cognitive nodes)"
       - name: Build
         run: |
           source /opt/ros/kilted/setup.bash

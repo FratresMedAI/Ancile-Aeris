@@ -1,4 +1,4 @@
-# Ancile Aeris Payload Selector v2.0
+# ClearSky OS Payload Selector v2.0
 # Property of Fratres X AI
 default_payload: cuas
 capabilities:
@@ -17,10 +17,10 @@ capabilities:
   copilot: true
   federated_learning: true
   continual_learning: true
-  scout_mothership: true
+  clearsky_os_scout_mothership: true
   mesh_mothership_coordination: true
   operator_copilot_node: true
-  baby_interceptor: false          # Optional - requires double human authorization
+  clearsky_os_baby_interceptor: false          # Optional - requires double human authorization
   defensive_swarm_coordinator: true
   zero_knowledge_sharing: true
   resilient_pnt: true

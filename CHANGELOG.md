@@ -17,7 +17,8 @@ for tagged releases.
 
 ### Changed
 
-- Canonical repository URL set to `https://github.com/Fratres-X-AI/Ancile-Aeris`
+- **Rebranded from Ancile Aeris to ClearSky OS** — ROS packages `ancile_aeris_*` → `clearsky_os_*`, Docker/k8s names, env vars `ANCILE_*` → `CLEARSKY_*`, docs and submission materials
+- Canonical repository URL set to `https://github.com/Fratres-X-AI/ClearSky-OS`
 - Documentation paths made host-agnostic for Docker workflows
 
 ## [2.1.0] - 2026-05
@@ -39,6 +40,6 @@ for tagged releases.
 - Tag `v2.0-lrbaa` baseline for DHS S&T LRBAA 24-01 / BORAP 04 filing materials
 - Docker-first ROS 2 Kilted workspace and CI build/test workflow
 
-[Unreleased]: https://github.com/Fratres-X-AI/Ancile-Aeris/compare/v2.0-lrbaa...HEAD
-[2.1.0]: https://github.com/Fratres-X-AI/Ancile-Aeris/releases/tag/v2.0-lrbaa
-[2.0.0]: https://github.com/Fratres-X-AI/Ancile-Aeris/releases/tag/v2.0-lrbaa
+[Unreleased]: https://github.com/Fratres-X-AI/ClearSky-OS/compare/v2.0-lrbaa...HEAD
+[2.1.0]: https://github.com/Fratres-X-AI/ClearSky-OS/releases/tag/v2.0-lrbaa
+[2.0.0]: https://github.com/Fratres-X-AI/ClearSky-OS/releases/tag/v2.0-lrbaa

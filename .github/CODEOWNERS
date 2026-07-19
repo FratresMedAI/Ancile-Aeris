@@ -1,7 +1,7 @@
-# Default owners for Ancile Aeris
+# Default owners for ClearSky OS
 *       @FratresMedAI
 
 /.github/                       @FratresMedAI
 /docker/                        @FratresMedAI
-/src/ancile_aeris_safety_gate/  @FratresMedAI
-/src/ancile_aeris_effectors/    @FratresMedAI
+/src/clearsky_os_safety_gate/  @FratresMedAI
+/src/clearsky_os_effectors/    @FratresMedAI

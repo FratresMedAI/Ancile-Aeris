@@ -1,6 +1,6 @@
-# Contributing to Ancile Aeris
+# Contributing to ClearSky OS
 
-Thanks for your interest in improving Ancile Aeris. This repository is a **simulation-first** ROS 2 Counter-UAS research prototype. Contributions that strengthen safety, auditability, test coverage, and documentation are especially welcome.
+Thanks for your interest in improving ClearSky OS. This repository is a **simulation-first** ROS 2 Counter-UAS research prototype. Contributions that strengthen safety, auditability, test coverage, and documentation are especially welcome.
 
 ## Before you start
 
@@ -14,7 +14,7 @@ Thanks for your interest in improving Ancile Aeris. This repository is a **simul
 
 ```bash
 # From repository root
-ANCILE_LAUNCH_FILE=ancile_aeris_basic_demo.launch.py \
+CLEARSKY_LAUNCH_FILE=clearsky_os_basic_demo.launch.py \
   docker compose -f docker/docker-compose.yml up --build
 ```
 
@@ -25,7 +25,7 @@ Clean rebuild inside the container:
 # or
 source /opt/ros/kilted/setup.bash
 rm -rf build/ install/ log/
-colcon build --symlink-install --packages-up-to ancile_aeris_bringup
+colcon build --symlink-install --packages-up-to clearsky_os_bringup
 ```
 
 Native Windows `colcon build` is **not** supported.

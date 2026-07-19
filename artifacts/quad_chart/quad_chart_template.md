@@ -2,7 +2,7 @@
 
 ## A. Project Title
 
-Ancile-Aeris: Defensive Multi-Payload UAS Detection, Tracking, Identification, and Mitigation
+ClearSky OS: Defensive Multi-Payload UAS Detection, Tracking, Identification, and Mitigation
 
 ## B. DHS Impact
 

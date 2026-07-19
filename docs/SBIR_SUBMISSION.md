@@ -1,6 +1,6 @@
-# Ancile Aeris Submission Package Outline
+# ClearSky OS Submission Package Outline
 
-Outline for federal acquisition / LRBAA narrative packaging. Canonical repo: https://github.com/Fratres-X-AI/Ancile-Aeris
+Outline for federal acquisition / LRBAA narrative packaging. Canonical repo: https://github.com/Fratres-X-AI/ClearSky-OS
 
 ## 1. Problem Statement
 - Escalating low-cost autonomous and semi-autonomous UAS threats.
@@ -13,7 +13,7 @@ Outline for federal acquisition / LRBAA narrative packaging. Canonical repo: htt
 - XAI + audit-first reasoning for operator trust and after-action review.
 
 ## 3. Open Architecture and Interoperability
-- Ancile Aeris interface contracts in `src/ancile_aeris_interfaces/`.
+- ClearSky OS interface contracts in `src/clearsky_os_interfaces/`.
 - Kubernetes-ready deployment manifests in `k8s/`.
 - Integration hooks for enterprise command-and-control interoperability.
 

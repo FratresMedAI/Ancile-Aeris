@@ -13,8 +13,8 @@ Do **not** open a public GitHub issue for security-sensitive findings.
 
 Please report vulnerabilities privately via one of:
 
-1. **GitHub Security Advisories** — [Report a vulnerability](https://github.com/Fratres-X-AI/Ancile-Aeris/security/advisories/new)
-2. **Email** — `security@fratres-x.ai` (subject: `Ancile Aeris security`)
+1. **GitHub Security Advisories** — [Report a vulnerability](https://github.com/Fratres-X-AI/ClearSky-OS/security/advisories/new)
+2. **Email** — `security@fratres-x.ai` (subject: `ClearSky OS security`)
 
 Include:
 
@@ -27,7 +27,7 @@ We aim to acknowledge reports within **5 business days**.
 
 ## Scope notes
 
-Ancile Aeris is a **simulation-only** defensive C-UAS research stack.
+ClearSky OS is a **simulation-only** defensive C-UAS research stack.
 
 In scope:
 

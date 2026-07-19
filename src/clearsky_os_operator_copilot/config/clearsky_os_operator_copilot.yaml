@@ -1,0 +1,4 @@
+clearsky_os_operator_copilot:
+  ros__parameters:
+    backend: template
+    dashboard_state_file: /tmp/clearsky_os_dashboard_state.json
