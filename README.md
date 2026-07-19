@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="assets/clearsky-os-logo.png" alt="ClearSky OS" width="280" />
+  <img src="assets/clearsky-os-hero.png" alt="ClearSky OS — Fratres X AI" width="100%" />
 </p>
-
-<h1 align="center">ClearSky OS</h1>
 
 <p align="center">
   <strong>ROS 2 counter-UAS research stack from <a href="https://fratres-x.com">Fratres X AI</a></strong><br />
