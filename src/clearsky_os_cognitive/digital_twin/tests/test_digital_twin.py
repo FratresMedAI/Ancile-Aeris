@@ -1,10 +1,49 @@
-def score_effectiveness(threat_score: float, mitigation_gain: float) -> tuple[float, float]:
-    effectiveness = min(1.0, max(0.0, 0.5 * threat_score + 0.5 * mitigation_gain))
-    collateral = max(0.0, 1.0 - effectiveness)
-    return effectiveness, collateral
+from digital_twin.physics import evaluate_proposal
 
 
-def test_score_effectiveness_bounds() -> None:
-    effectiveness, collateral = score_effectiveness(0.8, 0.7)
-    assert 0.0 <= effectiveness <= 1.0
-    assert 0.0 <= collateral <= 1.0
+def test_evaluate_proposal_bounds() -> None:
+    result = evaluate_proposal(
+        track_x=30.0,
+        track_y=0.0,
+        track_vx=-10.0,
+        track_vy=0.0,
+        threat_score=0.8,
+        mitigation_gain=0.7,
+        asset_radius_m=25.0,
+        safety_open=True,
+    )
+    assert 0.0 <= result.effectiveness_probability <= 1.0
+    assert 0.0 <= result.collateral_risk_score <= 1.0
+    assert 0.0 <= result.risk <= 1.0
+
+
+def test_high_proximity_can_veto() -> None:
+    result = evaluate_proposal(
+        track_x=5.0,
+        track_y=0.0,
+        track_vx=-20.0,
+        track_vy=0.0,
+        threat_score=0.95,
+        mitigation_gain=0.2,
+        asset_radius_m=25.0,
+        risk_veto_threshold=0.5,
+        safety_open=False,
+    )
+    assert result.risk >= 0.5
+    assert result.veto is True
+
+
+def test_far_slow_track_low_risk() -> None:
+    result = evaluate_proposal(
+        track_x=200.0,
+        track_y=200.0,
+        track_vx=1.0,
+        track_vy=0.0,
+        threat_score=0.3,
+        mitigation_gain=0.8,
+        asset_radius_m=25.0,
+        risk_veto_threshold=0.65,
+        safety_open=True,
+    )
+    assert result.risk < 0.65
+    assert result.veto is False

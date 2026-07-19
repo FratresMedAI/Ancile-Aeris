@@ -20,15 +20,16 @@ flowchart LR
 
 ## Node responsibilities
 
-- `clearsky_os_sensors`: visual, acoustic, and RF sensor stubs
-- `clearsky_os_fusion`: multimodal confidence fusion and `/fused_tracks` publication
+- `clearsky_os_sensors`: visual YOLO (or labeled synthetic), acoustic/RF/thermal stubs
+- `clearsky_os_fusion`: constant-velocity EKF + Mahalanobis association → `/fused_tracks`
 - `clearsky_os_safety_gate`: policy gate state on `/safety_gate_status`
-- `clearsky_os_bringup`: unified launch orchestration for all capabilities
-- `clearsky_os_cognitive/*`: cognitive defensive adjuncts (roadmap + demo-enabled subset)
+- `digital_twin`: analytic kinematics/risk → `/digital_twin_result` and `/digital_twin/veto`
+- `clearsky_os_bringup`: unified launch orchestration
+- `clearsky_os_cognitive/*`: cognitive adjuncts (roadmap + demo-enabled subset)
 - `clearsky_os_darkspace_integration`: audit / immutable hashing spine
 - `clearsky_os_operator_copilot`: operator query interface
 - `clearsky_os_effectors`: non-kinetic-first effector planning (simulation)
-- `clearsky_os_scout_mothership` + `clearsky_os_micro_payloads`: FOB swarm + modular micro-payload sim
+- `clearsky_os_scout_mothership` + `clearsky_os_micro_payloads`: FOB swarm + micro-payload sim
 
 ## Safety invariants
 

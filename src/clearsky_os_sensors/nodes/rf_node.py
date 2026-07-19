@@ -47,7 +47,7 @@ class RfNode(Node):
 
         fingerprint = RfFingerprint(
             emitter_id=f"rf-{self.tick_count:05d}",
-            confidence=0.999,
+            confidence=0.55,  # synthetic stub — not model inference
             center_freq_hz=2.437e9,
             bandwidth_hz=20.0e6,
             modulation_guess="ofdm",

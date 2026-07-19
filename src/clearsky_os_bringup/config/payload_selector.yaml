@@ -55,7 +55,7 @@ features:
   enable_cognitive_ew: false
   enable_continual_learning: false
   enable_defensive_swarm_coordinator: false
-  enable_digital_twin: false
+  enable_digital_twin: true
   enable_federated_learning: false
   enable_generative_red_team: false
   enable_hyperspectral_stub: false

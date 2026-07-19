@@ -93,12 +93,24 @@ Default demo chain: sensors → fusion → audit → safety gate → scout / mic
 
 ClearSky OS is an **active research / prototype workspace**, not a fielded product.
 
-| Layer today | Intent |
+| Layer today | Status |
 |-------------|--------|
 | Topic contracts, bringup, Docker, CI | Stable scaffolding |
-| Safety / effector policy gates | Real software logic to extend |
-| Sensor / fusion / twin modules | Placeholder adapters — swap for physics models, trained detectors, and validated estimators |
+| Safety / effector policy gates | Real software logic |
+| Visual perception | **YOLO path** when `CLEARSKY_SIM_MODE=false` + weights; labeled synthetic tracks in sim mode |
+| Fusion | **Constant-velocity EKF** with Mahalanobis association (`cv_ekf`) |
+| Digital twin | **Analytic** point-mass risk → `/digital_twin/veto` |
+| Acoustic / RF / thermal | Synthetic stubs (Phase 2) |
 | Effector / swarm inventory pubs | Simulation status publishers — not hardware actuation |
+
+```bash
+# Real vision (requires: pip install -r requirements-ml.txt && python scripts/download_visual_weights.py)
+CLEARSKY_SIM_MODE=false CLEARSKY_VISUAL_SOURCE=/path/to/video.mp4 \
+  docker compose -f docker/docker-compose.yml up --build
+
+# Offline fusion metrics
+python scripts/eval_fusion_offline.py
+```
 
 If you need production sensing, fusion, or autonomy work, talk to us at [fratres-x.com](https://fratres-x.com).
 

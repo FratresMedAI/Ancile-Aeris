@@ -48,7 +48,7 @@ class ThermalNode(Node):
         trk = ThermalTrack(
             track_id=f"thr-{self.tick_count:05d}",
             cls="drone_heat_signature",
-            confidence=0.999,
+            confidence=0.55,  # synthetic stub — not model inference
             x=0.42,
             y=0.34,
             w=0.11,

@@ -38,7 +38,7 @@ class AcousticNode(Node):
         self.timer = self.create_timer(max(0.05, 1.0 / publish_hz), self._tick)
 
         self.tick_count = 0
-        self.get_logger().info("acoustic_node initialized (CRNN integration stub active)")
+        self.get_logger().info("acoustic_node initialized (synthetic stub; CRNN Phase 2)")
 
     def _tick(self) -> None:
         self.tick_count += 1
@@ -46,7 +46,7 @@ class AcousticNode(Node):
 
         det = AcousticDetection(
             detection_id=f"aud-{self.tick_count:05d}",
-            confidence=0.999,
+            confidence=0.55,  # synthetic stub — not model inference
             estimated_bearing_deg=35.0,
             frequency_band_hz=[120.0, 1800.0],
         )

@@ -1,15 +1,16 @@
 models:
   visual_detector:
-    name: yolo26x
-    input_size: [1280, 720]
-    onnx_path: models/visual/yolo26x.onnx
-    tensorrt_path: models/visual/yolo26x.engine
+    name: yolo11n
+    input_size: [640, 640]
+    weights_path: models/visual/yolo11n.pt
+    onnx_path: models/visual/yolo11n.onnx
+    tensorrt_path: models/visual/yolo11n.engine
+    notes: "Download via scripts/download_visual_weights.py; not committed"
   acoustic_classifier:
     name: crnn_melspec
     onnx_path: models/acoustic/crnn.onnx
+    status: phase2
   rf_classifier:
     name: rf_cnn
     onnx_path: models/rf/rf_cnn.onnx
-  trajectory_predictor:
-    name: transformer_small
-    onnx_path: models/trajectory/transformer.onnx
+    status: phase2

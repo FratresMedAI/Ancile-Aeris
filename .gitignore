@@ -23,3 +23,14 @@ Thumbs.db
 # Local artifacts
 artifacts/local/
 reports/*.local.json
+reports/fusion_eval.json
+
+# ML weights (download via scripts/download_visual_weights.py)
+models/**/*.pt
+models/**/*.onnx
+models/**/*.engine
+models/**/*.pth
+models/**/*.bin
+!models/**/.gitkeep
+!models/README.md
+

@@ -14,7 +14,10 @@ if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 find_package(ament_cmake_pytest REQUIRED)
+
+ament_python_install_package(${PROJECT_NAME})
 
 install(PROGRAMS
   nodes/fusion_node.py
