@@ -18,7 +18,6 @@ find_package(ament_cmake_pytest REQUIRED)
 
 install(PROGRAMS clearsky_os_scout_mothership/scout_node.py DESTINATION lib/${PROJECT_NAME} RENAME clearsky_os_scout_mothership_node)
 install(PROGRAMS clearsky_os_scout_mothership/fob_coordinator_node.py DESTINATION lib/${PROJECT_NAME} RENAME fob_coordinator_node)
-install(PROGRAMS nodes/clearsky_os_scout_mothership_node.py DESTINATION lib/${PROJECT_NAME})
 install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
 
 if(BUILD_TESTING)
